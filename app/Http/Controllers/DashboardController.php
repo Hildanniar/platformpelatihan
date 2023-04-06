@@ -40,9 +40,10 @@ class DashboardController extends Controller {
 
         $validatedData = $request->validate( [
             'name' => 'required',
-            'age' => 'required',
-            'city' => 'required',
+            'age' => 'required|numeric',
+            'address' => 'required',
             'profession' => 'required',
+            'quota' => 'required|numeric',
             'type_training' => 'required',
             'month' => 'required',
             'excuse' => 'required'

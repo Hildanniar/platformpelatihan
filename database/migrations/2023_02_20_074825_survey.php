@@ -17,8 +17,9 @@ class Survey extends Migration
             $table->id();
             $table->string('name');
             $table->string('age');
-            $table->string('city');
+            $table->string('address');
             $table->string('profession');
+            $table->string('quota', 1);
             $table->string('type_training');
             $table->string('month');
             $table->text('excuse');

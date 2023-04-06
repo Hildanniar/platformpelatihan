@@ -142,7 +142,7 @@
                     <div class="row g-0 mb-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Award Winning</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Professional Staff</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>quotaal Staff</h5>
                         </div>
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>24/7 Support</h5>
@@ -217,7 +217,7 @@
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-users-cog text-white"></i>
                             </div>
-                            <h4>Professional Staff</h4>
+                            <h4>quotaal Staff</h4>
                             <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
                             </p>
                         </div>
@@ -647,7 +647,7 @@
     </div>
     <!-- Vendor End -->
 
-    <!-- Quote Start -->
+    <!-- Survey Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -668,46 +668,110 @@
                             @csrf
                             <div class="row g-3">
                                 <div class="col-xl-12">
-                                    <input type="text" name="name" class="form-control bg-light border-0"
-                                        placeholder="Masukkan Nama Lengkap" style="height: 40px;">
+                                    <input type="text" name="name"
+                                        class="form-control bg-light border-0 @error('name') is-invalid @enderror"
+                                        placeholder="Masukkan Nama Lengkap" style="height: 40px;" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" name="age" class="form-control bg-light border-0"
-                                        placeholder="Masukkan Usia" style="height: 40px;">
+                                    <input type="text" name="age"
+                                        class="form-control bg-light border-0 @error('age') is-invalid @enderror"
+                                        placeholder="Masukkan Usia" style="height: 40px;" required>
+                                    @error('age')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" name="city" class="form-control bg-light border-0"
-                                        placeholder="Masukkan Kota Asal" style="height: 40px;">
+                                    <input type="text" name="address"
+                                        class="form-control bg-light border-0 @error('address') is-invalid @enderror"
+                                        placeholder="Masukkan Alamat" style="height: 40px;" required>
+                                    @error('address')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" name="profession" class="form-control bg-light border-0"
-                                        placeholder="Masukkan Pekerjaan" style="height: 40px;">
+                                    <input type="text" name="profession"
+                                        class="form-control bg-light border-0 @error('profession') is-invalid @enderror"
+                                        placeholder="Masukkan Pekerjaan" style="height: 40px;" required>
+                                    @error('profession')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" name="type_training" class="form-control bg-light border-0"
-                                        placeholder="Masukkan Jenis Pelatihan" style="height: 40px;">
+                                    <input type="text" name="quota"
+                                        class="form-control bg-light border-0 @error('quota') is-invalid @enderror"
+                                        placeholder="Masukkan Jumlah Kuota" style="height: 40px;" maxlength="1"
+                                        required>
+                                    <small style="color:red">*atau jumlah teman yang ingin anda ajak</small>
+                                    @error('quota')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <select class="form-select bg-light border-0" name="month"
-                                        style="height: 40px;">
-                                        <option selected>Pilih Bulan Pelaksanaan</option>
-                                        <option value="1">Januari</option>
-                                        <option value="2">Februari</option>
-                                        <option value="3">Maret</option>
-                                        <option value="4">April</option>
-                                        <option value="5">Mei</option>
-                                        <option value="6">Juni</option>
-                                        <option value="7">Juli</option>
-                                        <option value="8">Agustus</option>
-                                        <option value="9">September</option>
-                                        <option value="10">Oktober</option>
-                                        <option value="11">November</option>
-                                        <option value="12">Desember</option>
+                                    <input type="text" name="type_training"
+                                        class="form-control bg-light border-0 @error('type_training') is-invalid @enderror"
+                                        placeholder="Masukkan Jenis Pelatihan" style="height: 40px;" required>
+                                    @error('type_training')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-12">
+                                    <select class="form-select bg-light border-0 @error('month') is-invalid @enderror"
+                                        name="month" style="height: 40px;" required>
+                                        <option selected disabled value="">Pilih Bulan Pelaksanaan</option>
+                                        <option value="Januari" @if (old('month') == 'Januari') selected @endif>
+                                            Januari</option>
+                                        <option value="Februari" @if (old('month') == 'Februari') selected @endif>
+                                            Februari</option>
+                                        <option value="Maret" @if (old('month') == 'Maret') selected @endif>Maret
+                                        </option>
+                                        <option value="April" @if (old('month') == 'April') selected @endif>April
+                                        </option>
+                                        <option value="Mei" @if (old('month') == 'Mei') selected @endif>Mei
+                                        </option>
+                                        <option value="Juni" @if (old('month') == 'Juni') selected @endif>Juni
+                                        </option>
+                                        <option value="Juli" @if (old('month') == 'Juli') selected @endif>Juli
+                                        </option>
+                                        <option value="Agustus" @if (old('month') == 'Agustus') selected @endif>
+                                            Agustus</option>
+                                        <option value="September" @if (old('month') == 'September') selected @endif>
+                                            September</option>
+                                        <option value="Oktober" @if (old('month') == 'Oktober') selected @endif>
+                                            Oktober</option>
+                                        <option value="November" @if (old('month') == 'November') selected @endif>
+                                            November</option>
+                                        <option value="Desember" @if (old('month') == 'Desember') selected @endif>
+                                            Desember</option>
                                     </select>
+                                    @error('month')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control bg-light border-0" name="excuse" rows="3"
-                                        placeholder="Alasan memilih Jenis Pelatihan tersebut"></textarea>
+                                    <textarea class="form-control bg-light border-0 @error('excuse') is-invalid @enderror" name="excuse" rows="3"
+                                        placeholder="Alasan memilih Jenis Pelatihan tersebut" required></textarea>
+                                    @error('excuse')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-dark w-100 py-3" type="submit">Kirim</button>
@@ -719,7 +783,7 @@
             </div>
         </div>
     </div>
-    <!-- Quote End -->
+    <!-- Survey End -->
 
     @include('dashboard.layouts.partials.footer')
 

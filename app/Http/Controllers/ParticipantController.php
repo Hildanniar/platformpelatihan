@@ -9,9 +9,12 @@ use App\Models\Participant;
 use App\Models\TypeTraining;
 use App\Exports\ParticipantExport;
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Database\QueryException;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ParticipantController extends Controller {
     /**
@@ -139,10 +142,12 @@ class ParticipantController extends Controller {
     }
 
     public function update( Request $request, Participant $participant ) {
+        // dd($request);
+        try{
         $rules =  [
             'type_training_id' => 'required',
             'name' => 'required|max:255',
-            // 'username' => 'required|unique:users|max:255',
+            'username' => 'required|unique:users,username,'.$participant->users->id.'|max:255',
             'email' => 'required',
             // 'password' => 'required',
             'address' => 'required|max:255',
@@ -213,11 +218,15 @@ class ParticipantController extends Controller {
             'address'=> $validatedData['address'],
             'no_hp'=> $validatedData['no_hp'],
         ];
-        $participant->users()->update($data_user);
+        $peserta = $participant->users()->update($data_user);
+        // dd($peserta);
         $participant->update($data_participant);
         // Participant::where( 'id', $participant->id )->update( $validatedData );
         return redirect( '/admin/participant' )->with( 'success', 'Data Berhasil Diupdate!' );
+    } catch(QueryException $error){
+        dd($error);
     }
+}
 
     /**
     * Remove the specified resource from storage.

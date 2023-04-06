@@ -112,6 +112,32 @@
                                         </div>
                                     @enderror
                                 </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="no_member" class="form-label">No.Anggota Perpustakaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('no_member') is-invalid @enderror"
+                                        id="no_member" name="no_member" required
+                                        value="{{ old('no_member', $participant->users->no_member) }}"
+                                        placeholder="No.Anggota Perpustakaan" maxlength="13">
+                                    @error('no_member')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="profession" class="form-label">Pekerjaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('profession') is-invalid @enderror"
+                                        id="profession" name="profession" required
+                                        value="{{ old('profession', $participant->users->profession) }}"
+                                        placeholder="Pekerjaan" maxlength="13">
+                                    @error('profession')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                                 <div class="form-group form-group form-floating-label">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
                                     <select class="form-control input-solid @error('gender') is-invalid @enderror"
