@@ -26,18 +26,18 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         // $faker = Faker::create('id_ID');
         // \App\Models\User::factory( 10 )->create();
-        User::factory( 10 )->create();
-        Participant::factory( 10 )->create();
-        Mentor::factory( 10 )->create();
-        Material::factory( 10 )->create();
-        TypeTraining::factory( 10 )->create();
-        Schedule::factory( 10 )->create();
-        Attainment::factory( 10 )->create();
-        Certificate::factory( 10 )->create();
-        Survey::factory( 10 )->create();
-        Task::factory( 10 )->create();
+        User::factory( 4 )->create();
+        Participant::factory( 4 )->create();
+        Mentor::factory( 4 )->create();
+        Material::factory( 4 )->create();
+        TypeTraining::factory( 4 )->create();
+        Schedule::factory( 4 )->create();
+        Attainment::factory( 4 )->create();
+        Certificate::factory( 4 )->create();
+        Survey::factory( 4 )->create();
+        Task::factory( 4 )->create();
         Level::create([
-                'name' => 'Superadmin'
+                'name' => 'Admin'
             ]);
         Level::create([
                 'name' => 'Mentor'
