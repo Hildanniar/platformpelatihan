@@ -131,7 +131,7 @@
                                         class="form-control input-solid @error('profession') is-invalid @enderror"
                                         id="profession" name="profession" required
                                         value="{{ old('profession', $participant->users->profession) }}"
-                                        placeholder="Pekerjaan" maxlength="13">
+                                        placeholder="Pekerjaan" maxlength="255">
                                     @error('profession')
                                         <div class="invalid-feedback">
                                             {{ $message }}

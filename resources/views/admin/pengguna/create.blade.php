@@ -6,11 +6,11 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Peserta</h2>
-                            <h5 class="text-white op-7 mb-2">Data Peserta</h5>
+                            <h2 class="text-white pb-2 fw-bold">Pengguna</h2>
+                            <h5 class="text-white op-7 mb-2">Data Pengguna</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/admin/participant" class="btn btn-white btn-border btn-round mr-2"><i
+                            <a href="/admin/pengguna" class="btn btn-white btn-border btn-round mr-2"><i
                                     class="fa-sharp fa-regular fa-arrow-left"></i></i> Kembali</a>
                         </div>
                     </div>
@@ -21,17 +21,17 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title">Tambah Data Peserta</h4>
+                                <h4 class="card-title">Tambah Data Pengguna</h4>
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <form method="post" action="/admin/participant" class="mb-5" enctype="multipart/form-data">
+                            <form method="post" action="/admin/pengguna" class="mb-5" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group form-floating-label">
                                     <label for="name" class="form-label">Nama</label>
                                     <input type="text"
                                         class="form-control input-solid @error('name') is-invalid @enderror" id="name"
-                                        name="name" required autofocus placeholder="Nama" value="{{ old('name') }}">
+                                        name="name" required autofocus placeholder="Nama" value="{{ old('name') }}"">
                                     @error('title')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -107,39 +107,13 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="no_member" class="form-label">No.Anggota Perpustakaan</label>
-                                    <input type="text"
-                                        class="form-control input-solid @error('no_member') is-invalid @enderror"
-                                        id="no_member" name="no_member" required value="{{ old('no_member') }}"
-                                        placeholder="No. Anggota Perpustakaan">
-                                    @error('no_member')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="profession" class="form-label">Pekerjaan</label>
-                                    <input type="text"
-                                        class="form-control input-solid @error('profession') is-invalid @enderror"
-                                        id="profession" name="profession" required value="{{ old('profession') }}"
-                                        placeholder="Pekerjaan" maxlength="255">
-                                    @error('profession')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
                                 <div class="form-group form-group form-floating-label">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
                                     <select class="form-control input-solid @error('gender') is-invalid @enderror"
                                         id="gender" required name="gender">
                                         <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option value="Laki-Laki" @if (old('gender') == 'Laki-Laki') selected @endif>
-                                            Laki-Laki</option>
-                                        <option value="Perempuan" @if (old('gender') == 'Perempuan') selected @endif>
-                                            Perempuan</option>
+                                        <option>Laki-Laki</option>
+                                        <option>Perempuan</option>
                                     </select>
                                     @error('gender')
                                         <div class="invalid-feedback">
@@ -147,45 +121,26 @@
                                         </div>
                                     @enderror
                                 </div>
+
                                 <div class="form-group form-floating-label">
-                                    <label for="type_training_id" class="form-label">Jenis Pelatihan</label>
-                                    <select class="form-control input-solid" name="type_training_id">
-                                        <option selected disabled value="">Silahkan dipilih...</option>
-                                        @foreach ($type_trainings as $type_training)
-                                            @if (old('type_training_id') == $type_training->id)
-                                                <option value="{{ $type_training->id }}" selected>
-                                                    {{ $type_training->name }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $type_training->id }}">{{ $type_training->name }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="class" class="form-label">Kelas</label>
-                                    <select class="form-control input-solid @error('class') is-invalid @enderror"
-                                        id="class" required name="class">
-                                        <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option value="Offline" @if (old('class') == 'Offline') selected @endif>Offline
-                                        </option>
-                                        <option value="Online" @if (old('class') == 'Online') selected @endif>Online
-                                        </option>
-                                    </select>
-                                    @error('class')
+                                    <label for="profession" class="form-label">Pekerjaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('profession') is-invalid @enderror"
+                                        id="profession" name="profession" required value="{{ old('profession') }}"
+                                        placeholder="Pekerjaan">
+                                    @error('profession')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                                 <div class="form-group form-floating-label">
-                                    <label for="image" class="form-label">Foto Profile Peserta</label>
-                                    <img class="img-preview img-fluid mb-3 col-sm-5"
-                                        style="max-height:300px; overflow:hidden;">
-                                    <input class="form-control input-solid @error('image') is-invalid @enderror "
-                                        type="file" id="image" name="image" onchange="previewImage()">
-                                    @error('image')
+                                    <label for="no_member" class="form-label">No.Anggota Perpustakaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('no_member') is-invalid @enderror"
+                                        id="no_member" name="no_member" required value="{{ old('no_member') }}"
+                                        placeholder="No. Anggota Perpustakaan">
+                                    @error('no_member')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -213,20 +168,4 @@
                 </div>
             </footer>
         </div>
-
-        <script>
-            function previewImage() {
-                const image = document.querySelector('#image');
-                const imgPreview = document.querySelector('.img-preview');
-
-                imgPreview.style.display = 'block';
-
-                const oFReader = new FileReader();
-                oFReader.readAsDataURL(image.files[0]);
-
-                oFReader.onload = function(oFREvent) {
-                    imgPreview.src = oFREvent.target.result;
-                }
-            }
-        </script>
     @endsection

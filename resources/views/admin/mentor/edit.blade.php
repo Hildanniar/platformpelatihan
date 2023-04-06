@@ -45,7 +45,7 @@
                                     <input type="text"
                                         class="form-control input-solid @error('username') is-invalid @enderror"
                                         id="username" name="username" required
-                                        value="{{ old('username', $mentor->username) }}">
+                                        value="{{ old('username', $mentor->users->username) }}">
                                     @error('username')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -109,12 +109,38 @@
                                         </div>
                                     @enderror
                                 </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="no_member" class="form-label">No.Anggota Perpustakaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('no_member') is-invalid @enderror"
+                                        id="no_member" name="no_member" required
+                                        value="{{ old('no_member', $mentor->users->no_member) }}"
+                                        placeholder="No.Anggota Perpustakaan" maxlength="13">
+                                    @error('no_member')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="profession" class="form-label">Pekerjaan</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('profession') is-invalid @enderror"
+                                        id="profession" name="profession" required
+                                        value="{{ old('profession', $mentor->users->profession) }}"
+                                        placeholder="Pekerjaan" maxlength="255">
+                                    @error('profession')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                                 <div class="form-group form-group form-floating-label">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
                                     <select class="form-control input-solid @error('gender') is-invalid @enderror"
                                         id="gender" required name="gender">
                                         <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option value="Laki-Laki" @if (old('gender', $mentor->users->gender) == 'Laki-Laki') selected @endif>
+                                        <option value="Laki-Laki" @if (old('gender', $mentor->users->gender) == 'Laki-laki') selected @endif>
                                             Laki-Laki</option>
                                         <option value="Perempuan" @if (old('gender', $mentor->users->gender) == 'Perempuan') selected @endif>
                                             Perempuan</option>

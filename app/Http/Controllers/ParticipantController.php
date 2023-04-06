@@ -218,10 +218,8 @@ class ParticipantController extends Controller {
             'address'=> $validatedData['address'],
             'no_hp'=> $validatedData['no_hp'],
         ];
-        $peserta = $participant->users()->update($data_user);
-        // dd($peserta);
+        $participant->users()->update($data_user);
         $participant->update($data_participant);
-        // Participant::where( 'id', $participant->id )->update( $validatedData );
         return redirect( '/admin/participant' )->with( 'success', 'Data Berhasil Diupdate!' );
     } catch(QueryException $error){
         dd($error);

@@ -140,7 +140,7 @@ class MentorController extends Controller {
     public function update( Request $request, Mentor $mentor ) {
         $rules = [
             'name' => 'required|max:255',
-            // 'username' => 'required|unique:users|max:255',
+            'username' => 'required|unique:users,username,'.$mentor->users->id.'|max:255',
             'email' => 'required',
             // 'password' => 'required',
             'address' => 'required|max:255',
