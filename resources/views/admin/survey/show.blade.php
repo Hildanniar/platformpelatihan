@@ -6,8 +6,8 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Survey Pelatihan</h2>
-                            <h5 class="text-white op-7 mb-2">Data Survey Pelatihan</h5>
+                            <h2 class="text-white pb-2 fw-bold">Survey Rekomendasi Pelatihan</h2>
+                            <h5 class="text-white op-7 mb-2">Data Survey Rekomendasi Pelatihan</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/admin/survey" class="btn btn-white btn-border btn-round mr-2"><i
@@ -35,14 +35,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Kota Asal</th>
+                                        <th>Alamat</th>
                                         <th>:</th>
-                                        <td> {{ $surveys->city }}</td>
+                                        <td> {{ $surveys->address }}</td>
                                     </tr>
                                     <tr>
                                         <th>Pekerjaan</th>
                                         <th>:</th>
                                         <td> {{ $surveys->profession }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jumlah Kuota</th>
+                                        <th>:</th>
+                                        <td> {{ $surveys->quota }}</td>
                                     </tr>
                                     <tr>
                                         <th>Rekomendasi Pelatihan</th>

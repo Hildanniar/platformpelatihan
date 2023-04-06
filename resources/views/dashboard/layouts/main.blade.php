@@ -653,13 +653,12 @@
             <div class="row g-5">
                 <div class="col-lg-7">
                     <div class="section-title position-relative pb-3 mb-5">
-                        <h5 class="fw-bold text-primary text-uppercase">Survey Pelatihan</h5>
+                        <h5 class="fw-bold text-primary text-uppercase">Survey Rekomendasi Pelatihan</h5>
                         <h1 class="mb-0">Berikan pendapat Anda sekarang juga!!!
                         </h1>
                     </div>
-                    <p class="mb-4">Adanya Survey Pelatihan ini sebagai metode pengumpulan data untuk menentukan
-                        jenis dan
-                        pelaksanaan pelatihan gratis selanjutnya</p>
+                    <p class="mb-4">Adanya Survey Rekomendasi Pelatihan untuk mengumpulkan data rekomendasi pelatihan
+                        guna menentukan jenis dan pelaksanaan pelatihan gratis selanjutnya</p>
                 </div>
                 <div class="col-lg-5">
                     <div class="bg-primary rounded h-100 d-flex align-items-center p-5 wow zoomIn"

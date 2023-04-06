@@ -41,8 +41,9 @@
                                                     <th>No</th>
                                                     <th>Nama Lengkap</th>
                                                     <th>Usia</th>
-                                                    <th>Kota Asal</th>
+                                                    <th>Alamat</th>
                                                     <th>Pekerjaan</th>
+                                                    <th>Jumlah Kuota</th>
                                                     <th>Rekomendasi Pelatihan</th>
                                                     <th>Bulan Pelaksanaan</th>
                                                     {{-- <th>Deskripsi</th> --}}
@@ -123,12 +124,16 @@
                         name: 'age'
                     },
                     {
-                        data: 'city',
-                        name: 'city'
+                        data: 'address',
+                        name: 'address'
                     },
                     {
                         data: 'profession',
                         name: 'profession'
+                    },
+                    {
+                        data: 'quota',
+                        name: 'quota'
                     },
                     {
                         data: 'type_training',
