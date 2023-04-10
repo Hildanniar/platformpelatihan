@@ -4,34 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\TypeTraining;
-
-class Task extends Migration
+class MateriTask extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('materi_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(TypeTraining::class);
+            $table->text('excerpt_materi');
+            $table->text('body_materi');
+            $table->string('file_materi')->nullable();
             $table->string('task_name');
             $table->date('start_date');
             $table->date('end_date');
-            $table->text('desc');
+            $table->text('desc_task');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('materi_tasks');
     }
 }

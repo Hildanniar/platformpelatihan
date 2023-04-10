@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Task;
-use App\Models\Material;
+use App\Models\MateriTask;
 use App\Models\Schedule;
 use App\Models\Attainment;
 use App\Models\Certificate;
@@ -14,12 +14,8 @@ class TypeTraining extends Model {
     use HasFactory;
     protected $guarded = [ 'id' ];
 
-    public function materials() {
-        return $this->hasMany( Material::class );
-    }
-
-    public function tasks() {
-        return $this->belongsTo( Task::class );
+    public function materi_tasks() {
+        return $this->hasMany( MateriTask::class );
     }
 
     public function certificate() {

@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Models;
-
 use App\Models\TypeTraining;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model {
+class MateriTask extends Model {
     use HasFactory;
     protected $guarded = [ 'id' ];
 
