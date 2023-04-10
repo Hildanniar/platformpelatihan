@@ -6,8 +6,8 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Materi</h2>
-                            <h5 class="text-white op-7 mb-2">Data Materi</h5>
+                            <h2 class="text-white pb-2 fw-bold">Materin & Tugas</h2>
+                            <h5 class="text-white op-7 mb-2">Data Materi & Tugas</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/admin/materi/create" class="btn btn-white btn-border btn-round mr-2"><i
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title">Tabel Data Materi</h4>
+                                <h4 class="card-title">Tabel Data Materi & Tugas</h4>
                             </div>
                             @if (session()->has('success'))
                                 <div class="alert alert-success col-lg-8" role="alert">
@@ -45,31 +45,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($materials as $materi)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $materi->type_trainings->name ?? 'none' }}</td>
-                                                        <td>{{ $materi->excerpt }}</td>
-                                                        <td>
-                                                            <div class="action-button mx-auto text-end">
-                                                                <a href="/admin/materi/{{ $materi->id }}/edit"
-                                                                    class="badge btn-warning"><i class="far fa-edit"></i>
-                                                                    Edit</a>
-                                                                <form action="/admin/materi/{{ $materi->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="badge btn-danger border-0"
-                                                                        onclick="return confirm('Are you sure?')"><i
-                                                                            class="fas fa-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <a href="/admin/materi/{{ $materi->id }}"
-                                                                    class="badge btn-success"><i class="far fa-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -103,7 +78,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "/admin/materi/datamateri",
+                ajax: "/admin/materi_tasks/datamateritasks",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'

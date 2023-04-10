@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\SurveyController;
-use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\MateriTaskController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AttainmentController;
@@ -80,13 +80,9 @@ Route::get('/admin/survey/datasurvey', [SurveyController::class, 'getSurveys']);
 Route::resource('/admin/survey', SurveyController::class);
 });
 
-// materi
-Route::get('/admin/materi/datamateri', [MaterialController::class, 'getMateri']);
-Route::resource('/admin/materi', MaterialController::class);
-
-// tugas
-Route::get('/admin/task/datatask', [TaskController::class, 'getTasks']);
-Route::resource('/admin/task', TaskController::class);
+// materi & tugas
+Route::get('/admin/materi_tasks/datamateritasks', [MateriTaskController::class, 'getMateriTasks']);
+Route::resource('/admin/materi_tasks', MateriTaskController::class);
 
 // jadwal
 Route::get('/admin/schedule/dataschedule', [ScheduleController::class, 'getSchedules']);

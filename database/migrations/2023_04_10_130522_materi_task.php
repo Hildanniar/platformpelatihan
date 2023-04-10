@@ -12,6 +12,7 @@ class MateriTask extends Migration
         Schema::create('materi_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(TypeTraining::class);
+            $table->string('bab_materi');
             $table->text('excerpt_materi');
             $table->text('body_materi');
             $table->string('file_materi')->nullable();

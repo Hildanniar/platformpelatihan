@@ -3,83 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\MateriTask;
+use App\Models\TypeTraining;
 use Illuminate\Http\Request;
 
-class MateriTaskController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+class MateriTaskController extends Controller {
+    public function index() {
+        return view( 'admin.materi_tasks.index', [
+            'materi_tasks' => MateriTask::all()
+        ] );
+    }
+
+    public function create() {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function store( Request $request ) {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function show( MateriTask $materiTask ) {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\MateriTask  $materiTask
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MateriTask $materiTask)
-    {
+    public function edit( MateriTask $materiTask ) {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\MateriTask  $materiTask
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MateriTask $materiTask)
-    {
+    public function update( Request $request, MateriTask $materiTask ) {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MateriTask  $materiTask
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, MateriTask $materiTask)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\MateriTask  $materiTask
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(MateriTask $materiTask)
-    {
+    public function destroy( MateriTask $materiTask ) {
         //
     }
 }
