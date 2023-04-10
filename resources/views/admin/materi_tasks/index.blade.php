@@ -6,11 +6,11 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Materin & Tugas</h2>
+                            <h2 class="text-white pb-2 fw-bold">Materi & Tugas</h2>
                             <h5 class="text-white op-7 mb-2">Data Materi & Tugas</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/admin/materi/create" class="btn btn-white btn-border btn-round mr-2"><i
+                            <a href="/admin/materi_tasks/create" class="btn btn-white btn-border btn-round mr-2"><i
                                     class="fas fa-plus"></i> Tambah</a>
                             {{-- <a href="#" class="btn btn-secondary btn-round"><i class="fas fa-print"></i> Cetak</a> --}}
                         </div>
@@ -40,7 +40,11 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Jenis Pelatihan</th>
-                                                    <th>Materi</th>
+                                                    <th>Bab Materi</th>
+                                                    <th>Kutipan Materi</th>
+                                                    <th>Nama Tugas</th>
+                                                    <th>Tanggal Mulai</th>
+                                                    <th>Tanggal Akhir</th>
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
@@ -88,8 +92,24 @@
                         name: 'jenis pelatihan'
                     },
                     {
-                        data: 'excerpt',
-                        name: 'materi'
+                        data: 'bab_materi',
+                        name: 'bab'
+                    },
+                    {
+                        data: 'excerpt_materi',
+                        name: 'kutipan'
+                    },
+                    {
+                        data: 'task_name',
+                        name: 'nama tugas'
+                    },
+                    {
+                        data: 'start_date',
+                        name: 'tanggal mulai'
+                    },
+                    {
+                        data: 'end_date',
+                        name: 'tanggal akhir'
                     },
                     {
                         data: 'action',

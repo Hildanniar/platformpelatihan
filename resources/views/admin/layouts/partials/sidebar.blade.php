@@ -72,16 +72,10 @@
                         </a>
                     </li>
                 @endcan
-                <li class="nav-item {{ Request::is('admin/materi*') ? 'active' : '' }}">
-                    <a href="/admin/materi">
+                <li class="nav-item {{ Request::is('admin/materi_tasks*') ? 'active' : '' }}">
+                    <a href="/admin/materi_tasks">
                         <i class="fas fa-book-open"></i>
-                        <p>Data Materi</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('admin/task*') ? 'active' : '' }}">
-                    <a href="/admin/task">
-                        <i class="fas fa-book-open"></i>
-                        <p>Data Tugas Pelatihan</p>
+                        <p>Data Materi & Tugas</p>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('admin/schedule*') ? 'active' : '' }}">
