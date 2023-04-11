@@ -45,7 +45,7 @@ class TypeTrainingController extends Controller {
             'name' => 'required|max:255',
             'quota' => 'required|min:1',
             'desc' => 'required',
-            'image' => 'image|file|max:3000'
+            'image' => 'image|file|max:3000',
         ] );
         if ( $request->file( 'image' ) ) {
             $validatedData[ 'image' ] = $request->file( 'image' )->store( 'post-images' );
@@ -94,7 +94,7 @@ class TypeTrainingController extends Controller {
             'name' => 'required|max:255',
             'quota' => 'required|min:1',
             'desc' => 'required',
-            'image' => 'image|file|max:3000'
+            'image' => 'image|file|max:3000',
         ];
         $validatedData = $request->validate( $rules );
 
@@ -103,12 +103,12 @@ class TypeTrainingController extends Controller {
                 Storage::delete( $request->oldImage );
             }
             $validatedData[ 'image' ] = $request->file( 'image' )->store( 'post-images' );
-            $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->body ), 200 );
+            $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->desc ), 200 );
 
-            TypeTraining::where( 'id', $typeTraining->id )
-            ->update( $validatedData );
-            return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Diedit!' );
         }
+        TypeTraining::where( 'id', $typeTraining->id )
+        ->update( $validatedData );
+        return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Diedit!' );
     }
 
     /**

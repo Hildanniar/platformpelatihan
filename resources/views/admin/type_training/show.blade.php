@@ -26,22 +26,30 @@
                                     <tr>
                                         <th>Nama Pelatihan</th>
                                         <th>:</th>
-                                        <td> {!! $type_training->name !!}</td>
+                                        <td> {{ $type_training->name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Kuota Pelatihan</th>
                                         <th>:</th>
-                                        <td> {!! $type_training->quota !!}</td>
+                                        <td> {{ $type_training->quota }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Gambar</th>
+                                        <th>Gambar Pelatihan</th>
                                         <th>:</th>
-                                        <td> {!! $type_training->image !!}</td>
+                                        <td>
+                                            @if ($type_training->image)
+                                                <img src="{{ asset('storage/' . $type_training->image) }}"
+                                                    class="img-fluid mt-3" style="max-height:250px; overflow:hidden;">
+                                            @else
+                                                <button type="button" class="btn btn-danger btn-sm">Gambar Pelatihan belum
+                                                    di upload</button>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi Pelatihan</th>
                                         <th>:</th>
-                                        <td> {!! $type_training->desc !!}</td>
+                                        <td> {{ $type_training->desc }}</td>
                                     </tr>
                                 </table>
                             </div>

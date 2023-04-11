@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Task;
 use App\Models\MateriTask;
 use App\Models\Schedule;
 use App\Models\Attainment;

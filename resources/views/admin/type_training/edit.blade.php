@@ -31,9 +31,10 @@
                                 @csrf
                                 <div class="form-group form-floating-label">
                                     <label for="name" class="form-label">Nama Pelatihan</label>
-                                    <input type="text" class="form-control input-solid @error('name') is-invalid @enderror"
-                                        id="name" name="name" required autofocus placeholder="Nama Pelatihan"
-                                        value="{{ old('name', $type_training->name) }}"">
+                                    <input type="text"
+                                        class="form-control input-solid @error('name') is-invalid @enderror" id="name"
+                                        name="name" required autofocus placeholder="Nama Pelatihan"
+                                        value="{{ old('name', $type_training->name) }}">
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -42,11 +43,14 @@
                                 </div>
                                 <div class="form-group form-floating-label">
                                     <label for="class" class="form-label">Kelas</label>
-                                    <select class="form-control input-solid @error('class') is-invalid @enderror" id="class"
-                                        required name="class">
+                                    <select class="form-control input-solid @error('class') is-invalid @enderror"
+                                        id="class" required name="class">
                                         <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option>Offline</option>
-                                        <option>Online</option>
+                                        <option value="Offline" @if (old('class', $type_training->class) == 'Offline') selected @endif>Offline
+                                        </option>
+                                        </option>
+                                        <option value="Online" @if (old('class', $type_training->class) == 'Online') selected @endif>Online
+                                        </option>
                                     </select>
                                     @error('class')
                                         <div class="invalid-feedback">
@@ -56,9 +60,10 @@
                                 </div>
                                 <div class="form-group form-floating-label">
                                     <label for="quota" class="form-label">Kuota Pelatihan</label>
-                                    <input type="text" class="form-control input-solid @error('quota') is-invalid @enderror"
-                                        id="quota" name="quota" required
-                                        value="{{ old('quota', $type_training->quota) }}" placeholder="Kuota Pelatihan">
+                                    <input type="text"
+                                        class="form-control input-solid @error('quota') is-invalid @enderror" id="quota"
+                                        name="quota" required value="{{ old('quota', $type_training->quota) }}"
+                                        placeholder="Kuota Pelatihan">
                                     @error('quota')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -74,8 +79,8 @@
                                     @else
                                         <img class="img-preview img-fluid mb-3 col-sm-5">
                                     @endif
-                                    <input class="form-control input-solid @error('image') is-invalid @enderror " type="file"
-                                        id="image" name="image" onchange="previewImage()">
+                                    <input class="form-control input-solid @error('image') is-invalid @enderror "
+                                        type="file" id="image" name="image" onchange="previewImage()">
                                     @error('image')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -113,4 +118,19 @@
                 </div>
             </footer>
         </div>
+        <script>
+            function previewImage() {
+                const image = document.querySelector('#image');
+                const imgPreview = document.querySelector('.img-preview');
+
+                imgPreview.style.display = 'block';
+
+                const oFReader = new FileReader();
+                oFReader.readAsDataURL(image.files[0]);
+
+                oFReader.onload = function(oFREvent) {
+                    imgPreview.src = oFREvent.target.result;
+                }
+            }
+        </script>
     @endsection
