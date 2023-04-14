@@ -24,7 +24,7 @@
                                 <h4 class="card-title">Edit Data Hasil Karya</h4>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        {{-- <div class="col-lg-8">
                             <form method="post" action="/admin/attainment/{{ $attainment->id }}" class="mb-5"
                                 enctype="multipart/form-data">
                                 @method('put')
@@ -93,8 +93,127 @@
                                         value="{{ old('desc', $attainment->desc) }}">
                                     <trix-editor input="desc"></trix-editor>
                                 </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="value" class="form-label">Nilai Hasil Karya</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('value') is-invalid @enderror" id="value"
+                                        name="value" value="{{ old('value', $attainment->value) }}"
+                                        placeholder="Masukkan Nilai Hasil Karya" required>
+                                    <small style="color:red">*Dinilai oleh Mentor</small>
+                                    @error('value')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Edit data</button>
                             </form>
+                        </div> --}}
+                        <div class="tab-content bd bd-gray-100 bd-t-0 pd-20" id="myTabContent">
+                            <div class="tab-pane fade show active" id="detail" role="tabpanel"
+                                aria-labelledby="detail-tab">
+                                <div class="card border-0 bg-white-9 rounded-xl p-0 mb-3">
+                                    <form method="post" action="/admin/attainment/{{ $attainment->id }}" class="mb-5"
+                                        enctype="multipart/form-data">
+                                        @method('put')
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-hover">
+                                                    <tr>
+                                                        <th>Jenis Pelatihan</th>
+                                                        <th>:</th>
+                                                        <td> {{ $attainment->type_trainings->name ?? 'none' }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Peserta</th>
+                                                        <th>:</th>
+                                                        <td> {{ $attainment->users->name }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Ulasan</th>
+                                                        <th>:</th>
+                                                        <td> {{ $attainment->comment }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Hasil Karya Pelatihan</th>
+                                                        <th>:</th>
+                                                        <td>
+                                                            @if ($attainment->image)
+                                                                <img src="{{ asset('storage/' . $attainment->image) }}"
+                                                                    class="img-fluid mt-3"
+                                                                    style="max-height:250px; overflow:hidden;">
+                                                            @else
+                                                                <button type="button" class="btn btn-danger btn-sm">Hasil
+                                                                    Karya
+                                                                    belum
+                                                                    diupload</button>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Rangkuman Pelatihan</th>
+                                                        <th>:</th>
+                                                        <td> {{ $attainment->desc }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nilai Hasil Karya</th>
+                                                        <th>:</th>
+                                                        <td>
+                                                            @if ($attainment->value == null)
+                                                                <div class="form-group form-floating-label">
+                                                                    <input type="text"
+                                                                        class="form-control input-solid @error('value') is-invalid @enderror"
+                                                                        id="value" name="value"
+                                                                        value="{{ old('value', $attainment->value) }}"
+                                                                        placeholder="Masukkan Nilai Hasil Karya" required>
+                                                                    <small style="color:red">*Dinilai oleh Mentor</small>
+                                                                    @error('value')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                            @else
+                                                                {{ $attainment->value }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Status Publikasi</th>
+                                                        <th>:</th>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="nopublikasi" name="status"
+                                                                        value="0" class="custom-control-input" required
+                                                                        {{ $attainment->is_active == '0' ? 'checked' : '' }}>
+                                                                    <label class="custom-control-label"
+                                                                        for="nopublikasi">Tidak
+                                                                        Publikasi</label><br>
+                                                                </div>
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="publikasi" name="status"
+                                                                        value="1" class="custom-control-input" required
+                                                                        {{ $attainment->is_active == '1' ? 'checked' : '' }}>
+                                                                    <label class="custom-control-label"
+                                                                        for="publikasi">Publikasi</label>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">Edit
+                                                                    data</button>
+                                                            </div>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

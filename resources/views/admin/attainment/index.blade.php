@@ -9,11 +9,10 @@
                             <h2 class="text-white pb-2 fw-bold">Hasil Karya Pelatihan</h2>
                             <h5 class="text-white op-7 mb-2">Data Hasil Karya Pelatihan</h5>
                         </div>
-                        <div class="ml-md-auto py-2 py-md-0">
+                        {{-- <div class="ml-md-auto py-2 py-md-0">
                             <a href="/admin/attainment/create" class="btn btn-white btn-border btn-round mr-2"><i
                                     class="fas fa-plus"></i> Tambah</a>
-                            <a href="#" class="btn btn-secondary btn-round"><i class="fas fa-print"></i> Cetak</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -42,47 +41,13 @@
                                                     <th>Jenis Pelatihan</th>
                                                     <th>Nama Peserta</th>
                                                     <th>Ulasan</th>
-                                                    <th>Status</th>
+                                                    <th>Nilai</th>
+                                                    {{-- <th>Status</th> --}}
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($attainment as $a)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $a->id_training }}</td>
-                                                        <td>{{ $a->id_user }}</td>
-                                                        <td>{{ $a->comment }}</td>
-                                                        <td>
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    role="switch" id="flexSwitchCheckDefault">
-                                                                <label class="form-check-label"
-                                                                    for="flexSwitchCheckDefault">Default switch checkbox
-                                                                    input</label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="action-button mx-auto text-end">
-                                                                <a href="/admin/attainment/{{ $a->id }}/edit"
-                                                                    class="badge btn-warning"><i class="far fa-edit""></i>
-                                                                    Edit</a>
-                                                                <form action="/admin/attainment/{{ $a->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="badge btn-danger border-0"
-                                                                        onclick="return confirm('Are you sure?')"><i
-                                                                            class="fas fa-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <a href="/admin/attainment/{{ $a->id }}"
-                                                                    class="badge btn-success"><i class="far fa-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
 
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -134,9 +99,13 @@
                         name: 'comment'
                     },
                     {
-                        data: 'status',
-                        name: 'status'
+                        data: 'value',
+                        name: 'value'
                     },
+                    // {
+                    //     data: 'status',
+                    //     name: 'status'
+                    // },
                     {
                         data: 'action',
                         name: 'action',

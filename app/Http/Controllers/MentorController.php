@@ -142,7 +142,6 @@ class MentorController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.$mentor->users->id.'|max:255',
             'email' => 'required',
-            // 'password' => 'required',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',

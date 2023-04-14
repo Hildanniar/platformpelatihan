@@ -11,7 +11,8 @@ class MateriTask extends Migration
     {
         Schema::create('materi_tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(TypeTraining::class);
+            // $table->foreignId('type_training_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(TypeTraining::class)->onDelete('cascade');
             $table->string('bab_materi');
             $table->text('excerpt_materi');
             $table->text('body_materi');

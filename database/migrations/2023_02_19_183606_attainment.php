@@ -20,6 +20,8 @@ class Attainment extends Migration
             $table->text('comment');
             $table->string('image')->nullable();
             $table->text('desc');
+            $table->string('value', 2);
+            $table->enum('status', ['NoPublikasi', 'Publikasi']);
             $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });
