@@ -30,7 +30,7 @@ class User extends Authenticatable {
     }
 
     public function participants() {
-        return $this->hasMany( Participant::class, 'id_user' );
+        return $this->belongsTo( Participant::class, 'id_user' );
     }
 
     public function mentors() {

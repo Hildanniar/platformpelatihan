@@ -183,32 +183,37 @@
                                                         <th>Status Publikasi</th>
                                                         <th>:</th>
                                                         <td>
+
                                                             <div class="form-group">
                                                                 <div class="custom-control custom-radio">
                                                                     <input type="radio" id="nopublikasi" name="status"
-                                                                        value="0" class="custom-control-input" required
-                                                                        {{ $attainment->is_active == '0' ? 'checked' : '' }}>
+                                                                        value="NoPublikasi" class="custom-control-input"
+                                                                        required
+                                                                        {{ $attainment->status == 'NoPublikasi' ? 'checked' : '' }}>
                                                                     <label class="custom-control-label"
                                                                         for="nopublikasi">Tidak
                                                                         Publikasi</label><br>
                                                                 </div>
                                                                 <div class="custom-control custom-radio">
                                                                     <input type="radio" id="publikasi" name="status"
-                                                                        value="1" class="custom-control-input" required
-                                                                        {{ $attainment->is_active == '1' ? 'checked' : '' }}>
+                                                                        value="Publikasi" class="custom-control-input"
+                                                                        required
+                                                                        {{ $attainment->status == 'Publikasi' ? 'checked' : '' }}>
                                                                     <label class="custom-control-label"
                                                                         for="publikasi">Publikasi</label>
                                                                 </div>
                                                             </div>
+
                                                             <br>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-primary">Edit
-                                                                    data</button>
-                                                            </div>
+
                                                         </td>
                                                         <td></td>
                                                     </tr>
                                                 </table>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Edit
+                                                        data</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

@@ -10,6 +10,6 @@ class Participant extends Model {
     protected $guarded = [ 'id' ];
 
     public function users() {
-        return $this->belongsTo( User::class, 'id_user' );
+        return $this->hasOne( User::class, 'id_user' );
     }
 }

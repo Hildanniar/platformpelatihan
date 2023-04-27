@@ -24,6 +24,7 @@ class ParticipantController extends Controller {
     */
 
     public function index() {
+
         return view( 'admin.participant.index', [
             'participants' => Participant::all()
         ] );
@@ -257,11 +258,16 @@ class ParticipantController extends Controller {
 
     public function getParticipants(Request $request)
     {
+      
         if ($request->ajax()) {
-            $data = Participant::all();
+            $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
+            // $data = Participant::all();
             return Datatables::of($data)
                 ->addIndexColumn() ->editColumn('name_user', function($data){
-                    return $data->users->name ?? 'none';
+                    return $data->participants->name ?? 'none';
+                })
+                ->addIndexColumn() ->editColumn('class', function($data){
+                    return $data->participants->class ?? 'none';
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
