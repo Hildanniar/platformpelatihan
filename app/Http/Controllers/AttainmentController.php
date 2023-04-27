@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Attainment;
 use App\Models\TypeTraining;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -50,16 +50,20 @@ class AttainmentController extends Controller {
     }
 
     public function update( Request $request, Attainment $attainment ) {
+        try{
         $rules = [
             'value' => 'required|max:2',
             'status' => 'required|in:NoPublikasi,Publikasi',
-            'is_active'=>$request['status'], // == 'true' ? 1 : 0
+            // 'is_active'=>$request['status'], // == 'true' ? 1 : 0
         ];
         $validatedData = $request->validate( $rules );
 
         Attainment::where( 'id', $attainment->id )
         ->update( $validatedData );
         return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Diedit!' );
+        } catch(QueryException $error){
+            dd($error);
+        }
     }
 
     public function destroy( Attainment $attainment ) {

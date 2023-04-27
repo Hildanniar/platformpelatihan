@@ -10,7 +10,7 @@
                     </a>
                     <p class="mt-3 mb-4">Platform Pelatihan ini disediakan oleh Dinas Perpustakaan dan Kearsipan
                         Kabupaten Madiun untuk mempermudah masyarakat dalam mencari informasi dan mendaftar pelatihan
-                        secara gratis
+                        secara gratis.
                     </p>
                 </div>
             </div>
@@ -52,8 +52,8 @@
                         <div class="link-animated d-flex flex-column justify-content-start">
                             <a class="text-light mb-2" href="/"><i
                                     class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                            <a class="text-light mb-2" href="/tentang"><i
-                                    class="bi bi-arrow-right text-primary me-2"></i>Tentang</a>
+                            <a class="text-light mb-2" href="/about"><i
+                                    class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
                             <a class="text-light mb-2" href="#"><i
                                     class="bi bi-arrow-right text-primary me-2"></i>Karya</a>
                             <a class="text-light mb-2" href="#"><i

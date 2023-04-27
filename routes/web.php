@@ -26,8 +26,14 @@ use App\Http\Controllers\DashboardController;
 */
 Route::get('/', [DashboardController::class, 'dashboard']);
 Route::post('/' , [DashboardController::class, 'survey']);
-Route::get('/tentang', function () {
+Route::get('/about', function () {
     return view('dashboard.layouts.about');
+});
+Route::get('/attainment', function () {
+    return view('dashboard.layouts.attainment');
+});
+Route::get('/training', function () {
+    return view('dashboard.layouts.training');
 });
 
 //login
