@@ -39,11 +39,6 @@
                                         <td> {{ $materi_tasks->bab_materi }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Kutipan Materi</th>
-                                        <th>:</th>
-                                        <td> {!! $materi_tasks->excerpt_materi !!}</td>
-                                    </tr>
-                                    <tr>
                                         <th>File Materi</th>
                                         <th>:</th>
                                         <td>
