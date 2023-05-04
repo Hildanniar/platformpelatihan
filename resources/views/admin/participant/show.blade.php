@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>Email</th>
                                         <th>:</th>
-                                        <td> {{ $participant->email }}</td>
+                                        <td> {{ $participant->users->email }}</td>
                                     </tr>
                                     <tr>
                                         <th>Alamat</th>
@@ -46,7 +46,7 @@
                                     <tr>
                                         <th>Usia</th>
                                         <th>:</th>
-                                        <td> {{ $participant->users->age }}</td>
+                                        <td> {{ $participant->age }}</td>
                                     </tr>
                                     <tr>
                                         <th>No.HP</th>
@@ -61,24 +61,24 @@
                                     <tr>
                                         <th>Jenis Kelamin</th>
                                         <th>:</th>
-                                        <td> {{ $participant->users->gender }}</td>
+                                        <td> {{ $participant->gender }}</td>
                                     </tr>
                                     <tr>
                                         <th>Pekerjaan</th>
                                         <th>:</th>
-                                        <td> {{ $participant->users->profession }}</td>
+                                        <td> {{ $participant->profession }}</td>
                                     </tr>
                                     <tr>
                                         <th>No.Anggota Perpustakaan</th>
                                         <th>:</th>
-                                        <td> {{ $participant->users->no_member }}</td>
+                                        <td> {{ $participant->no_member }}</td>
                                     </tr>
                                     <tr>
                                         <th>Foto Profile Peserta</th>
                                         <th>:</th>
                                         <td>
-                                            @if ($participant->users->image)
-                                                <img src="{{ asset('storage/' . $participant->users->image) }}"
+                                            @if ($participant->image)
+                                                <img src="{{ asset('storage/' . $participant->image) }}"
                                                     class="img-fluid mt-3" style="max-height:250px; overflow:hidden;">
                                             @else
                                                 <button type="button" class="btn btn-danger btn-sm">Foto Profile belum di

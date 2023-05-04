@@ -14,12 +14,14 @@ class MentorFactory extends Factory
     public function definition()
     {
         return [
-            'id_user' => mt_rand(1, 4),
+            'user_id' => mt_rand(6, 10),
             'name' => $this->faker->name(),
-            'username' => $this->faker->unique()->username(),
-            'email' => $this->faker->unique()->safeEmail(),
             'address' => $this->faker->address(),
+            'age' => mt_rand(20, 100),
             'no_hp' => $this->faker->numerify('08#########'),
+            'gender' => ['Laki-Laki', 'Perempuan'][mt_rand(0,1)],
+            'profession' => $this->faker->jobTitle(),
+            'no_member' => $this->faker->randomNumber(5, true),
             'is_active' =>['0', '1'][mt_rand(0,1)]
         ];
     }

@@ -37,7 +37,7 @@
                                     <tr>
                                         <th>Deskripsi Sertifikat</th>
                                         <th>:</th>
-                                        <td> {{ $certificate->desc }}</td>
+                                        <td> {!! $certificate->desc !!}</td>
                                     </tr>
                                 </table>
                             </div>

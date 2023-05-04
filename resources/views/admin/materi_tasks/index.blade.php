@@ -100,7 +100,7 @@
                         name: 'kutipan'
                     },
                     {
-                        data: 'task_name',
+                        data: 'name_task',
                         name: 'nama tugas'
                     },
                     {

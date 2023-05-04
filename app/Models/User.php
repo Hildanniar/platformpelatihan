@@ -26,18 +26,18 @@ class User extends Authenticatable {
     ];
 
     public function attainments() {
-        return $this->hasMany( Attainment::class, 'id_user' );
+        return $this->hasMany( Attainment::class );
     }
 
     public function participants() {
-        return $this->belongsTo( Participant::class, 'id_user' );
+        return $this->hasOne( Participant::class );
     }
 
     public function mentors() {
-        return $this->hasOne( Mentor::class, 'id_user' );
+        return $this->hasOne( Mentor::class );
     }
 
     public function levels() {
-        return $this->belongsTo( Level::class, 'id_level' );
+        return $this->belongsTo( Level::class, 'level_id' );
     }
 }

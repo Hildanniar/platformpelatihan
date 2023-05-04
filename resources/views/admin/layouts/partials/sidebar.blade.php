@@ -4,18 +4,34 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    @if (auth()->user()->image == null)
-                        <img src="/assets/admin/img/profiledefault.png" alt="..." class="avatar-img rounded-circle">
+                    @if (auth()->user()->levels->name == 'Peserta')
+                        @if (auth()->user()->participants->image == null)
+                            <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                class="avatar-img rounded-circle">
+                        @else
+                            <img src="{{ asset('storage/' . auth()->user()->participants->image) }}" alt="..."
+                                class="avatar-img rounded-circle">
+                        @endif
                     @else
-                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="..."
-                            class="avatar-img rounded-circle">
+                        @if (auth()->user()->mentors->image == null)
+                            <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                class="avatar-img rounded-circle">
+                        @else
+                            <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}" alt="..."
+                                class="avatar-img rounded-circle">
+                        @endif
                     @endif
                 </div>
                 <div class="info">
                     <a href="#collapseExample" aria-expanded="true">
                         <span>
-                            {{ auth()->user()->name }}
-                            <span class="user-level">{{ auth()->user()->levels->name }}</span>
+                            @if (auth()->user()->levels->name == 'Peserta')
+                                {{ auth()->user()->participants->name }}
+                                <span class="user-level">{{ auth()->user()->levels->name }}</span>
+                            @else
+                                {{ auth()->user()->mentors->name }}
+                                <span class="user-level">{{ auth()->user()->levels->name }}</span>
+                            @endif
                         </span>
                     </a>
                     <div class="clearfix"></div>

@@ -49,7 +49,7 @@
                                     <tr>
                                         <th>Deskripsi Pelatihan</th>
                                         <th>:</th>
-                                        <td> {{ $type_training->desc }}</td>
+                                        <td> {!! $type_training->desc !!}</td>
                                     </tr>
                                 </table>
                             </div>

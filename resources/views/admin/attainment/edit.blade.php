@@ -128,12 +128,12 @@
                                                     <tr>
                                                         <th>Peserta</th>
                                                         <th>:</th>
-                                                        <td> {{ $attainment->users->name }}</td>
+                                                        <td> {{ $attainment->users->participants->name ?? 'none' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Ulasan</th>
                                                         <th>:</th>
-                                                        <td> {{ $attainment->comment }}</td>
+                                                        <td> {!! $attainment->comment !!}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Hasil Karya Pelatihan</th>
@@ -154,7 +154,7 @@
                                                     <tr>
                                                         <th>Rangkuman Pelatihan</th>
                                                         <th>:</th>
-                                                        <td> {{ $attainment->desc }}</td>
+                                                        <td> {!! $attainment->desc !!}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Nilai Hasil Karya</th>

@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller {
     public function index() {
-        $users = User::where( 'id_level', '3' )->count();
+        $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
         return view( 'admin.dashboard.index', compact( 'users', 'type_trainings', 'attainments' ) );
     }
 
     public function dashboard() {
-        $users = User::where( 'id_level', '3' )->count();
+        $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
         return view( 'dashboard.layouts.main', compact( 'users', 'type_trainings', 'attainments' ) );

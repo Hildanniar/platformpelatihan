@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Attainment;
+use App\Models\Participant;
 use App\Models\TypeTraining;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -28,11 +30,15 @@ class AttainmentController extends Controller {
     public function store( Request $request ) {
         $validatedData = $request->validate( [
             'type_training_id' => 'required',
-            'id_user' => 'required',
+            'user_id' => 'required',
             'comment' => 'required',
             'desc' => 'required',
             'image' => 'image|file|max:3000'
         ] );
+        if ( $request->file( 'image' ) ) {
+            $validatedData[ 'image' ] = $request->file( 'image' )->store( 'hasil-karya' );
+        }
+        $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->comment ), 200 );
         Attainment::create( $validatedData );
         return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
@@ -45,7 +51,8 @@ class AttainmentController extends Controller {
         return view( 'admin.attainment.edit', [ 
             'attainment' => $attainment,
             'type_trainings' => TypeTraining::all(),
-            'users' => User::all()
+            'users' => User::all(),
+            'participants' => Participant::all(),
             ] );
     }
 
@@ -54,10 +61,9 @@ class AttainmentController extends Controller {
         $rules = [
             'value' => 'required|max:2',
             'status' => 'required|in:NoPublikasi,Publikasi',
-            // 'is_active'=>$request['status'], // == 'true' ? 1 : 0
+        
         ];
         $validatedData = $request->validate( $rules );
-
         Attainment::where( 'id', $attainment->id )
         ->update( $validatedData );
         return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Diedit!' );
@@ -84,7 +90,7 @@ class AttainmentController extends Controller {
                     return $data->type_trainings->name ?? 'none';
                 })
                 ->editColumn('name_user', function($data){
-                    return $data->users->name ?? 'none';
+                    return $data->users->participants->name ?? 'none';
                 })
                 ->editColumn('value', function($data){
                     return $data->value ?? 'Belum dinilai';

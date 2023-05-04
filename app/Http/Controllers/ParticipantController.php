@@ -43,13 +43,6 @@ class ParticipantController extends Controller {
         ] );
     }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-
     public function store( Request $request ) {
         $validatedData = $request->validate( [
             'type_training_id' => 'required',
@@ -63,17 +56,26 @@ class ParticipantController extends Controller {
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
             'no_member' => 'required|max:255',
-            'image' => 'image|file|max:2048'
+            'image' => 'image|file|max:2048',
+            'class' => 'required|in:Offline,Online'
         ] );
+
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('profile-photos');
-
+        }
         $data_user = [
-            'id_level' => 3,
-            'name'=> $validatedData['name'],
+            'level_id' => 3,
             'username'=> $validatedData['username'],
             'email'=> $validatedData['email'],
             'password'=> bcrypt($validatedData['password']),
+        ];
+        $user = User::create( $data_user );
+        $user_last_id = $user->id;
+        if($request->image != null){
+        $data_participant = [
+            'type_training_id'=> $validatedData['type_training_id'],
+            'user_id' => $user_last_id,
+            'name'=> $validatedData['name'],
             'address'=> $validatedData['address'],
             'age'=> $validatedData['age'],
             'no_hp'=> $validatedData['no_hp'],
@@ -81,58 +83,33 @@ class ParticipantController extends Controller {
             'profession'=> $validatedData['profession'],
             'no_member'=> $validatedData['no_member'],
             'image'=> $validatedData['image'],
+            'class'=> $validatedData['class'],
         ];
     } else {
-        $data_user = [
-            'id_level' => 3,
+        $data_participant = [
+            'type_training_id'=> $validatedData['type_training_id'],
+            'user_id' => $user_last_id,
             'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
-            'password'=> bcrypt($validatedData['password']),
             'address'=> $validatedData['address'],
             'age'=> $validatedData['age'],
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member']
-            
+            'no_member'=> $validatedData['no_member'],
+            'class'=> $validatedData['class'],
         ];
     }
-        $user = User::create($data_user);
-        $user_last_id = $user->id;
-        $data_participant = [
-            'type_training_id'=> $validatedData['type_training_id'],
-            'id_user' => $user_last_id,
-            'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
-            'address'=> $validatedData['address'],
-            'no_hp'=> $validatedData['no_hp'],
-        ];
         Participant::create( $data_participant );
         return redirect( '/admin/participant' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Participant  $participant
-    * @return \Illuminate\Http\Response
-    */
-
     public function show( Participant $participant ) {
+        // dd($participant);
         return view( 'admin.participant.show', [
             'participant' => $participant,
         ] );
-    }
-
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Participant  $participant
-    * @return \Illuminate\Http\Response
-    */
-
+        }
+        
     public function edit( Participant $participant ) {
         // dd($participant->users);
         return view( 'admin.participant.edit', [
@@ -150,7 +127,6 @@ class ParticipantController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.$participant->users->id.'|max:255',
             'email' => 'required',
-            // 'password' => 'required',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',
@@ -161,64 +137,53 @@ class ParticipantController extends Controller {
             'class' => 'required|in:Offline,Online'
         ] ;
         $validatedData = $request->validate( $rules );
+            if($request->password != null){
+            $data_user = [
+                'level_id' => 3,
+                'username'=> $validatedData['username'],
+                'email'=> $validatedData['email'],
+                'password'=> bcrypt($validatedData['password']),
+                
+            ];
+        } else {
+            $data_user = [
+                'level_id' => 3,
+                'username'=> $validatedData['username'],
+                'email'=> $validatedData['email'],
+            ];
+        }
         if ($request->file('image')) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('profile-photos');
-            if($request->password != null){
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'password'=> bcrypt($validatedData['password']),
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-                'image'=> $validatedData['image'],
-            ];
-        } else {
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-                'image'=> $validatedData['image'],
-            ];
         }
-        }else{
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'password'=> bcrypt($validatedData['password']),
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-            ];
-        }
+        if($request->image != null){
         $data_participant = [
             'type_training_id'=> $validatedData['type_training_id'],
             'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
             'address'=> $validatedData['address'],
+            'age'=> $validatedData['age'],
             'no_hp'=> $validatedData['no_hp'],
+            'gender'=> $validatedData['gender'],
+            'profession'=> $validatedData['profession'],
+            'no_member'=> $validatedData['no_member'],
+            'image'=> $validatedData['image'],
+            'class'=> $validatedData['class'],
         ];
+    } else{
+        $data_participant = [
+            'type_training_id'=> $validatedData['type_training_id'],
+            'name'=> $validatedData['name'],
+            'address'=> $validatedData['address'],
+            'age'=> $validatedData['age'],
+            'no_hp'=> $validatedData['no_hp'],
+            'gender'=> $validatedData['gender'],
+            'profession'=> $validatedData['profession'],
+            'no_member'=> $validatedData['no_member'],
+            'class'=> $validatedData['class'],
+        ];
+    }
         $participant->users()->update($data_user);
         $participant->update($data_participant);
         return redirect( '/admin/participant' )->with( 'success', 'Data Berhasil Diupdate!' );
@@ -227,18 +192,12 @@ class ParticipantController extends Controller {
     }
 }
 
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Participant  $participant
-    * @return \Illuminate\Http\Response
-    */
-
     public function destroy( Participant $participant ) {
-        if ($participant->users->image) {
-            Storage::delete($participant->users->image);
+        if ($participant->image) {
+            Storage::delete($participant->image);
         }
-        Participant::destroy( $participant->id );
+        $participant->users()->delete();
+        $participant->destroy($participant->id);
         return redirect( '/admin/participant' )->with( 'success', 'Data berhasil Dihapus!' );
     }
 
@@ -252,32 +211,37 @@ class ParticipantController extends Controller {
             'participants' => $participant
         ] )
         ->setPaper('a4', 'landscape');
-        // return $pdf->download( 'peserta.pdf' );
         return $pdf->stream();
     }
 
     public function getParticipants(Request $request)
     {
-      
         if ($request->ajax()) {
             $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
             // $data = Participant::all();
             return Datatables::of($data)
-                ->addIndexColumn() ->editColumn('name_user', function($data){
+            ->addIndexColumn()
+                ->editColumn('name_user', function($data){
                     return $data->participants->name ?? 'none';
                 })
-                ->addIndexColumn() ->editColumn('class', function($data){
+                ->editColumn('address', function($data){
+                    return $data->participants->address ?? 'none';
+                })
+                ->editColumn('no_hp', function($data){
+                    return $data->participants->no_hp ?? 'none';
+                })
+                ->editColumn('class', function($data){
                     return $data->participants->class ?? 'none';
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/admin/participant/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/participant/'. $row->id .'" method="POST" class="d-inline">
+                    <a href="/admin/participant/'. $row->participants->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/participant/'. $row->participants->id .'" method="POST" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
                     <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
                     </form>
-                    <a href="/admin/participant/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    <a href="/admin/participant/'. $row->participants->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
                     
                     return $actionBtn;
                 })

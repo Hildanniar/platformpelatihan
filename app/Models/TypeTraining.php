@@ -25,7 +25,7 @@ class TypeTraining extends Model {
         return $this->hasMany( Schedule::class );
     }
 
-    public function attainmnet() {
+    public function attainment() {
         return $this->hasMany( Attainment::class );
     }
 }

@@ -31,7 +31,7 @@
                                     <label for="name" class="form-label">Nama</label>
                                     <input type="text"
                                         class="form-control input-solid @error('name') is-invalid @enderror" id="name"
-                                        name="name" required autofocus placeholder="Nama" value="{{ old('name') }}"">
+                                        name="name" required autofocus placeholder="Nama" value="{{ old('name') }}">
                                     @error('title')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -153,6 +153,8 @@
                                         style="max-height:300px; overflow:hidden;">
                                     <input class="form-control input-solid @error('image') is-invalid @enderror "
                                         type="file" id="image" name="image" onchange="previewImage()">
+                                    <small style="color:red">*max.2MB</small> <br>
+                                    <small style="color:red">*format png, jpg, dan jpeg</small>
                                     @error('image')
                                         <div class="invalid-feedback">
                                             {{ $message }}

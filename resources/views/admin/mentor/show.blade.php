@@ -31,12 +31,12 @@
                                     <tr>
                                         <th>Username</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->username }}</td>
+                                        <td> {{ $mentor->users->username }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->email }}</td>
+                                        <td> {{ $mentor->users->email }}</td>
                                     </tr>
                                     <tr>
                                         <th>Alamat</th>
@@ -46,7 +46,7 @@
                                     <tr>
                                         <th>Usia</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->users->age }}</td>
+                                        <td> {{ $mentor->age }}</td>
                                     </tr>
                                     <tr>
                                         <th>No.HP</th>
@@ -56,25 +56,25 @@
                                     <tr>
                                         <th>Jenis Kelamin</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->users->gender }}</td>
+                                        <td> {{ $mentor->gender }}</td>
                                     </tr>
                                     <tr>
                                         <th>Pekerjaan</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->users->profession }}</td>
+                                        <td> {{ $mentor->profession }}</td>
                                     </tr>
                                     <tr>
                                         <th>No.Anggota Perpustakaan</th>
                                         <th>:</th>
-                                        <td> {{ $mentor->users->no_member }}</td>
+                                        <td> {{ $mentor->no_member }}</td>
                                     </tr>
                                     <tr>
                                         <th>Foto Profile Mentor</th>
                                         <th>:</th>
                                         <td>
-                                            @if ($mentor->users->image)
-                                                <img src="{{ asset('storage/' . $mentor->users->image) }}"
-                                                    class="img-fluid mt-3" style="max-height:250px; overflow:hidden;">
+                                            @if ($mentor->image)
+                                                <img src="{{ asset('storage/' . $mentor->image) }}" class="img-fluid mt-3"
+                                                    style="max-height:250px; overflow:hidden;">
                                             @else
                                                 <button type="button" class="btn btn-danger btn-sm">Foto Profile belum di
                                                     upload</button>

@@ -28,13 +28,19 @@ class MateriTaskController extends Controller {
             'bab_materi' => 'required',
             'file_materi' => 'file|mimes:pdf|max:5120',
             'body_materi' => 'required',
-            'task_name' => 'required',
+            'name_task' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'desc_task' => 'required',
         ] );
         $validatedData[ 'excerpt_materi' ] = Str::limit( strip_tags( $request->body_materi ), 200 );
-        $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
+        
+        if($request->_materi_file != null){
+            $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
+        } else {
+            $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
+        }
+        
         MateriTask::create( $validatedData );
         return redirect( '/admin/materi_tasks' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
@@ -58,7 +64,7 @@ class MateriTaskController extends Controller {
             'bab_materi' => 'required',
             'file_materi' => 'file|mimes:pdf|max:5120',
             'body_materi' => 'required',
-            'task_name' => 'required',
+            'name_task' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'desc_task' => 'required',

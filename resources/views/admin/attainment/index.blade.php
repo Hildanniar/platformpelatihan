@@ -95,17 +95,13 @@
                         name: 'nama peserta'
                     },
                     {
-                        data: 'comment',
-                        name: 'comment'
+                        data: 'excerpt',
+                        name: 'excerpt'
                     },
                     {
                         data: 'value',
                         name: 'value'
                     },
-                    // {
-                    //     data: 'status',
-                    //     name: 'status'
-                    // },
                     {
                         data: 'action',
                         name: 'action',
@@ -113,11 +109,6 @@
                         searchable: true
                     },
                 ],
-                // "fnDrawCallback": function(row) {
-                //     $('.status')
-                //         .prop('checked', row.status !== 1)
-                //         .bootstrapToggle();
-                // }
             });
         });
     </script>

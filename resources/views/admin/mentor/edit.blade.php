@@ -56,7 +56,7 @@
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email"
                                         class="form-control input-solid @error('email') is-invalid @enderror" id="email"
-                                        name="email" required value="{{ old('email', $mentor->email) }}">
+                                        name="email" required value="{{ old('email', $mentor->users->email) }}">
                                     @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -68,6 +68,7 @@
                                     <input type="password"
                                         class="form-control input-solid @error('password') is-invalid @enderror"
                                         id="password" name="password" placeholder="Password">
+                                    <small style="color:red">*kosongkan apabila tidak ingin mengubah password</small>
                                     @error('password')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -90,8 +91,7 @@
                                     <label for="age" class="form-label">Usia</label>
                                     <input type="text"
                                         class="form-control input-solid @error('age') is-invalid @enderror" id="age"
-                                        name="age" required value="{{ old('age', $mentor->users->age) }}"
-                                        maxlength="3">
+                                        name="age" required value="{{ old('age', $mentor->age) }}" maxlength="3">
                                     @error('age')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -114,7 +114,7 @@
                                     <input type="text"
                                         class="form-control input-solid @error('no_member') is-invalid @enderror"
                                         id="no_member" name="no_member" required
-                                        value="{{ old('no_member', $mentor->users->no_member) }}"
+                                        value="{{ old('no_member', $mentor->no_member) }}"
                                         placeholder="No.Anggota Perpustakaan" maxlength="13">
                                     @error('no_member')
                                         <div class="invalid-feedback">
@@ -127,8 +127,8 @@
                                     <input type="text"
                                         class="form-control input-solid @error('profession') is-invalid @enderror"
                                         id="profession" name="profession" required
-                                        value="{{ old('profession', $mentor->users->profession) }}"
-                                        placeholder="Pekerjaan" maxlength="255">
+                                        value="{{ old('profession', $mentor->profession) }}" placeholder="Pekerjaan"
+                                        maxlength="255">
                                     @error('profession')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -140,9 +140,9 @@
                                     <select class="form-control input-solid @error('gender') is-invalid @enderror"
                                         id="gender" required name="gender">
                                         <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option value="Laki-Laki" @if (old('gender', $mentor->users->gender) == 'Laki-laki') selected @endif>
+                                        <option value="Laki-Laki" @if (old('gender', $mentor->gender) == 'Laki-laki') selected @endif>
                                             Laki-Laki</option>
-                                        <option value="Perempuan" @if (old('gender', $mentor->users->gender) == 'Perempuan') selected @endif>
+                                        <option value="Perempuan" @if (old('gender', $mentor->gender) == 'Perempuan') selected @endif>
                                             Perempuan</option>
                                     </select>
                                     @error('gender')
@@ -156,8 +156,7 @@
                                     <input type="text"
                                         class="form-control input-solid @error('profession') is-invalid @enderror"
                                         id="profession" name="profession" required
-                                        value="{{ old('profession', $mentor->users->profession) }}"
-                                        placeholder="Pekerjaan">
+                                        value="{{ old('profession', $mentor->profession) }}" placeholder="Pekerjaan">
                                     @error('profession')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -169,7 +168,7 @@
                                     <input type="text"
                                         class="form-control input-solid @error('no_member') is-invalid @enderror"
                                         id="no_member" name="no_member" required
-                                        value="{{ old('no_member', $mentor->users->no_member) }}"
+                                        value="{{ old('no_member', $mentor->no_member) }}"
                                         placeholder="No. Anggota Perpustakaan">
                                     @error('no_member')
                                         <div class="invalid-feedback">
@@ -179,9 +178,10 @@
                                 </div>
                                 <div class="form-group form-floating-label">
                                     <label for="image" class="form-label">Foto Profile Mentor</label>
-                                    <input type="hidden" name="oldImage" value="{{ $mentor->users->image }}">
-                                    @if ($mentor->users->image)
-                                        <img src="{{ asset('storage/' . $mentor->users->image) }}"
+                                    <input type="hidden" name="oldImage" value="{{ $mentor->image }}">
+
+                                    @if ($mentor->image)
+                                        <img src="{{ asset('storage/' . $mentor->image) }}"
                                             class="img-preview img-fluid mb-3 col-sm-5 d-block"
                                             style="max-height:300px; overflow:hidden;">
                                     @else
@@ -190,6 +190,8 @@
                                     @endif
                                     <input class="form-control input-solid @error('image') is-invalid @enderror "
                                         type="file" id="image" name="image" onchange="previewImage()">
+                                    <small style="color:red">*max.2MB</small> <br>
+                                    <small style="color:red">*format png, jpg, dan jpeg</small>
                                     @error('image')
                                         <div class="invalid-feedback">
                                             {{ $message }}

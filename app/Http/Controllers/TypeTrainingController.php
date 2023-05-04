@@ -22,23 +22,10 @@ class TypeTrainingController extends Controller {
             'type_training' => TypeTraining::all()
         ] );
     }
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
+    
     public function create() {
         return view( 'admin.type_training.create' );
     }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
 
     public function store( Request $request ) {
         $validatedData = $request->validate( [
@@ -55,12 +42,6 @@ class TypeTrainingController extends Controller {
         return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\TypeTraining  $typeTraining
-    * @return \Illuminate\Http\Response
-    */
 
     public function show( TypeTraining $typeTraining ) {
         return view( 'admin.type_training.show', [
@@ -68,26 +49,12 @@ class TypeTrainingController extends Controller {
         ] );
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\TypeTraining  $typeTraining
-    * @return \Illuminate\Http\Response
-    */
-
     public function edit( TypeTraining $typeTraining ) {
         return view( 'admin.type_training.edit', [
             'type_training' => $typeTraining
         ] );
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\TypeTraining  $typeTraining
-    * @return \Illuminate\Http\Response
-    */
 
     public function update( Request $request, TypeTraining $typeTraining ) {
         $rules = [
@@ -110,13 +77,6 @@ class TypeTrainingController extends Controller {
         ->update( $validatedData );
         return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Diedit!' );
     }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\TypeTraining  $typeTraining
-    * @return \Illuminate\Http\Response
-    */
 
     public function destroy( TypeTraining $typeTraining ) {
         if ( $typeTraining->image ) {

@@ -212,12 +212,22 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        @if (auth()->user()->image == null)
-                            <img src="/assets/admin/img/profiledefault.png" alt="..."
-                                class="avatar-img rounded-circle">
+                        @if (auth()->user()->levels->name == 'Peserta')
+                            @if (auth()->user()->participants->image == null)
+                                <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                    class="avatar-img rounded-circle">
+                            @else
+                                <img src="{{ asset('storage/' . auth()->user()->participants->image) }}" alt="..."
+                                    class="avatar-img rounded-circle">
+                            @endif
                         @else
-                            <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="..."
-                                class="avatar-img rounded-circle">
+                            @if (auth()->user()->mentors->image == null)
+                                <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                    class="avatar-img rounded-circle">
+                            @else
+                                <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}" alt="..."
+                                    class="avatar-img rounded-circle">
+                            @endif
                         @endif
                     </div>
                 </a>
@@ -226,7 +236,11 @@
                 <a class="dropdown" data-toggle="dropdown" href="#" aria-expanded="false">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        {{ auth()->user()->name }}
+                        @if (auth()->user()->levels->name == 'Peserta')
+                            {{ auth()->user()->participants->name }}
+                        @else
+                            {{ auth()->user()->mentors->name }}
+                        @endif
                     </button>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">

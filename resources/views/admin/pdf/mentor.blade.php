@@ -25,7 +25,6 @@
             <tr>
                 <th>No</th>
                 <th>Nama Lengkap</th>
-                <th>Username</th>
                 <th>Email</th>
                 <th>Alamat</th>
                 <th>No.Telp</th>
@@ -40,14 +39,13 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $mentor->name }}</td>
-                    <td>{{ $mentor->username }}</td>
-                    <td>{{ $mentor->email }}</td>
+                    <td>{{ $mentor->users->email }}</td>
                     <td>{{ $mentor->address }}</td>
                     <td>{{ $mentor->no_hp }}</td>
-                    <td>{{ $mentor->users->age }}</td>
-                    <td>{{ $mentor->users->gender }}</td>
-                    <td>{{ $mentor->users->profession }}</td>
-                    <td>{{ $mentor->users->no_member }}</td>
+                    <td>{{ $mentor->age }}</td>
+                    <td>{{ $mentor->gender }}</td>
+                    <td>{{ $mentor->profession }}</td>
+                    <td>{{ $mentor->no_member }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -66,19 +66,77 @@ class AuthenticationController extends Controller {
     }
 
     public function UpdateProfile( Request $request ) {
+        $rules =  [
+            'name' => 'required|max:255',
+            'username' => 'required|unique:users,username|max:255',
+            'email' => 'required',
+            'address' => 'required|max:255',
+            'age' => 'required|numeric|min:1',
+            'no_hp' => 'required|numeric|min:1',
+            'gender' => 'required|in:Laki-Laki,Perempuan',
+            'profession' => 'required|max:255',
+            'no_member' => 'required|max:255',
+            'image' => 'image|file|max:2048',
+
+        ] ;
+        $validatedData = $request->validate( $rules );
+
         $user = User::find( Auth::user()->id );
         if ( $user ) {
-            $user->name = $request[ 'name' ];
-            $user->email = $request[ 'email' ];
-            $user->username = $request[ 'username' ];
-            $user->no_hp = $request[ 'no_hp' ];
-            $user->no_member = $request[ 'no_member' ];
-            $user->gender = $request[ 'gender' ];
-            $user->profession = $request[ 'profession' ];
-            $user->age = $request[ 'age' ];
-            $user->address = $request[ 'address' ];
+            if ( auth()->user()->levels->name == 'Mentor' || 'Admin' ) {
+                if ( $request->password != null ) {
+                    $data_user = [
+                        'level_id' => 2,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+                    ];
+                } else {
+                    $data_user = [
+                        'level_id' => 2,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
 
-            $user->save();
+                    ];
+                }
+                $data_mentor = [
+                    'name'=> $validatedData[ 'name' ],
+                    'address'=> $validatedData[ 'address' ],
+                    'age'=> $validatedData[ 'age' ],
+                    'no_hp'=> $validatedData[ 'no_hp' ],
+                    'gender'=> $validatedData[ 'gender' ],
+                    'profession'=> $validatedData[ 'profession' ],
+                    'no_member'=> $validatedData[ 'no_member' ],
+                    // 'image'=> $validatedData[ 'image' ],
+                ];
+                $user->mentors()->update( $data_mentor );
+                $user->update( $data_user );
+            } else {
+                if ( $request->password != null ) {
+                    $data_user = [
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+                    ];
+                } else {
+                    $data_user = [
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                    ];
+                }
+                $data_participant = [
+                    'name'=> $validatedData[ 'name' ],
+                    'address'=> $validatedData[ 'address' ],
+                    'age'=> $validatedData[ 'age' ],
+                    'no_hp'=> $validatedData[ 'no_hp' ],
+                    'gender'=> $validatedData[ 'gender' ],
+                    'profession'=> $validatedData[ 'profession' ],
+                    'no_member'=> $validatedData[ 'no_member' ],
+                    // 'image'=> $validatedData[ 'image' ],
+                ];
+                $user->participants()->update( $data_participant );
+                $user->update( $data_user );
+            }
             return Redirect()->back()->with( 'success', 'Profile Berhasil diupdate!!!' );
         } else {
             return Redirect()->back();

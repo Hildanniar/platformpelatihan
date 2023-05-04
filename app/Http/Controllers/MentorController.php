@@ -10,35 +10,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Database\QueryException;
 
 class MentorController extends Controller {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
 
     public function index() {
         return view( 'admin.mentor.index');
 
     }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
     public function create() {
         return view( 'admin.mentor.create');
     }
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
 
     public function store( Request $request ) {
         $validatedData = $request->validate( [
@@ -57,70 +40,48 @@ class MentorController extends Controller {
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('profile-photos');
-
+        }
         $data_user = [
-            'id_level' => 2,
-            'name'=> $validatedData['name'],
+            'level_id' => 2,
             'username'=> $validatedData['username'],
             'email'=> $validatedData['email'],
             'password'=> bcrypt($validatedData['password']),
-            'address'=> $validatedData['address'],
-            'age'=> $validatedData['age'],
-            'no_hp'=> $validatedData['no_hp'],
-            'gender'=> $validatedData['gender'],
-            'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member'],
-            'image'=> $validatedData['image'],
         ];
-    } else {
-        $data_user = [
-            'id_level' => 2,
-            'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
-            'password'=> bcrypt($validatedData['password']),
-            'address'=> $validatedData['address'],
-            'age'=> $validatedData['age'],
-            'no_hp'=> $validatedData['no_hp'],
-            'gender'=> $validatedData['gender'],
-            'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member']
-            
-        ];
-    }
-        $user = User::create($data_user);
+        $user = User::create( $data_user );
         $user_last_id = $user->id;
-        $data_mentor = [
-            'id_user' => $user_last_id,
-            'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
-            'address'=> $validatedData['address'],
-            'no_hp'=> $validatedData['no_hp'],
-        ];
+        if($request->image != null){
+            $data_mentor = [
+                'user_id' => $user_last_id,
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+                'image'=> $validatedData['image'],
+            ];
+        } else {
+            $data_mentor = [
+                'user_id' => $user_last_id,
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+            ];
+        }
         Mentor::create( $data_mentor );
         return redirect( '/admin/mentor' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
-
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Mentor  $mentor
-    * @return \Illuminate\Http\Response
-    */
 
     public function show( Mentor $mentor ) {
         return view( 'admin.mentor.show', [
             'mentor' => $mentor,
         ] );
     }
-
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Mentor  $mentor
-    * @return \Illuminate\Http\Response
-    */
 
     public function edit( Mentor $mentor ) {
         return view( 'admin.mentor.edit', [
@@ -129,15 +90,8 @@ class MentorController extends Controller {
         ] );
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\Mentor  $mentor
-    * @return \Illuminate\Http\Response
-    */
-
     public function update( Request $request, Mentor $mentor ) {
+        try{
         $rules = [
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.$mentor->users->id.'|max:255',
@@ -152,104 +106,93 @@ class MentorController extends Controller {
         ];
         
         $validatedData = $request->validate( $rules );
+        if($request->password != null){
+            $data_user = [
+                'level_id' => 2,
+                'username'=> $validatedData['username'],
+                'email'=> $validatedData['email'],
+                'password'=> bcrypt($validatedData['password']),
+                
+            ];
+        } else {
+            $data_user = [
+                'level_id' => 2,
+                'username'=> $validatedData['username'],
+                'email'=> $validatedData['email'],
+            ];
+        }
         if ($request->file('image')) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('profile-photos');
-            if($request->password != null){
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'password'=> bcrypt($validatedData['password']),
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-                'image'=> $validatedData['image'],
-            ];
-        } else {
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-                'image'=> $validatedData['image'],
-            ];
         }
-        }else{
-            $data_user = [
-                'id_level' => 2,
-                'name'=> $validatedData['name'],
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-                'password'=> bcrypt($validatedData['password']),
-                'address'=> $validatedData['address'],
-                'age'=> $validatedData['age'],
-                'no_hp'=> $validatedData['no_hp'],
-                'gender'=> $validatedData['gender'],
-                'profession'=> $validatedData['profession'],
-                'no_member'=> $validatedData['no_member'],
-            ];
-        }
-
+        if($request->image != null){
         $data_mentor = [
             'name'=> $validatedData['name'],
-            'username'=> $validatedData['username'],
-            'email'=> $validatedData['email'],
             'address'=> $validatedData['address'],
+            'age'=> $validatedData['age'],
             'no_hp'=> $validatedData['no_hp'],
+            'gender'=> $validatedData['gender'],
+            'profession'=> $validatedData['profession'],
+            'no_member'=> $validatedData['no_member'],
+            'image'=> $validatedData['image'],
+            
         ];
+    } else{
+        $data_mentor = [
+            'name'=> $validatedData['name'],
+            'address'=> $validatedData['address'],
+            'age'=> $validatedData['age'],
+            'no_hp'=> $validatedData['no_hp'],
+            'gender'=> $validatedData['gender'],
+            'profession'=> $validatedData['profession'],
+            'no_member'=> $validatedData['no_member'],
+            
+        ];
+    }
         $mentor->users()->update($data_user);
         $mentor->update($data_mentor);
-        // Mentor::where( 'id', $mentor->id )->update( $validatedData );
         return redirect( '/admin/mentor' )->with( 'success', 'Data Berhasil Diupdate!' );
+    } catch(QueryException $error){
+        dd($error);
     }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Mentor  $mentor
-    * @return \Illuminate\Http\Response
-    */
+    }
 
     public function destroy( Mentor $mentor ) {
         if ($mentor->users->image) {
             Storage::delete($mentor->users->image);
         }
-        Mentor::destroy( $mentor->id );
+        $mentor->users()->delete();
+        $mentor->destroy($mentor->id);
         return redirect( '/admin/mentor' )->with( 'success', 'Data berhasil dihapus!' );
     }
 
     public function getMentors(Request $request)
     {
         if ($request->ajax()) {
-            $data = Mentor::all();
+            $data = User::whereRelation('levels', 'name', 'Mentor')->get(); 
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->editColumn('name_user', function($data){
-                    return $data->users->name ?? 'none';
+                ->editColumn('name', function($data){
+                    return $data->mentors->name ?? 'none';
+                })
+                ->editColumn('address', function($data){
+                    return $data->mentors->address ?? 'none';
+                })
+                ->editColumn('no_hp', function($data){
+                    return $data->mentors->no_hp ?? 'none';
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/admin/mentor/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/mentor/'. $row->id .'" method="POST" class="d-inline">
+                    <a href="/admin/mentor/'. $row->mentors->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/mentor/'. $row->mentors->id .'" method="POST" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
                     <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
                 </form>
-                     <a href="/admin/mentor/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                     
+                    <a href="/admin/mentor/'. $row->mentors->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

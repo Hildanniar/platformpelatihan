@@ -92,12 +92,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-floating-label">
-                                    <label for="task_name" class="form-label">Nama Tugas</label>
+                                    <label for="name_task" class="form-label">Nama Tugas</label>
                                     <input type="text"
-                                        class="form-control input-solid @error('task_name') is-invalid @enderror"
-                                        id="task_name" name="task_name" required
-                                        value="{{ old('task_name', $materi_tasks->task_name) }}" maxlength="255">
-                                    @error('task_name')
+                                        class="form-control input-solid @error('name_task') is-invalid @enderror"
+                                        id="name_task" name="name_task" required
+                                        value="{{ old('name_task', $materi_tasks->name_task) }}" maxlength="255">
+                                    @error('name_task')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

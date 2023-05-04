@@ -41,7 +41,7 @@
                                     <tr>
                                         <th>Kutipan Materi</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->excerpt_materi }}</td>
+                                        <td> {!! $materi_tasks->excerpt_materi !!}</td>
                                     </tr>
                                     <tr>
                                         <th>File Materi</th>
@@ -59,7 +59,7 @@
                                     <tr>
                                         <th>Teks Materi</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->body_materi }}</td>
+                                        <td> {!! $materi_tasks->body_materi !!}</td>
                                     </tr>
                                 </table>
                                 <table class="table table-sm table-hover">
@@ -71,7 +71,7 @@
                                     <tr>
                                         <th>Nama Tugas</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->task_name }}</td>
+                                        <td> {{ $materi_tasks->name_task }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Mulai</th>
@@ -86,7 +86,7 @@
                                     <tr>
                                         <th>Deskripsi Tugas</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->desc_task }}</td>
+                                        <td> {!! $materi_tasks->desc_task !!}</td>
                                     </tr>
                                 </table>
                             </div>

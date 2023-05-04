@@ -40,14 +40,14 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $participant->name }}</td>
-                    <td>{{ $participant->email }}</td>
+                    <td>{{ $participant->users->email }}</td>
                     <td>{{ $participant->address }}</td>
                     <td>{{ $participant->no_hp }}</td>
                     <td>{{ $participant->class }}</td>
-                    <td>{{ $participant->users->age }}</td>
-                    <td>{{ $participant->users->gender }}</td>
-                    <td>{{ $participant->users->profession }}</td>
-                    <td>{{ $participant->users->no_member }}</td>
+                    <td>{{ $participant->age }}</td>
+                    <td>{{ $participant->gender }}</td>
+                    <td>{{ $participant->profession }}</td>
+                    <td>{{ $participant->no_member }}</td>
                 </tr>
             @endforeach
         </tbody>

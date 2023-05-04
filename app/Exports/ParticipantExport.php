@@ -19,8 +19,8 @@ class ParticipantExport implements FromCollection, WithHeadings, WithColumnWidth
 
     public function collection() {
         $participants = DB::table( 'participants' )
-        ->leftJoin( 'users', 'users.id', '=', 'participants.id_user' )
-        ->select( 'participants.name', 'participants.email', 'participants.address', 'participants.no_hp', 'participants.class', 'users.age', 'users.gender', 'users.profession', 'users.no_member' )
+        ->leftJoin( 'users', 'users.id', '=', 'participants.user_id' )
+        ->select( 'participants.name', 'users.email', 'participants.address', 'participants.no_hp', 'participants.class', 'participants.age', 'participants.gender', 'participants.profession', 'participants.no_member' )
         ->get();
         return $participants;
     }

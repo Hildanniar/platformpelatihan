@@ -20,8 +20,8 @@ class MentorExport implements FromCollection, WithHeadings, WithColumnWidths {
 
     public function collection() {
         $mentors = DB::table( 'mentors' )
-        ->leftJoin( 'users', 'users.id', '=', 'mentors.id_user' )
-        ->select( 'mentors.name', 'mentors.email', 'mentors.address', 'mentors.no_hp', 'users.age', 'users.gender', 'users.profession', 'users.no_member' )
+        ->leftJoin( 'users', 'users.id', '=', 'mentors.user_id' )
+        ->select( 'mentors.name', 'users.email', 'mentors.address', 'mentors.no_hp', 'mentors.age', 'mentors.gender', 'mentors.profession', 'mentors.no_member' )
         ->get();
         return $mentors;
     }

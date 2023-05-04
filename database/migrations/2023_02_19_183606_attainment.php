@@ -16,13 +16,13 @@ class Attainment extends Migration
         Schema::create('attainments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(TypeTraining::class);
-            $table->foreignId('id_user');
+            $table->foreignId('user_id');
             $table->text('comment');
             $table->string('image')->nullable();
+            $table->text('excerpt');
             $table->text('desc');
             $table->string('value', 2);
             $table->enum('status', ['NoPublikasi', 'Publikasi']);
-            $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });
     }

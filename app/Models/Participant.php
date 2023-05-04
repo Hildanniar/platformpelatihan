@@ -10,6 +10,10 @@ class Participant extends Model {
     protected $guarded = [ 'id' ];
 
     public function users() {
-        return $this->hasOne( User::class, 'id_user' );
+        return $this->belongsTo( User::class, 'user_id' );
+    }
+
+    public function attainments() {
+        return $this->hasMany( Attainment::class, 'user_id' );
     }
 }
