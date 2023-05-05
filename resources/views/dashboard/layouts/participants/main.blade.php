@@ -22,22 +22,11 @@
                     <img class="w-100" src="/assets/dashboard/img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            {{-- @if (auth()->user()->levels->name == 'Peserta')
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Dinas Perpustakaan dan
-                                    Kearsipan
-                                    Kabupaten Madiun</h5>
-                                <h2 class="display-1 text-white mb-md-4 animated zoomIn">Platform Pelatihan</h2>
-                                <a href="/training"
-                                    class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Mulai
-                                    Sekarang</a>
-                            @else --}}
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Dinas Perpustakaan dan
-                                Kearsipan
-                                Kabupaten Madiun</h5>
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Selamat Datang</h5>
                             <h2 class="display-1 text-white mb-md-4 animated zoomIn">Platform Pelatihan</h2>
-                            <a href="/login" class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Daftar
+                            <a href="/dashboard/training"
+                                class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Mulai
                                 Sekarang</a>
-                            {{-- @endif --}}
                         </div>
                     </div>
                 </div>
@@ -48,8 +37,12 @@
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Dinas Perpustakaan dan
                                 Kearsipan
                                 Kabupaten Madiun</h5>
+                            {{-- @if (auth()->user()->levels->name == 'Peserta')
+                                {{ auth()->user()->participants->name }}
+                            @endif --}}
                             <h2 class="display-1 text-white mb-md-4 animated zoomIn">Platform Pelatihan</h2>
-                            <a href="/login" class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Daftar
+                            <a href="/dashboard/training"
+                                class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Mulai
                                 Sekarang</a>
                         </div>
                     </div>

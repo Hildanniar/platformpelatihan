@@ -12,21 +12,22 @@ use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TypeTrainingController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardParticipantController;
 
-
+// halaman utama
 Route::get('/', [DashboardController::class, 'dashboard']);
 Route::post('/' , [DashboardController::class, 'survey']);
 Route::get('/about', function () {
-    return view('dashboard.layouts.about');
+    return view('dashboard.layouts.public.about');
 });
 Route::get('/attainment', function () {
-    return view('dashboard.layouts.attainment');
+    return view('dashboard.layouts.public.attainment');
 });
 Route::get('/training', function () {
-    return view('dashboard.layouts.training');
+    return view('dashboard.layouts.public.training');
 });
 
-//login
+//halaman login
 Route::get('/login', [AuthenticationController::class, 'index'])->name('login');
 Route::get('/login/reload-captcha', [AuthenticationController::class, 'reloadcaptcha']);
 Route::post('/login' , [AuthenticationController::class, 'login']);
@@ -35,7 +36,7 @@ Route::post('/login' , [AuthenticationController::class, 'login']);
 Route::post('/logout' , [AuthenticationController::class, 'logout']);
 
 Route::middleware('level')->group(function () {
-// dashboard
+// dashboard admin dan mentor
 Route::get('/admin', [DashboardController::class, 'index']);
 
 //user profile
@@ -91,3 +92,8 @@ Route::get('/admin/attainment/dataattainment', [AttainmentController::class, 'ge
 Route::resource('/admin/attainment', AttainmentController::class);
 
 });
+
+
+// halaman peserta
+Route::get('/dashboard', [DashboardParticipantController::class, 'index']);
+Route::get('/dashboard/participant', [DashboardParticipantController::class, 'start']);

@@ -20,9 +20,18 @@
             <a href="/attainment" class="nav-item nav-link {{ Request::is('attainment') ? 'active' : '' }}">Karya</a>
             <a href="/training" class="nav-item nav-link {{ Request::is('training') ? 'active' : '' }}">Pelatihan</a>
         </div>
-        <a href="/login" class="btn btn-primary py-2 px-4 ms-3"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        {{-- @if (auth()->user()->levels->name == 'Peserta') --}}
+        <form action="/logout" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary py-2 px-4 ms-3"><i
+                    class="fas fa-arrow-to-left"></i>Logout</button>
+        </form>
+        {{-- @else --}}
+        <a href="/login" class="btn btn-primary py-2 px-4 ms-3"><i class="fa-solid fa-right-to-bracket"></i>
+            Login</a>
         <a href="/register" class="btn btn-primary py-2 px-4 ms-3"><i class="fa-regular fa-address-card"></i>
             Register</a>
+        {{-- @endif --}}
     </div>
 </nav>
 

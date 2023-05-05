@@ -35,7 +35,7 @@ class AuthenticationController extends Controller {
             $request->session()->regenerate();
 
             if ( auth()->user()->levels->name === 'Peserta' ) {
-                return redirect()->intended( '/peserta' );
+                return redirect()->intended( '/dashboard' );
             }
             return redirect()->intended( '/admin' );
         }
@@ -80,7 +80,6 @@ class AuthenticationController extends Controller {
 
         ] ;
         $validatedData = $request->validate( $rules );
-
         $user = User::find( Auth::user()->id );
         if ( $user ) {
             if ( auth()->user()->levels->name == 'Mentor' || 'Admin' ) {
