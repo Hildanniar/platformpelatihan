@@ -38,7 +38,7 @@
                             <div class="notif-center">
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../assets/img/jm_denis.jpg" alt="Img Profile">
+                                        <img src="/assets/participant/img/jm_denis.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Jimmy Denis</span>
@@ -50,7 +50,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../assets/img/chadengle.jpg" alt="Img Profile">
+                                        <img src="/assets/participant/img/chadengle.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Chad</span>
@@ -62,7 +62,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../assets/img/mlane.jpg" alt="Img Profile">
+                                        <img src="/assets/participant/img/mlane.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Jhon Doe</span>
@@ -74,7 +74,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../assets/img/talha.jpg" alt="Img Profile">
+                                        <img src="/assets/participant/img/talha.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="subject">Talha</span>
@@ -128,7 +128,7 @@
                                 </a>
                                 <a href="#">
                                     <div class="notif-img">
-                                        <img src="../assets/img/profile2.jpg" alt="Img Profile">
+                                        <img src="/assets/participant/img/profile2.jpg" alt="Img Profile">
                                     </div>
                                     <div class="notif-content">
                                         <span class="block">
@@ -212,15 +212,16 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                        <img src="/assets/participant/img/profile.jpg" alt="..."
+                            class="avatar-img rounded-circle">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                         <li>
                             <div class="user-box">
-                                <div class="avatar-lg"><img src="../assets/img/profile.jpg" alt="image profile"
-                                        class="avatar-img rounded"></div>
+                                <div class="avatar-lg"><img src="/assets/participant/img/profile.jpg"
+                                        alt="image profile" class="avatar-img rounded"></div>
                                 <div class="u-text">
                                     <h4>Hizrian</h4>
                                     <p class="text-muted">hello@example.com</p><a href="profile.html"

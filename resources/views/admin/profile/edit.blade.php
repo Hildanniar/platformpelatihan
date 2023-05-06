@@ -12,46 +12,64 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row gutters">
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <div class="account-settings">
-                                    <div class="user-profile">
-                                        <div class="user-avatar">
-                                            <input type="hidden" name="oldImage" value="{{ auth()->user()->image }}">
-                                            @if (auth()->user()->image == null)
-                                                <img src="/assets/admin/img/profiledefault.png" alt="..."
-                                                    class="img-preview rounded-circle">
-                                            @else
-                                                <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="..."
-                                                    class="img-preview rounded-circle">
-                                            @endif
-                                        </div>
-                                        <h5 class="user-name">{{ auth()->user()->name }}</h5>
-                                        <h6 class="user-email">{{ auth()->user()->email }}</h6>
-                                        <br>
-                                        <div class="media-body ml-4">
-                                            <label class="btn btn-outline-warning">
-                                                Upload new photo
-                                                <input type="file" class="account-settings-fileinput" name="image"
-                                                    id="image" onchange="previewImage()">
-                                            </label> &nbsp;
-                                            <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 3MB
+            <form method="POST" action="{{ route('update.user.profile') }}" class="mb-5" enctype="multipart/form-data">
+                @csrf
+                <div class="container">
+                    <div class="row gutters">
+                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+
+                                            <div class="user-avatar">
+                                                <input type="hidden" name="oldImage"
+                                                    @if (auth()->user()->levels->name == 'Mentor' || 'Admin') value="{{ $user->mentors['image'] }}"
+                                                @else 
+                                                value="{{ $user->participants['image'] }}" @endif>
+
+                                                @if (auth()->user()->levels->name == 'Peserta')
+                                                    @if (auth()->user()->participants->image == null)
+                                                        <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                                            class="img-preview rounded-circle" style=" object-fit: cover;">
+                                                    @else
+                                                        <img src="{{ asset('storage/' . auth()->user()->participants->image) }}"
+                                                            alt="..." class="img-preview rounded-circle"
+                                                            style=" object-fit: cover;">
+                                                    @endif
+                                                @else
+                                                    @if (auth()->user()->mentors->image == null)
+                                                        <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                                            class="img-preview rounded-circle" style=" object-fit: cover;">
+                                                    @else
+                                                        <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}"
+                                                            alt="..." class="img-preview rounded-circle"
+                                                            style=" object-fit: cover;">
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <h5 class="user-name">{{ auth()->user()->name }}</h5>
+                                            <h6 class="user-email">{{ auth()->user()->email }}</h6>
+                                            <br>
+                                            <div class="media-body ml-4">
+                                                <label class="btn btn-outline-warning">
+                                                    Upload new photo
+                                                    <input type="file" class="account-settings-fileinput" name="image"
+                                                        id="image" onchange="previewImage()">
+                                                </label> &nbsp;
+                                                <small style="color:red">*ukuran foto max.2MB</small> <br>
+                                                <small style="color:red">*format png, jpg, dan jpeg</small>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <form method="POST" action="{{ route('update.user.profile') }}" class="mb-5"
-                                    enctype="multipart/form-data">
-                                    @csrf
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                            <div class="card h-100">
+                                <div class="card-body">
+
                                     <div class="row gutters">
                                         @if (session()->has('success'))
                                             <div class="alert alert-success col-lg-8" role="alert">
@@ -184,11 +202,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <footer class="footer">
             <div class="container-fluid">
@@ -211,8 +230,6 @@
         function previewImage() {
             const image = document.querySelector('#image');
             const imgPreview = document.querySelector('.img-preview');
-
-            imgPreview.style.display = 'block';
 
             const oFReader = new FileReader();
             oFReader.readAsDataURL(image.files[0]);

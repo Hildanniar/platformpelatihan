@@ -93,7 +93,8 @@ Route::resource('/admin/attainment', AttainmentController::class);
 
 });
 
-
+Route::middleware('can:is_participant')->group(function(){
 // halaman peserta
-Route::get('/dashboard', [DashboardParticipantController::class, 'index']);
-Route::get('/dashboard/participant', [DashboardParticipantController::class, 'start']);
+Route::get('/dashboard/participant', [DashboardParticipantController::class, 'index']);
+Route::get('/dashboard/participant/training', [DashboardParticipantController::class, 'start']);
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthenticationController extends Controller {
@@ -35,7 +36,7 @@ class AuthenticationController extends Controller {
             $request->session()->regenerate();
 
             if ( auth()->user()->levels->name === 'Peserta' ) {
-                return redirect()->intended( '/dashboard' );
+                return redirect()->intended( '/dashboard/participant' );
             }
             return redirect()->intended( '/admin' );
         }
@@ -66,9 +67,10 @@ class AuthenticationController extends Controller {
     }
 
     public function UpdateProfile( Request $request ) {
+
         $rules =  [
             'name' => 'required|max:255',
-            'username' => 'required|unique:users,username|max:255',
+            'username' => 'required|unique:users,username,'.auth()->user()->id.'|max:255',
             'email' => 'required',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
@@ -79,35 +81,70 @@ class AuthenticationController extends Controller {
             'image' => 'image|file|max:2048',
 
         ] ;
+        if($request->password != null){
+            $rules['password'] = 'min:8';
+        }
         $validatedData = $request->validate( $rules );
         $user = User::find( Auth::user()->id );
         if ( $user ) {
-            if ( auth()->user()->levels->name == 'Mentor' || 'Admin' ) {
+            if ( auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin' ) {
                 if ( $request->password != null ) {
-                    $data_user = [
-                        'level_id' => 2,
-                        'username'=> $validatedData[ 'username' ],
-                        'email'=> $validatedData[ 'email' ],
-                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+                    if ( auth()->user()->levels->name == 'Admin' ) {
+                        $data_user = [
+                            'level_id' => 1,
+                            'username'=> $validatedData[ 'username' ],
+                            'email'=> $validatedData[ 'email' ],
+                            'password'=> bcrypt( $validatedData[ 'password' ] ),
+                        ];
+                    } else {
+                        $data_user = [
+                            'level_id' => 2,
+                            'username'=> $validatedData[ 'username' ],
+                            'email'=> $validatedData[ 'email' ],
+                            'password'=> bcrypt( $validatedData[ 'password' ] ),
+                        ];
+                    }
+                } else {
+                    if ( auth()->user()->levels->name == 'Admin' ) {
+                        $data_user = [
+                            'level_id' => 1,
+                            'username'=> $validatedData[ 'username' ],
+                            'email'=> $validatedData[ 'email' ],
+                        ];
+                    } else {
+                        $data_user = [
+                            'level_id' => 2,
+                            'username'=> $validatedData[ 'username' ],
+                            'email'=> $validatedData[ 'email' ],
+                        ];
+                    }
+                }
+                if ( $request->file( 'image' ) ) {
+                    if ( $request->oldImage ) {
+                        Storage::delete( $request->oldImage );
+                    }
+                    $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                    $data_mentor = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
+                        'image'=> $validatedData[ 'image' ],
                     ];
                 } else {
-                    $data_user = [
-                        'level_id' => 2,
-                        'username'=> $validatedData[ 'username' ],
-                        'email'=> $validatedData[ 'email' ],
-
+                    $data_mentor = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
                     ];
                 }
-                $data_mentor = [
-                    'name'=> $validatedData[ 'name' ],
-                    'address'=> $validatedData[ 'address' ],
-                    'age'=> $validatedData[ 'age' ],
-                    'no_hp'=> $validatedData[ 'no_hp' ],
-                    'gender'=> $validatedData[ 'gender' ],
-                    'profession'=> $validatedData[ 'profession' ],
-                    'no_member'=> $validatedData[ 'no_member' ],
-                    // 'image'=> $validatedData[ 'image' ],
-                ];
                 $user->mentors()->update( $data_mentor );
                 $user->update( $data_user );
             } else {
@@ -123,16 +160,32 @@ class AuthenticationController extends Controller {
                         'email'=> $validatedData[ 'email' ],
                     ];
                 }
-                $data_participant = [
-                    'name'=> $validatedData[ 'name' ],
-                    'address'=> $validatedData[ 'address' ],
-                    'age'=> $validatedData[ 'age' ],
-                    'no_hp'=> $validatedData[ 'no_hp' ],
-                    'gender'=> $validatedData[ 'gender' ],
-                    'profession'=> $validatedData[ 'profession' ],
-                    'no_member'=> $validatedData[ 'no_member' ],
-                    // 'image'=> $validatedData[ 'image' ],
-                ];
+                if ( $request->file( 'image' ) ) {
+                    if ( $request->oldImage ) {
+                        Storage::delete( $request->oldImage );
+                    }
+                    $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                    $data_participant = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
+                        'image'=> $validatedData[ 'image' ],
+                    ];
+                } else {
+                    $data_participant = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
+                    ];
+                }
                 $user->participants()->update( $data_participant );
                 $user->update( $data_user );
             }

@@ -15,4 +15,8 @@ class DashboardParticipantController extends Controller {
         $attainments = Attainment::count();
         return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments' ) );
     }
+
+    public function start() {
+        return view( 'participants.layouts.main' );
+    }
 }

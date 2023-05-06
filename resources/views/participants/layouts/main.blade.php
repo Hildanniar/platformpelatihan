@@ -9,7 +9,7 @@
             <div class="logo-header" data-background-color="blue2">
 
                 <a href="index.html" class="logo">
-                    <img src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+                    <img src="/assets/participant/img/logo.svg" alt="navbar brand" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -245,7 +245,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/id.png"
+                                                                    <img src="/assets/participant/img/flags/id.png"
                                                                         alt="indonesia">
                                                                 </div>
                                                             </td>
@@ -260,7 +260,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/us.png"
+                                                                    <img src="/assets/participant/img/flags/us.png"
                                                                         alt="united states">
                                                                 </div>
                                                             </td>
@@ -275,7 +275,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/au.png"
+                                                                    <img src="/assets/participant/img/flags/au.png"
                                                                         alt="australia">
                                                                 </div>
                                                             </td>
@@ -290,7 +290,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/ru.png"
+                                                                    <img src="/assets/participant/img/flags/ru.png"
                                                                         alt="russia">
                                                                 </div>
                                                             </td>
@@ -305,7 +305,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/cn.png"
+                                                                    <img src="/assets/participant/img/flags/cn.png"
                                                                         alt="china">
                                                                 </div>
                                                             </td>
@@ -320,7 +320,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flag">
-                                                                    <img src="../assets/img/flags/br.png"
+                                                                    <img src="/assets/participant/img/flags/br.png"
                                                                         alt="brazil">
                                                                 </div>
                                                             </td>
@@ -355,7 +355,7 @@
                                 <div class="card-body pb-0">
                                     <div class="d-flex">
                                         <div class="avatar">
-                                            <img src="../assets/img/logoproduct.svg" alt="..."
+                                            <img src="/assets/participant/img/logoproduct.svg" alt="..."
                                                 class="avatar-img rounded-circle">
                                         </div>
                                         <div class="flex-1 pt-1 ml-2">
@@ -369,7 +369,7 @@
                                     <div class="separator-dashed"></div>
                                     <div class="d-flex">
                                         <div class="avatar">
-                                            <img src="../assets/img/logoproduct.svg" alt="..."
+                                            <img src="/assets/participant/img/logoproduct.svg" alt="..."
                                                 class="avatar-img rounded-circle">
                                         </div>
                                         <div class="flex-1 pt-1 ml-2">
@@ -383,7 +383,7 @@
                                     <div class="separator-dashed"></div>
                                     <div class="d-flex">
                                         <div class="avatar">
-                                            <img src="../assets/img/logoproduct3.svg" alt="..."
+                                            <img src="/assets/participant/img/logoproduct3.svg" alt="..."
                                                 class="avatar-img rounded-circle">
                                         </div>
                                         <div class="flex-1 pt-1 ml-2">
@@ -408,7 +408,7 @@
                                     <div class="card-list">
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/jm_denis.jpg" alt="..."
+                                                <img src="/assets/participant/img/jm_denis.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">
@@ -421,7 +421,7 @@
                                         </div>
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/chadengle.jpg" alt="..."
+                                                <img src="/assets/participant/img/chadengle.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">
@@ -434,7 +434,7 @@
                                         </div>
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/talha.jpg" alt="..."
+                                                <img src="/assets/participant/img/talha.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">
@@ -447,7 +447,7 @@
                                         </div>
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/mlane.jpg" alt="..."
+                                                <img src="/assets/participant/img/mlane.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">
@@ -460,7 +460,7 @@
                                         </div>
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/talha.jpg" alt="..."
+                                                <img src="/assets/participant/img/talha.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">
@@ -473,7 +473,7 @@
                                         </div>
                                         <div class="item-list">
                                             <div class="avatar">
-                                                <img src="../assets/img/jm_denis.jpg" alt="..."
+                                                <img src="/assets/participant/img/jm_denis.jpg" alt="..."
                                                     class="avatar-img rounded-circle">
                                             </div>
                                             <div class="info-user ml-3">

@@ -24,7 +24,7 @@
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Selamat Datang</h5>
                             <h2 class="display-1 text-white mb-md-4 animated zoomIn">Platform Pelatihan</h2>
-                            <a href="/dashboard/training"
+                            <a href="/dashboard/participant/training"
                                 class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Mulai
                                 Sekarang</a>
                         </div>
@@ -41,7 +41,7 @@
                                 {{ auth()->user()->participants->name }}
                             @endif --}}
                             <h2 class="display-1 text-white mb-md-4 animated zoomIn">Platform Pelatihan</h2>
-                            <a href="/dashboard/training"
+                            <a href="/dashboard/participant/training"
                                 class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Mulai
                                 Sekarang</a>
                         </div>
