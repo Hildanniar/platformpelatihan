@@ -8,17 +8,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="/" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
-            <a href="/about" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">About Us</a>
-            {{-- <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Karya</a>
-                <div class="dropdown-menu m-0">
-                    <a href="blog.html" class="dropdown-item">Content Creator</a>
-                    <a href="detail.html" class="dropdown-item">Canva</a>
-                </div>
-            </div> --}}
-            <a href="/attainment" class="nav-item nav-link {{ Request::is('attainment') ? 'active' : '' }}">Karya</a>
-            <a href="/training" class="nav-item nav-link {{ Request::is('training') ? 'active' : '' }}">Pelatihan</a>
+            @if (auth()->user() == null)
+                <a href="/" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                <a href="/about" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">About Us</a>
+                <a href="/attainment"
+                    class="nav-item nav-link {{ Request::is('attainment') ? 'active' : '' }}">Karya</a>
+                <a href="/training"
+                    class="nav-item nav-link {{ Request::is('training') ? 'active' : '' }}">Pelatihan</a>
+            @else
+                @if (auth()->user()->levels->name == 'Peserta')
+                    <a href="/dashboard/participant"
+                        class="nav-item nav-link {{ Request::is('dashboard/participant') ? 'active' : '' }}">Home</a>
+                    <a href="/dashboard/participant/attainment"
+                        class="nav-item nav-link {{ Request::is('dashboard/participant/attainment*') ? 'active' : '' }}">Karya</a>
+                    <a href="/dashboard/participant/type_training"
+                        class="nav-item nav-link {{ Request::is('dashboard/participant/type_training*') ? 'active' : '' }}">Pelatihan</a>
+                    <a href="/dashboard/participant/start"
+                        class="nav-item nav-link {{ Request::is('dashboard/participant/start*') ? 'active' : '' }}">Dashboard</a>
+                @else
+                    <a href="/" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                    <a href="/about" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">About Us</a>
+                    <a href="/attainment"
+                        class="nav-item nav-link {{ Request::is('attainment') ? 'active' : '' }}">Karya</a>
+                    <a href="/training"
+                        class="nav-item nav-link {{ Request::is('training') ? 'active' : '' }}">Pelatihan</a>
+                @endif
+            @endif
         </div>
         @if (auth()->user() == null)
             <a href="/login" class="btn btn-primary py-2 px-4 ms-3"><i class="fa-solid fa-right-to-bracket"></i>

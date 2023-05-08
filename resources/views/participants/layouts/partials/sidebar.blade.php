@@ -4,14 +4,18 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="/assets/participant/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    @if (auth()->user()->participants->image == null)
+                        <img src="/assets/admin/img/profiledefault.png" alt="..." class="avatar-img rounded-circle">
+                    @else
+                        <img src="{{ asset('storage/' . auth()->user()->participants->image) }}" alt="..."
+                            class="avatar-img rounded-circle">
+                    @endif
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Hizrian
-                            <span class="user-level">Administrator</span>
-                            <span class="caret"></span>
+                            {{ auth()->user()->participants->name }}
+                            <span class="user-level">{{ auth()->user()->levels->name }}</span>
                         </span>
                     </a>
                     <div class="clearfix"></div>

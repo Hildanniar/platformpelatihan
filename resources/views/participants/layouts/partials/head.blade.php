@@ -1,9 +1,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+    <title>Dashboard Platform Pelatihan- Dinas Perpustakaan dan Kearsipan Kabupaten Madiun</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="/assets/participant/img/icon.ico" type="image/x-icon" />
-
+    <link rel="shortcut icon" href="{{ asset('assets/admin/img/logodinas.png') }}" type="image/x-icon" />
     <!-- Fonts and icons -->
     <script src="/assets/participant/js/plugin/webfont/webfont.min.js"></script>
     <script>
@@ -15,7 +14,7 @@
                 "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
                     "simple-line-icons"
                 ],
-                urls: ['../assets/css/fonts.min.css']
+                urls: ['/assets/participant/css/fonts.min.css']
             },
             active: function() {
                 sessionStorage.fonts = true;

@@ -26,18 +26,6 @@ class DashboardController extends Controller {
     }
 
     public function survey( Request $request ) {
-        // DB::table( 'surveys' )->insert( [
-        //     'name' => $request->name,
-        //     'age' => $request->age,
-        //     'city' => $request->city,
-        //     'profession' => $request->profession,
-        //     'type_training' => $request->type_training,
-        //     'month' => $request->month,
-        //     'excuse' => $request->excuse
-        // ] );
-        // // alihkan halaman ke halaman pegawai
-        // return redirect( '/' );
-
         $validatedData = $request->validate( [
             'name' => 'required',
             'age' => 'required|numeric',
@@ -50,5 +38,17 @@ class DashboardController extends Controller {
         ] );
         Survey::create( $validatedData );
         return redirect( '/' )->with( 'success', 'Data Berhasil Ditambahkan!' );
+    }
+
+    public function about() {
+        return view( 'dashboard.layouts.public.about' );
+    }
+
+    public function attainment() {
+        return view( 'dashboard.layouts.public.attainment' );
+    }
+
+    public function training() {
+        return view( 'dashboard.layouts.public.training' );
     }
 }

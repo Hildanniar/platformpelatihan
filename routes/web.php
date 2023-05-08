@@ -14,18 +14,13 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardParticipantController;
 
-// halaman utama
+
+// halaman utama tanpa login
 Route::get('/', [DashboardController::class, 'dashboard']);
 Route::post('/' , [DashboardController::class, 'survey']);
-Route::get('/about', function () {
-    return view('dashboard.layouts.public.about');
-});
-Route::get('/attainment', function () {
-    return view('dashboard.layouts.public.attainment');
-});
-Route::get('/training', function () {
-    return view('dashboard.layouts.public.training');
-});
+Route::get('/about', [DashboardController::class, 'about']);
+Route::get('/attainment', [DashboardController::class, 'attainment']);
+Route::get('/training', [DashboardController::class, 'training']);
 
 //halaman login
 Route::get('/login', [AuthenticationController::class, 'index'])->name('login');
@@ -39,62 +34,68 @@ Route::middleware('level')->group(function () {
 // dashboard admin dan mentor
 Route::get('/admin', [DashboardController::class, 'index']);
 
-//user profile
-Route::get('/admin/profile', [AuthenticationController::class, 'PUpdate'])->name('profile.update');
-Route::post('/admin/profile/update', [AuthenticationController::class, 'UpdateProfile'])->name('update.user.profile');
+//update profile admin dan mentor
+Route::get('/profile', [AuthenticationController::class, 'PUpdate'])->name('profile.update');
+Route::post('/profile/update', [AuthenticationController::class, 'UpdateProfile'])->name('update.user.profile');
 
 Route::middleware('can:is_admin')->group(function(){
-// user
-Route::get('/admin/pengguna/datapengguna', [PenggunaController::class, 'getUsers']);
-Route::get('/admin/pengguna/export_excel', [PenggunaController::class, 'export_excel']);
-Route::get('/admin/pengguna/export_pdf', [PenggunaController::class, 'export_pdf']);
-Route::resource('/admin/pengguna', PenggunaController::class);
+// halaman user
+// Route::get('/admin/pengguna/datapengguna', [PenggunaController::class, 'getUsers']);
+// Route::get('/admin/pengguna/export_excel', [PenggunaController::class, 'export_excel']);
+// Route::get('/admin/pengguna/export_pdf', [PenggunaController::class, 'export_pdf']);
+// Route::resource('/admin/pengguna', PenggunaController::class);
 
-// peserta
+// halaman data peserta
 Route::get('/admin/participant/dataparticipant', [ParticipantController::class, 'getParticipants']);
 Route::get('/admin/participant/export_excel', [ParticipantController::class, 'export_excel']);
 Route::get('/admin/participant/export_pdf', [ParticipantController::class, 'export_pdf']);
 Route::resource('/admin/participant', ParticipantController::class);
 
-// mentor
+// halaman data mentor
 Route::get('/admin/mentor/datamentor', [MentorController::class, 'getMentors']);
 Route::get('/admin/mentor/export_excel', [MentorController::class, 'export_excel']);
 Route::get('/admin/mentor/export_pdf', [MentorController::class, 'export_pdf']);
 Route::resource('/admin/mentor', MentorController::class);
 
-// jenis pelatihan
+// halaman data jenis pelatihan
 Route::get('/admin/type_training/datatraining', [TypeTrainingController::class, 'getTrainings']);
 Route::get('/admin/type_training/export_excel', [TypeTrainingController::class, 'export_excel']);
 Route::get('/admin/type_training/export_pdf', [TypeTrainingController::class, 'export_pdf']);
 Route::resource('/admin/type_training', TypeTrainingController::class);
 
-// sertifikat
+// halaman data sertifikat
 Route::get('/admin/certificate/datacertificate', [CertificateController::class, 'getCertificates']);
 Route::resource('/admin/certificate', CertificateController::class);
 
-// survey
+// halaman data survey
 Route::get('/admin/survey/datasurvey', [SurveyController::class, 'getSurveys']);
 Route::resource('/admin/survey', SurveyController::class);
 });
 
-// materi & tugas
+// halaman data materi & tugas pelatihan 
 Route::get('/admin/materi_tasks/datamateritasks', [MateriTaskController::class, 'getMateriTasks']);
 Route::resource('/admin/materi_tasks', MateriTaskController::class);
 
-// jadwal
+// halaman data jadwal pelatihan
 Route::get('/admin/schedule/dataschedule', [ScheduleController::class, 'getSchedules']);
 Route::get('/admin/schedule/export_excel', [ScheduleController::class, 'export_excel']);
 Route::get('/admin/schedule/export_pdf', [ScheduleController::class, 'export_pdf']);
 Route::resource('/admin/schedule', ScheduleController::class);
 
-// hasil karya
+// halaman data hasil karya pelatihan
 Route::get('/admin/attainment/dataattainment', [AttainmentController::class, 'getAttainment']);
 Route::resource('/admin/attainment', AttainmentController::class);
 
 });
 
 Route::middleware('can:is_participant')->group(function(){
-// halaman peserta
+// halaman dashboard peserta
 Route::get('/dashboard/participant', [DashboardParticipantController::class, 'index']);
-Route::get('/dashboard/participant/training', [DashboardParticipantController::class, 'start']);
+Route::get('/dashboard/participant/start', [DashboardParticipantController::class, 'start']);
+Route::get('/dashboard/participant/attainment', [DashboardParticipantController::class, 'attainment']);
+Route::get('/dashboard/participant/type_training', [DashboardParticipantController::class, 'type_training']);
+
+//update profile peserta
+Route::get('/profile', [AuthenticationController::class, 'PUpdate'])->name('profile.update');
+Route::post('/profile/update', [AuthenticationController::class, 'UpdateProfile'])->name('update.user.profile');
 });

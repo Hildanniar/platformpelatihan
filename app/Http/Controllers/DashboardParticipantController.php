@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\TypeTraining;
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardParticipantController extends Controller {
     public function index() {
@@ -17,6 +19,28 @@ class DashboardParticipantController extends Controller {
     }
 
     public function start() {
-        return view( 'participants.layouts.main' );
+        return view( 'participants.layouts.index' );
     }
+
+    public function about() {
+        return view( 'dashboard.layouts.public.about' );
+    }
+
+    public function attainment() {
+        return view( 'dashboard.layouts.public.attainment' );
+    }
+
+    public function type_training() {
+        return view( 'dashboard.layouts.public.training' );
+    }
+
+    public function PUpdate() {
+        if ( Auth::user() ) {
+            $user = User::find( Auth::user()->id );
+            if ( $user ) {
+                return view( 'admin.profile.edit', compact( 'user' ) );
+            }
+        }
+    }
+
 }
