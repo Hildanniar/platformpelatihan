@@ -51,9 +51,15 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('profile.update') }}">Profil Saya</a>
-                        </li>
+                        @if (auth()->user()->levels->name == 'Peserta')
+                            <li>
+                                <a class="dropdown-item" href="{{ route('update.profile') }}">Profil Saya</a>
+                            </li>
+                        @else
+                            <li>
+                                <a class="dropdown-item" href="{{ route('profile.update') }}">Profil Saya</a>
+                            </li>
+                        @endif
                         <hr class="dropdown-divider">
                         <li>
                             <form action="/logout" method="POST">

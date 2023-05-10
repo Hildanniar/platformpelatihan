@@ -16,7 +16,7 @@ use App\Http\Controllers\DashboardParticipantController;
 
 
 // halaman utama tanpa login
-Route::get('/', [DashboardController::class, 'dashboard']);
+Route::get('/', [DashboardController::class, 'dashboardPublic']);
 Route::post('/' , [DashboardController::class, 'survey']);
 Route::get('/about', [DashboardController::class, 'about']);
 Route::get('/attainment', [DashboardController::class, 'attainment']);
@@ -32,18 +32,13 @@ Route::post('/logout' , [AuthenticationController::class, 'logout']);
 
 Route::middleware('level')->group(function () {
 // dashboard admin dan mentor
-Route::get('/admin', [DashboardController::class, 'index']);
+Route::get('/admin', [DashboardController::class, 'dashboardAdmin']);
 
 //update profile admin dan mentor
-Route::get('/profile', [AuthenticationController::class, 'PUpdate'])->name('profile.update');
-Route::post('/profile/update', [AuthenticationController::class, 'UpdateProfile'])->name('update.user.profile');
+Route::get('/profile', [DashboardController::class, 'PUpdate'])->name('profile.update');
+Route::post('/profile/update', [DashboardController::class, 'UpdateProfile'])->name('update.user.profile');
 
 Route::middleware('can:is_admin')->group(function(){
-// halaman user
-// Route::get('/admin/pengguna/datapengguna', [PenggunaController::class, 'getUsers']);
-// Route::get('/admin/pengguna/export_excel', [PenggunaController::class, 'export_excel']);
-// Route::get('/admin/pengguna/export_pdf', [PenggunaController::class, 'export_pdf']);
-// Route::resource('/admin/pengguna', PenggunaController::class);
 
 // halaman data peserta
 Route::get('/admin/participant/dataparticipant', [ParticipantController::class, 'getParticipants']);
@@ -95,7 +90,7 @@ Route::get('/dashboard/participant/start', [DashboardParticipantController::clas
 Route::get('/dashboard/participant/attainment', [DashboardParticipantController::class, 'attainment']);
 Route::get('/dashboard/participant/type_training', [DashboardParticipantController::class, 'type_training']);
 
-//update profile peserta
-Route::get('/profile', [AuthenticationController::class, 'PUpdate'])->name('profile.update');
-Route::post('/profile/update', [AuthenticationController::class, 'UpdateProfile'])->name('update.user.profile');
+// update profile peserta
+Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');
+Route::post('/participant/profile/update', [DashboardParticipantController::class, 'UpdateProfileParticipant'])->name('update.profile.participant');
 });

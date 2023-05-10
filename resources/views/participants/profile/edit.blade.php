@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('participants.layouts.main')
 @section('container')
     <div class="main-panel">
         <div class="content">
@@ -12,7 +12,8 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ route('update.user.profile') }}" class="mb-5" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('update.profile.participant') }}" class="mb-5"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="container">
                     <div class="row gutters">
@@ -21,16 +22,14 @@
                                 <div class="card-body">
                                     <div class="account-settings">
                                         <div class="user-profile">
-
                                             <div class="user-avatar">
                                                 <input type="hidden" name="oldImage" value="">
-
-                                                @if (auth()->user()->levels->name == 'Admin' || auth()->user()->levels->name == 'Mentor')
-                                                    @if (auth()->user()->mentors->image == null)
+                                                @if (auth()->user()->levels->name == 'Peserta')
+                                                    @if (auth()->user()->participants->image == null)
                                                         <img src="/assets/admin/img/profiledefault.png" alt="..."
                                                             class="img-preview rounded-circle" style=" object-fit: cover;">
                                                     @else
-                                                        <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}"
+                                                        <img src="{{ asset('storage/' . auth()->user()->participants->image) }}"
                                                             alt="..." class="img-preview rounded-circle"
                                                             style=" object-fit: cover;">
                                                     @endif
@@ -197,21 +196,7 @@
                 </div>
             </form>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Dinas Perpustakaan dan Kearsipan Kabupaten Madiun
-                            </a>
-                        </li>
-                </nav>
-                <div class="copyright ml-auto">
-                    Copyright
-                </div>
-            </div>
-        </footer>
+        @include('participants.layouts.partials.footer')
     </div>
 
     <script>

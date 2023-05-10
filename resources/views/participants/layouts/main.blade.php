@@ -31,7 +31,7 @@
 
         @include('participants.layouts.partials.sidebar')
 
-        @yield('coba')
+        @yield('container')
 
     </div>
     @include('participants.layouts.partials.script')
