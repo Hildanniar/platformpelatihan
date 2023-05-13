@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Level;
+use App\Models\Admin;
 use App\Models\Mentor;
 use App\Models\Attainment;
 use App\Models\Participant;
@@ -15,7 +16,7 @@ class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [ 'id' ];
-    // protected $fillable = [ 'age', 'gender', 'no_hp', 'profession', 'no_member' ];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -27,6 +28,10 @@ class User extends Authenticatable {
 
     public function attainments() {
         return $this->hasMany( Attainment::class );
+    }
+
+    public function admins() {
+        return $this->hasOne( Admin::class );
     }
 
     public function participants() {

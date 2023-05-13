@@ -1,8 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Level;
 use App\Models\Mentor;
 use App\Models\Survey;
@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder {
 
     public function run() {
 
-        User::factory( 11 )->create();
+        User::factory( 15 )->create();
+        Admin::factory( 5 )->create();
         Participant::factory( 5 )->create();
         Mentor::factory( 5 )->create();
         MateriTask::factory( 5 )->create();

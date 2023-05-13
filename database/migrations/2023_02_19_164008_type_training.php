@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class TypeTraining extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('type_trainings', function (Blueprint $table) {
@@ -25,11 +21,7 @@ class TypeTraining extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('type_training');

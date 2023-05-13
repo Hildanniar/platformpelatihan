@@ -4,12 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
-
-class Mentor extends Migration
+class CreateAdminsTable extends Migration
 {
     public function up()
     {
-        Schema::create('mentors', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('name');
@@ -24,9 +23,8 @@ class Mentor extends Migration
             $table->timestamps();
         });
     }
-
     public function down()
     {
-        Schema::dropIfExists('mentors');
+        Schema::dropIfExists('admins');
     }
 }
