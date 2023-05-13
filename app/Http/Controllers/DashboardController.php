@@ -71,7 +71,7 @@ class DashboardController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.auth()->user()->id.'|max:255',
             'email' => 'required',
-            'password'=> 'nullable',
+            'password'=>'nullable',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',
@@ -84,38 +84,46 @@ class DashboardController extends Controller {
         $validatedData = $request->validate( $rules );
         $user = User::find( Auth::user()->id );
         if ( $user ) {
-            if ( auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin' ) {
-                if ( $request->password != null ) {
-                    if ( auth()->user()->levels->name == 'Admin' ) {
-                        $data_user = [
-                            'level_id' => 1,
-                            'username'=> $validatedData[ 'username' ],
-                            'email'=> $validatedData[ 'email' ],
-                            'password'=> bcrypt( $validatedData[ 'password' ] ),
-                        ];
-                    } else {
-                        $data_user = [
-                            'level_id' => 2,
-                            'username'=> $validatedData[ 'username' ],
-                            'email'=> $validatedData[ 'email' ],
-                            'password'=> bcrypt( $validatedData[ 'password' ] ),
-                        ];
+            if ( auth()->user()->levels->name == 'Admin' ) {
+                $data_user = [
+                    'username'=> $validatedData[ 'username' ],
+                    'email'=> $validatedData[ 'email' ],
+                    'password'=> bcrypt( $validatedData[ 'password' ] ),
+                ];
+                if ( $request->file( 'image' ) ) {
+                    if ( $request->oldImage ) {
+                        Storage::delete( $request->oldImage );
                     }
+                    $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                    $data_admin = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
+                        'image'=> $validatedData[ 'image' ],
+                    ];
                 } else {
-                    if ( auth()->user()->levels->name == 'Admin' ) {
-                        $data_user = [
-                            'level_id' => 1,
-                            'username'=> $validatedData[ 'username' ],
-                            'email'=> $validatedData[ 'email' ],
-                        ];
-                    } else {
-                        $data_user = [
-                            'level_id' => 2,
-                            'username'=> $validatedData[ 'username' ],
-                            'email'=> $validatedData[ 'email' ],
-                        ];
-                    }
+                    $data_admin = [
+                        'name'=> $validatedData[ 'name' ],
+                        'address'=> $validatedData[ 'address' ],
+                        'age'=> $validatedData[ 'age' ],
+                        'no_hp'=> $validatedData[ 'no_hp' ],
+                        'gender'=> $validatedData[ 'gender' ],
+                        'profession'=> $validatedData[ 'profession' ],
+                        'no_member'=> $validatedData[ 'no_member' ],
+                    ];
                 }
+                $user->admins()->update( $data_admin );
+                $user->update( $data_user );
+            } elseif ( auth()->user()->levels->name == 'Mentor' ) {
+                $data_user = [
+                    'username'=> $validatedData[ 'username' ],
+                    'email'=> $validatedData[ 'email' ],
+                    'password'=> bcrypt( $validatedData[ 'password' ] ),
+                ];
                 if ( $request->file( 'image' ) ) {
                     if ( $request->oldImage ) {
                         Storage::delete( $request->oldImage );

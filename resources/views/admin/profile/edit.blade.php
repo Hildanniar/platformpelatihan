@@ -24,8 +24,16 @@
 
                                             <div class="user-avatar">
                                                 <input type="hidden" name="oldImage" value="">
-
-                                                @if (auth()->user()->levels->name == 'Admin' || auth()->user()->levels->name == 'Mentor')
+                                                @if (auth()->user()->levels->name == 'Admin')
+                                                    @if (auth()->user()->admins->image == null)
+                                                        <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                                            class="img-preview rounded-circle" style=" object-fit: cover;">
+                                                    @else
+                                                        <img src="{{ asset('storage/' . auth()->user()->admins->image) }}"
+                                                            alt="..." class="img-preview rounded-circle"
+                                                            style=" object-fit: cover;">
+                                                    @endif
+                                                @elseif (auth()->user()->levels->name == 'Mentor')
                                                     @if (auth()->user()->mentors->image == null)
                                                         <img src="/assets/admin/img/profiledefault.png" alt="..."
                                                             class="img-preview rounded-circle" style=" object-fit: cover;">
@@ -72,9 +80,9 @@
                                                 <label for="name">Nama Lengkap</label>
                                                 <input type="text" class="form-control input-solid" name="name"
                                                     placeholder="Masukkan Nama Lengkap"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['name'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['name'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['name'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['name'] }}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -82,8 +90,8 @@
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control input-solid" name="email"
                                                     placeholder="Masukkan Email"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || 'Admin') value="{{ $user['email'] }}"
-                                                    @else 
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user['email'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
                                                     value="{{ $user['email'] }}" @endif>
                                             </div>
                                         </div>
@@ -92,8 +100,8 @@
                                                 <label for="username">Username</label>
                                                 <input type="text" class="form-control input-solid" name="username"
                                                     placeholder="Masukkan Username"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || 'Admin') value="{{ $user['username'] }}"
-                                                    @else 
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user['username'] }}"
+                                                    @else
                                                     value="{{ $user['username'] }}" @endif>
                                             </div>
                                         </div>
@@ -111,9 +119,9 @@
                                                 <label for="no_hp">No.HP</label>
                                                 <input type="text" class="form-control input-solid" name="no_hp"
                                                     placeholder="Masukkan No.HP"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['no_hp'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['no_hp'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['no_hp'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['no_hp'] }}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -121,9 +129,9 @@
                                                 <label for="no_member">No.Anggota Perpustakaan</label>
                                                 <input type="text" class="form-control input-solid" name="no_member"
                                                     placeholder="Masukkan No.Anggota Perpustakaan"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['no_member'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['no_member'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['no_member'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['no_member'] }}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -133,7 +141,7 @@
                                                     class="form-control input-solid @error('gender') is-invalid @enderror"
                                                     id="gender" required name="gender">
                                                     <option selected disabled value="">Silahkan dipilih...</option>
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin')
+                                                    @if (auth()->user()->levels->name == 'Mentor')
                                                         <option value="Laki-Laki"
                                                             @if (old('gender', $user->mentors['gender']) == 'Laki-laki') selected @endif>
                                                             Laki-Laki</option>
@@ -142,10 +150,10 @@
                                                             Perempuan</option>
                                                     @else
                                                         <option value="Laki-Laki"
-                                                            @if (old('gender', $user->participants['gender']) == 'Laki-laki') selected @endif>
+                                                            @if (old('gender', $user->admins['gender']) == 'Laki-laki') selected @endif>
                                                             Laki-Laki</option>
                                                         <option value="Perempuan"
-                                                            @if (old('gender', $user->participants['gender']) == 'Perempuan') selected @endif>
+                                                            @if (old('gender', $user->admins['gender']) == 'Perempuan') selected @endif>
                                                             Perempuan</option>
                                                     @endif
 
@@ -157,9 +165,9 @@
                                                 <label for="profession">Pekerjaan</label>
                                                 <input type="text" class="form-control input-solid" name="profession"
                                                     placeholder="Masukkan Pekerjaan"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['profession'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['profession'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['profession'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['profession'] }}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -167,9 +175,9 @@
                                                 <label for="age">Umur</label>
                                                 <input type="text" class="form-control input-solid" name="age"
                                                     placeholder="Masukkan Umur"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['age'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['age'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['age'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['age'] }}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -177,9 +185,9 @@
                                                 <label for="address">Alamat</label>
                                                 <input type="text" class="form-control input-solid" name="address"
                                                     placeholder="Masukkan Alamat"
-                                                    @if (auth()->user()->levels->name == 'Mentor' || auth()->user()->levels->name == 'Admin') value="{{ $user->mentors['address'] }}"
-                                                    @else 
-                                                    value="{{ $user->participants['address'] }}" @endif>
+                                                    @if (auth()->user()->levels->name == 'Mentor') value="{{ $user->mentors['address'] }}"
+                                                    @elseif (auth()->user()->levels->name == 'Admin')
+                                                    value="{{ $user->admins['address'] }}" @endif>
                                             </div>
                                         </div>
                                     </div>

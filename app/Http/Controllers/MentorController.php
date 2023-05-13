@@ -96,6 +96,7 @@ class MentorController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.$mentor->users->id.'|max:255',
             'email' => 'required',
+            'password'=>'nullable',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',
@@ -106,21 +107,12 @@ class MentorController extends Controller {
         ];
         
         $validatedData = $request->validate( $rules );
-        if($request->password != null){
             $data_user = [
-                'level_id' => 2,
                 'username'=> $validatedData['username'],
                 'email'=> $validatedData['email'],
                 'password'=> bcrypt($validatedData['password']),
                 
             ];
-        } else {
-            $data_user = [
-                'level_id' => 2,
-                'username'=> $validatedData['username'],
-                'email'=> $validatedData['email'],
-            ];
-        }
         if ($request->file('image')) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);

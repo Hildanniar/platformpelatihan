@@ -12,12 +12,23 @@
                             <img src="{{ asset('storage/' . auth()->user()->participants->image) }}" alt="..."
                                 class="avatar-img rounded-circle">
                         @endif
-                    @else
+                    @endif
+                    @if (auth()->user()->levels->name == 'Mentor')
                         @if (auth()->user()->mentors->image == null)
                             <img src="/assets/admin/img/profiledefault.png" alt="..."
                                 class="avatar-img rounded-circle">
                         @else
                             <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}" alt="..."
+                                class="avatar-img rounded-circle">
+                        @endif
+                    @endif
+                    @if (auth()->user()->levels->name == 'Admin')
+
+                        @if (auth()->user()->admins->image == null)
+                            <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                class="avatar-img rounded-circle">
+                        @else
+                            <img src="{{ asset('storage/' . auth()->user()->admins->image) }}" alt="..."
                                 class="avatar-img rounded-circle">
                         @endif
                     @endif
@@ -28,8 +39,11 @@
                             @if (auth()->user()->levels->name == 'Peserta')
                                 {{ auth()->user()->participants->name }}
                                 <span class="user-level">{{ auth()->user()->levels->name }}</span>
-                            @else
+                            @elseif (auth()->user()->levels->name == 'Mentor')
                                 {{ auth()->user()->mentors->name }}
+                                <span class="user-level">{{ auth()->user()->levels->name }}</span>
+                            @else
+                                {{ auth()->user()->admins->name }}
                                 <span class="user-level">{{ auth()->user()->levels->name }}</span>
                             @endif
                         </span>

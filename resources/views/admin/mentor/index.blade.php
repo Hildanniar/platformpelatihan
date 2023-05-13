@@ -51,34 +51,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($mentors as $mentor)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $mentor->name }}</td>
-                                                        <td>{{ $mentor->username }}</td>
-                                                        <td>{{ $mentor->email }}</td>
-                                                        <td>{{ $mentor->address }}</td>
-                                                        <td>{{ $mentor->no_hp }}</td>
-                                                        <td>
-                                                            <div class="action-button mx-auto text-end">
-                                                                <a href="/admin/mentor/{{ $mentor->id }}/edit"
-                                                                    class="badge btn-warning"><i class="far fa-edit""></i>
-                                                                    Edit</a>
-                                                                <form action="/admin/mentor/{{ $mentor->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="badge btn-danger border-0"
-                                                                        onclick="return confirm('Are you sure?')"><i
-                                                                            class="fas fa-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <a href="/admin/mentor/{{ $mentor->id }}"
-                                                                    class="badge btn-success"><i class="far fa-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
+
                                             </tbody>
                                         </table>
                                     </div>
