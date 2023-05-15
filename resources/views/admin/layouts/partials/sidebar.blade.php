@@ -4,15 +4,6 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    @if (auth()->user()->levels->name == 'Peserta')
-                        @if (auth()->user()->participants->image == null)
-                            <img src="/assets/admin/img/profiledefault.png" alt="..."
-                                class="avatar-img rounded-circle">
-                        @else
-                            <img src="{{ asset('storage/' . auth()->user()->participants->image) }}" alt="..."
-                                class="avatar-img rounded-circle">
-                        @endif
-                    @endif
                     @if (auth()->user()->levels->name == 'Mentor')
                         @if (auth()->user()->mentors->image == null)
                             <img src="/assets/admin/img/profiledefault.png" alt="..."
@@ -21,9 +12,7 @@
                             <img src="{{ asset('storage/' . auth()->user()->mentors->image) }}" alt="..."
                                 class="avatar-img rounded-circle">
                         @endif
-                    @endif
-                    @if (auth()->user()->levels->name == 'Admin')
-
+                    @elseif (auth()->user()->levels->name == 'Admin')
                         @if (auth()->user()->admins->image == null)
                             <img src="/assets/admin/img/profiledefault.png" alt="..."
                                 class="avatar-img rounded-circle">
@@ -34,16 +23,13 @@
                     @endif
                 </div>
                 <div class="info">
-                    <a href="#collapseExample" aria-expanded="true">
+                    <a href="/profile" aria-expanded="true">
                         <span>
-                            @if (auth()->user()->levels->name == 'Peserta')
-                                {{ auth()->user()->participants->name }}
+                            @if (auth()->user()->levels->name == 'Admin')
+                                {{ auth()->user()->admins->name }}
                                 <span class="user-level">{{ auth()->user()->levels->name }}</span>
                             @elseif (auth()->user()->levels->name == 'Mentor')
                                 {{ auth()->user()->mentors->name }}
-                                <span class="user-level">{{ auth()->user()->levels->name }}</span>
-                            @else
-                                {{ auth()->user()->admins->name }}
                                 <span class="user-level">{{ auth()->user()->levels->name }}</span>
                             @endif
                         </span>
@@ -114,7 +100,6 @@
                         <p>Jadwal Pelatihan</p>
                     </a>
                 </li>
-
                 <li class="nav-item {{ Request::is('admin/attainment*') ? 'active' : '' }}">
                     <a href="/admin/attainment">
                         <i class="fas fa-file"></i>

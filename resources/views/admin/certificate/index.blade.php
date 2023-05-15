@@ -41,36 +41,10 @@
                                                     <th>No</th>
                                                     <th>Jenis Pelatihan</th>
                                                     <th>Link Sertifikat</th>
-                                                    {{-- <th>Deskripsi</th> --}}
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($certificate as $c)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $c->id_training }}</td>
-                                                        <td>{{ $c->link }}</td>
-                                                        <td>
-                                                            <div class="action-button mx-auto text-end">
-                                                                <a href="/admin/certificate/{{ $c->id }}/edit"
-                                                                    class="badge btn-warning"><i class="far fa-edit""></i>
-                                                                    Edit</a>
-                                                                <form action="/admin/certificate/{{ $c->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="badge btn-danger border-0"
-                                                                        onclick="return confirm('Are you sure?')"><i
-                                                                            class="fas fa-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <a href="/admin/certificate/{{ $c->id }}"
-                                                                    class="badge btn-success"><i class="far fa-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -81,23 +55,8 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Dinas Perpustakaan dan Kearsipan Kabupaten Madiun
-                            </a>
-                        </li>
-                </nav>
-                <div class="copyright ml-auto">
-                    Copyright
-                </div>
-            </div>
-        </footer>
+        @include('admin.layouts.partials.footer')
     </div>
-
     <script>
         $(document).ready(function() {
             $('#table').DataTable({

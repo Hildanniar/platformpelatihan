@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\SurveyController;
-use App\Http\Controllers\MateriTaskController;
-use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\MateriTaskController;;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\AttainmentController;
 use App\Http\Controllers\CertificateController;
@@ -13,7 +12,7 @@ use App\Http\Controllers\TypeTrainingController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardParticipantController;
-
+use App\Http\Controllers\MenuParticipantController;
 
 // halaman utama tanpa login
 Route::get('/', [DashboardController::class, 'dashboardPublic']);
@@ -94,3 +93,9 @@ Route::get('/dashboard/participant/type_training', [DashboardParticipantControll
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');
 Route::post('/participant/profile/update', [DashboardParticipantController::class, 'UpdateProfileParticipant'])->name('update.profile.participant');
 });
+
+// jadwal pelatihan peserta
+Route::get('/participant/schedule', [MenuParticipantController::class, 'schedule']);
+
+//hasil karya pelatihan peserta
+Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);

@@ -24,91 +24,6 @@
                                 <h4 class="card-title">Edit Data Hasil Karya</h4>
                             </div>
                         </div>
-                        {{-- <div class="col-lg-8">
-                            <form method="post" action="/admin/attainment/{{ $attainment->id }}" class="mb-5"
-                                enctype="multipart/form-data">
-                                @method('put')
-                                @csrf
-                                <div class="form-group form-floating-label">
-                                    <label for="training" class="form-label">Jenis Pelatihan</label>
-                                    <select class="form-control input-solid" name="type_training_id">
-                                        @foreach ($type_trainings as $type_training)
-                                            @if (old('type_training_id', $attainment->type_training_id) == $type_training->id)
-                                                <option value="{{ $type_training->id }}" selected>{{ $type_training->name }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $type_training->id }}">{{ $type_training->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="id_user" class="form-label">Peserta</label>
-                                    <select class="form-control input-solid" name="id_user">
-                                        @foreach ($users as $user)
-                                            @if (old('id_user', $attainment->id_user) == $user->id)
-                                                <option value="{{ $user->id }}" selected>{{ $user->name }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="comment" class="form-label">Ulasan</label>
-                                    <input type="text"
-                                        class="form-control input-solid @error('comment') is-invalid @enderror"
-                                        id="comment" name="comment" required
-                                        value="{{ old('comment', $attainment->comment) }}">
-                                    @error('comment')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="image" class="form-label">Hasil Karya Pelatihan</label>
-                                    <input type="hidden" name="oldImage" value="{{ $attainment->image }}">
-                                    @if ($attainment->image)
-                                        <img src="{{ asset('storage/' . $attainment->image) }}"
-                                            class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                                    @else
-                                        <img class="img-preview img-fluid mb-3 col-sm-5">
-                                    @endif
-                                    <input class="form-control input-solid @error('image') is-invalid @enderror "
-                                        type="file" id="image" name="image" onchange="previewImage()">
-                                    @error('image')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="desc" class="form-label ">Rangkuman Pelatihan</label>
-                                    @error('desc')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                    <input id="desc" type="hidden" name="desc"
-                                        value="{{ old('desc', $attainment->desc) }}">
-                                    <trix-editor input="desc"></trix-editor>
-                                </div>
-                                <div class="form-group form-floating-label">
-                                    <label for="value" class="form-label">Nilai Hasil Karya</label>
-                                    <input type="text"
-                                        class="form-control input-solid @error('value') is-invalid @enderror" id="value"
-                                        name="value" value="{{ old('value', $attainment->value) }}"
-                                        placeholder="Masukkan Nilai Hasil Karya" required>
-                                    <small style="color:red">*Dinilai oleh Mentor</small>
-                                    @error('value')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <button type="submit" class="btn btn-primary">Edit data</button>
-                            </form>
-                        </div> --}}
                         <div class="tab-content bd bd-gray-100 bd-t-0 pd-20" id="myTabContent">
                             <div class="tab-pane fade show active" id="detail" role="tabpanel"
                                 aria-labelledby="detail-tab">
@@ -223,20 +138,6 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Dinas Perpustakaan dan Kearsipan Kabupaten Madiun
-                                </a>
-                            </li>
-                    </nav>
-                    <div class="copyright ml-auto">
-                        Copyright
-                    </div>
-                </div>
-            </footer>
+            @include('admin.layouts.partials.footer')
         </div>
     @endsection

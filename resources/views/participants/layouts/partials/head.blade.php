@@ -3,6 +3,7 @@
     <title>Dashboard Platform Pelatihan- Dinas Perpustakaan dan Kearsipan Kabupaten Madiun</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="shortcut icon" href="{{ asset('assets/admin/img/logodinas.png') }}" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/assets/admin/css/profile.css">
     <!-- Fonts and icons -->
     <script src="/assets/participant/js/plugin/webfont/webfont.min.js"></script>
     <script>

@@ -51,34 +51,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($participants as $participant)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $participant->name }}</td>
-                                                        <td>{{ $participant->email }}</td>
-                                                        <td>{{ $participant->address }}</td>
-                                                        <td>{{ $participant->no_hp }}</td>
-                                                        <td>{{ $participant->class }}</td>
-                                                        <td>
-                                                            <div class="action-button mx-auto text-end">
-                                                                <a href="/admin/participant/{{ $participant->id }}/edit"
-                                                                    class="badge btn-warning"><i class="far fa-edit""></i>
-                                                                    Edit</a>
-                                                                <form action="/admin/participant/{{ $participant->id }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button class="badge btn-danger border-0"
-                                                                        onclick="return confirm('Are you sure?')"><i
-                                                                            class="fas fa-trash"></i> Hapus</button>
-                                                                </form>
-                                                                <a href="/admin/participant/{{ $participant->id }}"
-                                                                    class="badge btn-success"><i class="far fa-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -89,21 +61,7 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Dinas Perpustakaan dan Kearsipan Kabupaten Madiun
-                            </a>
-                        </li>
-                </nav>
-                <div class="copyright ml-auto">
-                    Copyright
-                </div>
-            </div>
-        </footer>
+        @include('admin.layouts.partials.footer')
     </div>
 
     <script>
