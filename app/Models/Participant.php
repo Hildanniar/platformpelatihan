@@ -16,4 +16,8 @@ class Participant extends Model {
     public function attainments() {
         return $this->hasMany( Attainment::class, 'user_id' );
     }
+
+    public function trainings() {
+        return $this->hasMany( TypeTraining::class, 'type_training_id' );
+    }
 }

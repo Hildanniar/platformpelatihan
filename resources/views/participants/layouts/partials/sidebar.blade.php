@@ -37,12 +37,18 @@
                     <h4 class="text-section">Menu</h4>
                 </li>
                 @can('is_participant')
-                    <li class="nav-item {{ Request::is('participant/schedule*') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('participant/training*') ? 'active' : '' }}">
+                        <a href="/participant/training ">
+                            <i class="fas fa-file"></i>
+                            <p>Jenis Pelatihan</p>
+                        </a>
+                    </li>
+                    {{-- <li class="nav-item {{ Request::is('participant/schedule*') ? 'active' : '' }}">
                         <a href="/participant/schedule">
                             <i class="fas fa-clock"></i>
                             <p>Jadwal Pelatihan</p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item {{ Request::is('participant/attainment*') ? 'active' : '' }}">
                         <a href="/participant/attainment">
                             <i class="fas fa-file"></i>

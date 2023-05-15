@@ -4,6 +4,11 @@
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="shortcut icon" href="{{ asset('assets/admin/img/logodinas.png') }}" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/assets/admin/css/profile.css">
+    {{-- Data Tables --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Fonts and icons -->
     <script src="/assets/participant/js/plugin/webfont/webfont.min.js"></script>
     <script>

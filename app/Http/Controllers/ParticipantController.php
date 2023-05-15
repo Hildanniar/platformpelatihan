@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class ParticipantController extends Controller {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
 
     public function index() {
 
@@ -30,11 +25,6 @@ class ParticipantController extends Controller {
         ] );
     }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
 
     public function create() {
         return view( 'admin.participant.create',[

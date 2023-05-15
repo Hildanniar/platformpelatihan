@@ -79,9 +79,9 @@ Route::resource('/admin/schedule', ScheduleController::class);
 // halaman data hasil karya pelatihan
 Route::get('/admin/attainment/dataattainment', [AttainmentController::class, 'getAttainment']);
 Route::resource('/admin/attainment', AttainmentController::class);
-
 });
 
+//peserta
 Route::middleware('can:is_participant')->group(function(){
 // halaman dashboard peserta
 Route::get('/dashboard/participant', [DashboardParticipantController::class, 'index']);
@@ -92,10 +92,14 @@ Route::get('/dashboard/participant/type_training', [DashboardParticipantControll
 // update profile peserta
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');
 Route::post('/participant/profile/update', [DashboardParticipantController::class, 'UpdateProfileParticipant'])->name('update.profile.participant');
-});
+
+//jenis pelatihan peserta
+Route::get('/participant/training', [MenuParticipantController::class, 'training']);
+Route::get('/participant/training/datatraining', [MenuParticipantController::class, 'getTraining']);
 
 // jadwal pelatihan peserta
 Route::get('/participant/schedule', [MenuParticipantController::class, 'schedule']);
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
+});

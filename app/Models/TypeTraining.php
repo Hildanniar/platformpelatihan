@@ -28,4 +28,8 @@ class TypeTraining extends Model {
     public function attainment() {
         return $this->hasMany( Attainment::class );
     }
+
+    public function participants() {
+        return $this->hasMany( Participant::class );
+    }
 }

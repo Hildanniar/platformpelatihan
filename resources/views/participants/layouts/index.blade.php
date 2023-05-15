@@ -26,13 +26,24 @@
                                         </div>
                                     </div>
                                     <blockquote class="col-12">
-                                        <h4 class="card-title">Silahkan memilih jenis pelatihan yang akan
-                                            anda ikuti
-                                        </h4>
+                                        @if (auth()->user()->participants->type_training_id == null)
+                                            <h4 class="card-title">Silahkan memilih jenis pelatihan yang akan
+                                                anda ikuti
+                                            </h4>
+                                        @else
+                                            <h4 class="card-title">Anda memiliki pelatihan
+                                                {{ auth()->user()->participants->type_training_id }}
+                                            </h4>
+                                        @endif
                                     </blockquote>
                                     <div class="col-12 col-stats">
-                                        <a href="/dashboard/participant/type_training"
-                                            class="btn btn-secondary btn-round">Daftar Sekarang</a>
+                                        @if (auth()->user()->participants->type_training_id == null)
+                                            <a href="/dashboard/participant/type_training"
+                                                class="btn btn-secondary btn-round">Daftar Sekarang</a>
+                                        @else
+                                            <a href="/participant/training" class="btn btn-secondary btn-round">Mulai
+                                                Sekarang</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
