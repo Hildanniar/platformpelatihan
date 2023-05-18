@@ -15,12 +15,40 @@
                     </div>
                 </div>
             </div>
-            @foreach ($typeTraining->schedules as $s)
-                {{ $s->start_date }}
-                {{ $s->end_date }}
-                {{ $s->start_time }}
-                {{ $s->end_time }}
-            @endforeach
+            <div class="tab-content bd bd-gray-100 bd-t-0 pd-20" id="myTabContent">
+                <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                    <div class="card border-0 bg-white-9 rounded-xl p-0 mb-3">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                @foreach ($typeTraining->schedules as $s)
+                                    <table class="table table-sm table-hover">
+                                        <tr>
+                                            <th>Tanggal Mulai</th>
+                                            <th>:</th>
+                                            <td> {{ $s->start_date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tanggal Akhir</th>
+                                            <th>:</th>
+                                            <td> {{ $s->end_date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Jam Mulai</th>
+                                            <th>:</th>
+                                            <td> {{ $s->start_time }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Jam Akhir</th>
+                                            <th>:</th>
+                                            <td> {{ $s->end_time }}</td>
+                                        </tr>
+                                    </table>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         @include('participants.layouts.partials.footer')
     </div>

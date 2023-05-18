@@ -5,6 +5,7 @@
             <div class="content">
                 <div class="panel-header bg-primary-gradient">
                     <div class="page-inner py-5">
+
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
                                 <h2 class="text-white pb-2 fw-bold">{{ $m->type_trainings->name }}</h2>
@@ -16,28 +17,29 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="/participant/materi/{materi}">
-                                {{-- <a href="/materi_tasks?name_materi={{ $m->name_materi }}"> --}}
-                                <div class="card bg-dark text-white">
-                                    <img src="https://source.unsplash.com/500x500?{{ $m->bab_materi }}" class="card-img"
-                                        alt="{{ $m->bab_materi }}">
-                                    <div class="card-img-overlay d-flex align-items-center p-0">
-                                        <h5 class="card-title text-center flex-fill p-4 fs-3"
-                                            style="background-color: rgba(0,0,0,0.7)">
-                                            {{ $m->bab_materi }}</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
 
+                <div class="container">
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-md-8">
+                            <h1>{{ $m->bab_materi }} <br> {{ $m->name_materi }}</h1>
+                            @if ($m->type_trainings->image)
+                                <div style="max-height:500px; overflow:hidden;">
+                                    <img src="{{ asset('storage/' . $m->type_trainings->image) }}"
+                                        alt="{{ $m->type_trainings->image }}" class="card-img-top">
+                                </div>
+                            @else
+                                <img src="https://source.unsplash.com/1200x400?{{ $m->type_trainings->image }}"
+                                    alt="{{ $m->type_trainings->image }}" class="card-img-top">
+                            @endif
+
+                            <article class="my-3 fs-6">
+                                {!! $m->body_materi !!}
+                            </article>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @include('participants.layouts.partials.footer')
-        </div>
     @endforeach
+    </div>
+    @include('participants.layouts.partials.footer')
+    </div>
 @endsection

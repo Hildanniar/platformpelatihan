@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Participant;
 use App\Models\TypeTraining;
+use App\Models\MateriTask;
 
 class MenuParticipantController extends Controller {
 
@@ -39,6 +40,12 @@ class MenuParticipantController extends Controller {
     public function materi_task(TypeTraining $materiTask ){
         return view('participants.materi_task.index', [
             'materiTask' => $materiTask,
+        ]);
+    }
+
+    public function show_materi(TypeTraining $materi){
+        return view('participants.materi_task.post', [
+            'materiTask' => $materi,
         ]);
     }
     

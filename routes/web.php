@@ -102,6 +102,7 @@ Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::c
 
 // materi & task pelatihan peserta
 Route::get('/participant/materi_task/{materiTask}', [MenuParticipantController::class, 'materi_task']);
+Route::get('/participant/materi/', [MenuParticipantController::class, 'show_materi']);
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
