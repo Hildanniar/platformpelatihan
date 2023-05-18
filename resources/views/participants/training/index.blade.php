@@ -65,7 +65,7 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'name',
+                        data: 'type_training_id',
                         name: 'jenis pelatihan'
                     },
                     {
@@ -74,10 +74,6 @@
                         orderable: true,
                         searchable: true
                     },
-                ],
-                lengthMenu: [
-                    [10, 25, 10, -1],
-                    [10, 25, 50, 'All'],
                 ],
             });
         });

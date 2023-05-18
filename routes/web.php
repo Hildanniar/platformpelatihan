@@ -98,7 +98,10 @@ Route::get('/participant/training', [MenuParticipantController::class, 'training
 Route::get('/participant/training/datatraining', [MenuParticipantController::class, 'getTraining']);
 
 // jadwal pelatihan peserta
-Route::get('/participant/schedule', [MenuParticipantController::class, 'schedule']);
+Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::class, 'schedule']);
+
+// materi & task pelatihan peserta
+Route::get('/participant/materi_task/{materiTask}', [MenuParticipantController::class, 'materi_task']);
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);

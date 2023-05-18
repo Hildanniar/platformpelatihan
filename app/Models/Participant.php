@@ -17,7 +17,15 @@ class Participant extends Model {
         return $this->hasMany( Attainment::class, 'user_id' );
     }
 
-    public function trainings() {
-        return $this->hasMany( TypeTraining::class, 'type_training_id' );
+    public function type_trainings() {
+        return $this->belongsTo( TypeTraining::class, 'type_training_id' );
+    }
+
+    public function schedules() {
+        return $this->hasMany( Schedule::class );
+    }
+
+    public function materi_tasks() {
+        return $this->hasMany( MateriTask::class );
     }
 }

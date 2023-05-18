@@ -201,7 +201,6 @@ class ParticipantController extends Controller {
     {
         if ($request->ajax()) {
             $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
-            // $data = Participant::all();
             return Datatables::of($data)
             ->addIndexColumn()
                 ->editColumn('name_user', function($data){

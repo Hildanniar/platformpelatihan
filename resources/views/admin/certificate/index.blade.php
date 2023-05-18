@@ -12,7 +12,6 @@
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/admin/certificate/create" class="btn btn-white btn-border btn-round mr-2"><i
                                     class="fas fa-plus"></i> Tambah</a>
-                            {{-- <a href="#" class="btn btn-secondary btn-round"><i class="fas fa-print"></i> Cetak</a> --}}
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@
                                             </h4>
                                         @else
                                             <h4 class="card-title">Anda memiliki pelatihan
-                                                {{ auth()->user()->participants->type_training_id }}
+                                                {{ auth()->user()->participants->type_trainings->name }}
                                             </h4>
                                         @endif
                                     </blockquote>

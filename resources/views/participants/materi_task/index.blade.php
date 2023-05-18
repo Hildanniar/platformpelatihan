@@ -6,7 +6,7 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Jadwal Pelatihan</h2>
+                            <h2 class="text-white pb-2 fw-bold">Materi Pelatihan</h2>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/participant/training" class="btn btn-white btn-border btn-round mr-2"><i
@@ -15,11 +15,7 @@
                     </div>
                 </div>
             </div>
-            @foreach ($typeTraining->schedules as $s)
-                {{ $s->start_date }}
-                {{ $s->end_date }}
-                {{ $s->start_time }}
-                {{ $s->end_time }}
+            @foreach ($materiTask->materi_tasks as $m)
             @endforeach
         </div>
         @include('participants.layouts.partials.footer')

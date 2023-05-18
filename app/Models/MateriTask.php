@@ -12,4 +12,8 @@ class MateriTask extends Model {
     public function type_trainings() {
         return $this->belongsTo( TypeTraining::class, 'type_training_id' );
     }
+
+    public function participants() {
+        return $this->hasMany( Participant::class );
+    }
 }
