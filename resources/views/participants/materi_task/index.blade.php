@@ -20,13 +20,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="/participant/materi/{materi}">
+                            <a href="/participant/materi/{{ $m->type_trainings->id }}">
                                 {{-- <a href="/materi_tasks?name_materi={{ $m->name_materi }}"> --}}
                                 <div class="card bg-dark text-white">
-                                    <img src="https://source.unsplash.com/500x500?{{ $m->bab_materi }}" class="card-img"
-                                        alt="{{ $m->bab_materi }}">
+                                    <img src="https://source.unsplash.com/500x500?{{ $m->type_trainings->name }}"
+                                        class="card-img" alt="{{ $m->bab_materi }}">
                                     <div class="card-img-overlay d-flex align-items-center p-0">
-                                        <h5 class="card-title text-center flex-fill p-4 fs-3"
+                                        <h5 class="card-title text-center text-white flex-fill p-4 fs-3"
                                             style="background-color: rgba(0,0,0,0.7)">
                                             {{ $m->bab_materi }}</h5>
                                     </div>
