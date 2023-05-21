@@ -11,75 +11,99 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row gutters">
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <div class="account-settings">
-                                    <div class="user-profile">
-                                        <div class="user-avatar">
-                                            <input type="hidden" name="oldImage" value="">
-                                            @if (auth()->user()->levels->name == 'Peserta')
-                                                @if (auth()->user()->participants->image == null)
-                                                    <img src="/assets/admin/img/profiledefault.png" alt="..."
-                                                        class="img-preview rounded-circle" style=" object-fit: cover;">
-                                                @else
-                                                    <img src="{{ asset('storage/' . auth()->user()->participants->image) }}"
-                                                        alt="..." class="img-preview rounded-circle"
-                                                        style=" object-fit: cover;">
-                                                @endif
-                                            @endif
-                                        </div>
-                                        <div class="media-body ml-4">
-                                            <label class="btn btn-outline-warning">
-                                                Upload new photo
-                                                <input type="file" class="account-settings-fileinput" name="image"
-                                                    id="image" onchange="previewImage()">
-                                            </label> &nbsp;
-                                            <small style="color:red">*ukuran foto max.2MB</small> <br>
-                                            <small style="color:red">*format png, jpg, dan jpeg</small>
-
+            <form method="post" action="{{ route('create.attainments') }}" class="mb-5" enctype="multipart/form-data">
+                @csrf
+                <div class="container">
+                    <div class="row gutters">
+                        <div class=" col-lg-6  ">
+                            <div class="card h-100 w-100">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="form-group form-floating-label">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="mb-2 text-primary">Foto Hasil Karya</h6>
+                                            </div>
+                                            <img class="img-preview img-fluid mb-3 col-sm-5"
+                                                style="max-height:700px; max-width:700px; overflow:hidden;">
+                                            <input class="form-control input-solid @error('image') is-invalid @enderror "
+                                                type="file" id="image" name="image" onchange="previewImage()">
+                                            @error('image')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <small style="color:red">*max.3MB</small> <br>
+                                            <small style="color:red">*format PNG, JPG, dan JPEG</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                        <div class="card h-90 w-75">
-                            <div class="card-body">
-                                <div class="row gutters">
+                        <div class=" col-lg-6  ">
+                            <div class="card h-100 w-100">
+                                <div class="card-body">
                                     @if (session()->has('success'))
                                         <div class="alert alert-success col-lg-8" role="alert">
                                             {{ session('success') }}
                                         </div>
                                     @endif
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <h6 class="mb-2 text-primary">Personal Details</h6>
+                                        <h6 class="mb-2 text-primary">Form Hasil Karya</h6>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                        <div class="form-group">
-                                            <label for="email">URL Project</label>
-                                            <input type="email" class="form-control input-solid" name="email"
-                                                placeholder="URL Project" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Deskripsi Project</label>
-                                            <textarea type="text" class="form-control input-solid" name="name" placeholder="Deskripsi Project" value=""></textarea>
-                                        </div>
-                                        {{-- <div class="form-group">
+
+                                    <div class="form-group">
+                                        <label for="url">URL Hasil Karya</label>
+                                        <input type="url"
+                                            class="form-control input-solid  @error('url') is-invalid @enderror"
+                                            name="url" placeholder="URL Hasil Karya" value="">
+                                        @error('url')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                        <small style="color:red">*URL dapat berupa Google Drive, Github dan lainnya</small>
+                                        <br>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="desc">Deskripsi Hasil Karya</label>
+                                        <textarea type="text" class="form-control input-solid  @error('desc') is-invalid @enderror" name="desc"
+                                            placeholder="Deskripsi Hasil Karya" value="">
+                                        </textarea>
+                                        @error('desc')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    {{-- <div class="form-group">
                                             <label for="name">Komentar</label>
                                             <textarea type="text" class="form-control input-solid" name="name" placeholder="Deskripsi Project" value=""></textarea>
                                         </div> --}}
-                                    </div>
+
+                                    <button type="submit" class="btn btn-primary float-right">Kirim</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         @include('participants.layouts.partials.footer')
     </div>
+
+    <script>
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
+    </script>
 @endsection

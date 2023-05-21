@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Participant;
 use App\Models\TypeTraining;
 use App\Models\MateriTask;
-
+use App\Models\Attainment;
+use Illuminate\Support\Str;
 class MenuParticipantController extends Controller {
 
     public function getTraining(Request $request) {
@@ -40,6 +40,7 @@ class MenuParticipantController extends Controller {
     public function materi_task(TypeTraining $materiTask ){
         return view('participants.materi_task.index', [
             'materiTask' => $materiTask,
+            'attainments' => Attainment::all()
         ]);
     }
 
@@ -49,13 +50,34 @@ class MenuParticipantController extends Controller {
         ]);
     }
     
-    public function schedule(TypeTraining $typeTraining){
+    public function schedule(TypeTraining $schedule){
         return view('participants.schedule.index', [
-            'typeTraining' => $typeTraining,
+            'schedule' => $schedule,
         ]);
     }
 
-    public function attainment() {
-        return view( 'participants.attainment.index' );
+    public function attainment(TypeTraining $attainments) {
+        return view( 'participants.attainment.index', [
+            'attainments' => $attainments,
+        ] );
+    }
+
+    public function CreateAttainments(Request $request){
+        $validatedData = $request->validate( [
+            'url' => 'required',
+            'image'=> 'required|image|file|max:3072',
+            'desc' => 'required'
+        ]);
+        $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->desc ), 200 );
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('hasil-karya');
+        }
+        $data_attainment = [
+            'url'=> $validatedData['url'],
+            'image'=> $validatedData['image'],
+            'desc'=> $validatedData['desc'],
+        ];
+        Attainment::create( $data_attainment );
+        return redirect( '/participant/attainment' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 }

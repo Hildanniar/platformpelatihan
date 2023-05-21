@@ -98,12 +98,14 @@ Route::get('/participant/training', [MenuParticipantController::class, 'training
 Route::get('/participant/training/datatraining', [MenuParticipantController::class, 'getTraining']);
 
 // jadwal pelatihan peserta
-Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::class, 'schedule']);
+Route::get('/participant/schedule/{schedule}', [MenuParticipantController::class, 'schedule']);
 
 // materi & task pelatihan peserta
 Route::get('/participant/materi_task/{materiTask}', [MenuParticipantController::class, 'materi_task']);
 Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 'show_materi']);
 
 //hasil karya pelatihan peserta
-Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
+Route::get('/participant/attainment', [MenuParticipantController::class, 'DataAttainment']);
+Route::get('/participant/attainment/{attainments}', [MenuParticipantController::class, 'attainment']);
+Route::post('/participant/attainment/add', [MenuParticipantController::class, 'CreateAttainments'])->name('create.attainments');
 });

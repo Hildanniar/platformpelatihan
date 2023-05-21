@@ -13,6 +13,7 @@ class MateriTask extends Migration
             $table->id();
             // $table->foreignId('type_training_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(TypeTraining::class)->onDelete('cascade');
+            $table->string('name_materi');
             $table->string('bab_materi');
             $table->text('excerpt_materi');
             $table->text('body_materi');

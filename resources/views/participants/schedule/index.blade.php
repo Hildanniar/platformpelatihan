@@ -20,7 +20,7 @@
                     <div class="card border-0 bg-white-9 rounded-xl p-0 mb-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                @foreach ($typeTraining->schedules as $s)
+                                @foreach ($schedule->schedules as $s)
                                     <table class="table table-sm table-hover">
                                         <tr>
                                             <th>Tanggal Mulai</th>

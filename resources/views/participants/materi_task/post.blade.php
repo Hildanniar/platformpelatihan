@@ -62,8 +62,13 @@
                                     <span class="badge bg-danger text-white">Waktu Penugasan Mulai
                                         {{ $m->start_date }} s.d. {{ $m->end_date }}</span>
                                 </b>
-                                <a class="btn btn-primary float-right" href="/participant/attainment" role="button">Upload
-                                    Hasil Karya</a>
+                                @if ($m->attainments['is_active'] == '1')
+                                    <button type="button" class="btn btn-success">Sudah Mengupload Hasil Karya</button>
+                                @else
+                                    <a class="btn btn-primary float-right"
+                                        href="/participant/attainment/{{ $m->type_trainings->id }}" role="button">Upload
+                                        Hasil Karya</a>
+                                @endif
                             </article>
                         </div>
                     </div>

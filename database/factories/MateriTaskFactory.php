@@ -15,6 +15,7 @@ class MateriTaskFactory extends Factory
     {
         return [
             'type_training_id' => mt_rand(1, 10),
+            'name_materi' => $this->faker->name(),
             'bab_materi' => ['BAB I', 'BAB II', 'BAB III'][mt_rand(0,1)],
             'excerpt_materi' => $this->faker->paragraph(),
             'body_materi' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>',
