@@ -16,6 +16,7 @@ class AttainmentFactory extends Factory
         return [
             'type_training_id' => mt_rand(1, 3),
             'user_id' => mt_rand(1, 3),
+            'materi_task_id' => mt_rand(1, 3),
             'link' => $this->faker->paragraph(),
             'excerpt' => $this->faker->paragraph(),
             'desc' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>',

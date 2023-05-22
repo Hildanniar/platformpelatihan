@@ -22,12 +22,13 @@ class DashboardController extends Controller {
     }
 
     public function dashboardPublic() {
-        // $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
+        $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
+        $typeTrainings = TypeTraining::limit( 5 )->get();
         //dashboard tanpa login
         $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
-        return view( 'dashboard.layouts.main', compact( 'users', 'type_trainings', 'attainments' ) );
+        return view( 'dashboard.layouts.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings' ) );
     }
 
     public function survey( Request $request ) {
@@ -53,7 +54,8 @@ class DashboardController extends Controller {
         return view( 'dashboard.layouts.public.attainment' );
     }
 
-    public function trainings( TypeTraining $typeTrainings ) {
+    public function trainings() {
+        $typeTrainings = TypeTraining::all();
         return view( 'dashboard.layouts.public.training', [
             'typeTrainings' => $typeTrainings,
         ] );

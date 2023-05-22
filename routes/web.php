@@ -105,7 +105,7 @@ Route::get('/participant/training/datatraining', [MenuParticipantController::cla
 Route::get('/participant/schedule/{schedule}', [MenuParticipantController::class, 'schedule']);
 
 // materi & task pelatihan peserta
-Route::get('/participant/materi_task/{materiTask}', [MenuParticipantController::class, 'materi_task']);
+Route::get('/participant/materi_task/{type_training}', [MenuParticipantController::class, 'materi_task']);
 Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 'show_materi']);
 
 //hasil karya pelatihan peserta

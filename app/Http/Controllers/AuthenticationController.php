@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Level;
+use Exception;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,21 +21,26 @@ class AuthenticationController extends Controller {
     }
 
     public function actionregister( Request $request ) {
-        $validatedData = $request->validate( [
-            'level_id' => 'required',
-            'username' => 'required|unique:users|max:255',
-            'email' => 'required',
-            'password' => 'required',
-        ] );
-        $data_user = [
-            'level_id' => $validatedData[ 'level_id' ],
-            'username'=> $validatedData[ 'username' ],
-            'email'=> $validatedData[ 'email' ],
-            'password'=> bcrypt( $validatedData[ 'password' ] ),
-        ];
-        User::create( $data_user );
-        Session::flash( 'message', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.' );
-        return redirect( '/register' );
+        // dd( $request );
+        try {
+            $validatedData = $request->validate( [
+                'level_id' => 'required',
+                'username' => 'required|unique:users|max:255',
+                'email' => 'required',
+                'password' => 'required',
+            ] );
+            $data_user = [
+                'level_id' => $validatedData[ 'level_id' ],
+                'username'=> $validatedData[ 'username' ],
+                'email'=> $validatedData[ 'email' ],
+                'password'=> bcrypt( $validatedData[ 'password' ] ),
+            ];
+            User::create( $data_user );
+            Session::flash( 'message', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.' );
+            return redirect( '/register' );
+        } catch( Exception $error ) {
+            dd( $error );
+        }
     }
 
     public function index() {

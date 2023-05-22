@@ -37,16 +37,20 @@ class MenuParticipantController extends Controller {
         ] );
     }
 
-    public function materi_task(TypeTraining $materiTask ){
+    public function materi_task(TypeTraining $type_training ){
+        $materi_tasks = MateriTask::where('type_training_id', $type_training->id )->orderBy('bab_materi')->get();
         return view('participants.materi_task.index', [
-            'materiTask' => $materiTask,
+            'materiTask' => $materi_tasks,
             'attainments' => Attainment::all()
         ]);
     }
 
-    public function show_materi(TypeTraining $materi){
+    public function show_materi(MateriTask $materi){
+        $attainments = Attainment::where('user_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
+        // dd($attainments);
         return view('participants.materi_task.post', [
             'materiTask' => $materi,
+            'attainments' => $attainments
         ]);
     }
     
@@ -64,7 +68,7 @@ class MenuParticipantController extends Controller {
 
     public function CreateAttainments(Request $request){
         $validatedData = $request->validate( [
-            'url' => 'required',
+            'link' => 'required',
             'image'=> 'required|image|file|max:3072',
             'desc' => 'required'
         ]);
@@ -72,10 +76,15 @@ class MenuParticipantController extends Controller {
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('hasil-karya');
         }
+        $participant = Participant::where('user_id', auth()->user()->id)->first();
         $data_attainment = [
-            'url'=> $validatedData['url'],
+            'link'=> $validatedData['link'],
             'image'=> $validatedData['image'],
             'desc'=> $validatedData['desc'],
+            'excerpt'=> $validatedData['excerpt'],
+            'type_training_id' => $participant->type_training_id,
+            'user_id'=> $participant->user_id,
+            'is_active' => 1,
         ];
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );

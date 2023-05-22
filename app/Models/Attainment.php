@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Participant;
 use App\Models\TypeTraining;
+use App\Models\MateriTask;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,5 +23,9 @@ class Attainment extends Model {
 
     public function participants() {
         return $this->belongsTo( Participant::class, 'user_id' );
+    }
+
+    public function materi_tasks() {
+        return $this->belongsTo( MateriTask::class );
     }
 }

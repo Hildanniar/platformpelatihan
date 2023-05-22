@@ -22,6 +22,7 @@ class MateriTask extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->text('desc_task');
+            $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });
     }

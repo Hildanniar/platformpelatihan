@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group">
                             <label><i class="fa fa-address-book"></i> Role</label>
-                            <select class="form-control" name="type_training_id" required>
+                            <select class="form-control" name="level_id" required>
                                 <option selected disabled value="">Silahkan dipilih</option>
                                 @foreach ($levels as $level)
                                     @if (old('level_id') == $level->id)

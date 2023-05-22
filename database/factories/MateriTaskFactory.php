@@ -23,7 +23,8 @@ class MateriTaskFactory extends Factory
             'name_task' => $this->faker->name(),
             'start_date' => $this->faker->date('Y-m-d'),
             'end_date' => $this->faker->date('Y-m-d'),
-            'desc_task' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>'
+            'desc_task' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>',
+            'is_active' => ['0', '1'][mt_rand(0,1)],
         ];
     }
 }

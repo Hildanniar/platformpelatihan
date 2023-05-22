@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\TypeTraining;
 use App\Models\User;
+use App\Models\MateriTask;
 
 class Attainment extends Migration
 {
@@ -14,6 +15,7 @@ class Attainment extends Migration
             $table->id();
             $table->foreignIdFor(TypeTraining::class);
             $table->foreignIdFor(User::class);
+            $table->foreignIdFor(MateriTask::class);
             $table->string('link');
             $table->string('image')->nullable();
             $table->text('excerpt');

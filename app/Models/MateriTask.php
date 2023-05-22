@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\TypeTraining;
+use App\Models\Attainment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ class MateriTask extends Model {
     public function participants() {
         return $this->hasMany( Participant::class );
     }
+
+    public function attainments() {
+        return $this->hasMany( Attainment::class );
+    }
+
 }

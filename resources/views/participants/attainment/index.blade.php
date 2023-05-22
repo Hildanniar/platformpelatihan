@@ -52,11 +52,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="url">URL Hasil Karya</label>
-                                        <input type="url"
-                                            class="form-control input-solid  @error('url') is-invalid @enderror"
-                                            name="url" placeholder="URL Hasil Karya" value="">
-                                        @error('url')
+                                        <label for="link">URL Hasil Karya</label>
+                                        <input type="link"
+                                            class="form-control input-solid  @error('link') is-invalid @enderror"
+                                            name="link" placeholder="URL Hasil Karya" value="">
+                                        @error('link')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
