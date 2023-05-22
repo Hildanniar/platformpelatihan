@@ -6,8 +6,13 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Selamat Datang {{ auth()->user()->participants->name }}!
-                            </h2>
+                            @if (auth()->user()->participants->name == null)
+                                <h2 class="text-white pb-2 fw-bold">Silahkan Daftar Pelatihan
+                                </h2>
+                            @else
+                                <h2 class="text-white pb-2 fw-bold">Selamat Datang {{ auth()->user()->participants->name }}!
+                                </h2>
+                            @endif
                             <h5 class="text-white op-7 mb-2">Semoga belajarmu menyenangkan</h5>
                         </div>
                     </div>

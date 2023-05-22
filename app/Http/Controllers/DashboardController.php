@@ -55,9 +55,16 @@ class DashboardController extends Controller {
     }
 
     public function trainings() {
-        $typeTrainings = TypeTraining::all();
+        $typeTrainings = TypeTraining::latest()->paginate( 6 );
         return view( 'dashboard.layouts.public.training', [
             'typeTrainings' => $typeTrainings,
+        ] );
+    }
+
+    public function show_training( TypeTraining $type_training ) {
+        // dd( $type_training );
+        return view( 'dashboard.layouts.public.show_training', [
+            'type_training' => $type_training,
         ] );
     }
 
@@ -163,9 +170,4 @@ class DashboardController extends Controller {
             return Redirect()->back();
         }
     }
-
-    // public function ShowComment( Attainment $attainment ) {
-    //     $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
-    //     return view( 'dashboard.layouts.main' );
-    // }
 }
