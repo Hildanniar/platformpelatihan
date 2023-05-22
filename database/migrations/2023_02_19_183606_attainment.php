@@ -18,7 +18,7 @@ class Attainment extends Migration
             $table->string('image')->nullable();
             $table->text('excerpt');
             $table->text('desc');
-            $table->string('value', 2);
+            $table->string('value', 2)->nullable();
             $table->enum('status', ['NoPublikasi', 'Publikasi']);
             $table->text('comment');
             $table->enum('is_active', ['0', '1']);

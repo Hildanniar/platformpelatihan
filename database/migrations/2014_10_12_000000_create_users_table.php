@@ -18,13 +18,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('level_id');
             $table->foreignIdFor(Level::class);
-            // $table->foreignIdFor(Participant::class);
-            // $table->foreignIdFor(Mentor::class);
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });
     }
