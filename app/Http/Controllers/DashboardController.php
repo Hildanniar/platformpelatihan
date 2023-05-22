@@ -22,6 +22,7 @@ class DashboardController extends Controller {
     }
 
     public function dashboardPublic() {
+        // $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
         //dashboard tanpa login
         $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
@@ -52,8 +53,10 @@ class DashboardController extends Controller {
         return view( 'dashboard.layouts.public.attainment' );
     }
 
-    public function training() {
-        return view( 'dashboard.layouts.public.training' );
+    public function trainings( TypeTraining $typeTrainings ) {
+        return view( 'dashboard.layouts.public.training', [
+            'typeTrainings' => $typeTrainings,
+        ] );
     }
 
     public function PUpdate() {
@@ -158,4 +161,9 @@ class DashboardController extends Controller {
             return Redirect()->back();
         }
     }
+
+    // public function ShowComment( Attainment $attainment ) {
+    //     $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
+    //     return view( 'dashboard.layouts.main' );
+    // }
 }

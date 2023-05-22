@@ -23,10 +23,10 @@
 
     <div class="card mx-4 mx-md-5 shadow-5-strong"
         style="
-          margin-top: -100px;
-          background: hsla(0, 0%, 100%, 0.8);
-          backdrop-filter: blur(30px);
-          ">
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
         <div class="card-body py-5 px-md-5">
 
             <div class="row d-flex justify-content-center">
@@ -98,8 +98,8 @@
                         <button class="btn btn-primary btn-block btn-lg shadow-lg">Masuk</button>
                     </form>
                     <div class="text-center mt-3">
-                        <p class="text-gray-600">Belum memiliki akun? <a href="auth-register.html"
-                                class="font-bold">Register</a></p>
+                        <p class="text-gray-600">Belum memiliki akun? <a href="/register" class="font-bold">Register</a>
+                        </p>
                         <p><a class="font-bold" href="auth-forgot-password.html">Lupa password?</a></p>
                     </div>
                 </div>

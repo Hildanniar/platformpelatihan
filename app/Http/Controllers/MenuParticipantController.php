@@ -78,6 +78,6 @@ class MenuParticipantController extends Controller {
             'desc'=> $validatedData['desc'],
         ];
         Attainment::create( $data_attainment );
-        return redirect( '/participant/attainment' )->with( 'success', 'Data Berhasil Ditambahkan!' );
+        return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
 }

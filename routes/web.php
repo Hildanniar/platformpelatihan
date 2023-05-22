@@ -19,7 +19,11 @@ Route::get('/', [DashboardController::class, 'dashboardPublic']);
 Route::post('/' , [DashboardController::class, 'survey']);
 Route::get('/about', [DashboardController::class, 'about']);
 Route::get('/attainment', [DashboardController::class, 'attainment']);
-Route::get('/training', [DashboardController::class, 'training']);
+Route::get('/training', [DashboardController::class, 'trainings']);
+
+//halaman register
+Route::get('/register', [AuthenticationController::class, 'register'])->name('register');
+Route::post('register/action', [AuthenticationController::class, 'actionregister'])->name('actionregister');
 
 //halaman login
 Route::get('/login', [AuthenticationController::class, 'index'])->name('login');
