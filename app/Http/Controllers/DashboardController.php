@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attainment;
+use App\Models\MateriTask;
+use App\Models\Schedule;
 use App\Models\User;
 use App\Models\TypeTraining;
 use App\Models\Survey;
@@ -51,7 +53,28 @@ class DashboardController extends Controller {
     }
 
     public function attainment() {
-        return view( 'dashboard.layouts.public.attainment' );
+        // $typeTrainings = TypeTraining::latest()->paginate( 6 );
+        // $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
+        // dd( $typeTrainings );
+        $attainments = Attainment::where( 'status', 'Publikasi' )->latest()->paginate( 6 );
+        return view( 'dashboard.layouts.public.attainment', [
+            'attainments' => $attainments,
+            // 'schedules' => $schedules,
+        ] );
+    }
+
+    public function show_attainment( Attainment $attainment ) {
+        // dd( $attainment->users );
+        return view( 'dashboard.layouts.public.show_attainment', [
+            'attainment' => $attainment,
+            // 'materi_tasks' =>$materi_tasks,
+        ] );
+    }
+
+    public function page_attainment( TypeTraining $type_trainings ) {
+        return view( 'dashboard.layouts.public.page_attainment', [
+            'type_trainings' => $type_trainings,
+        ] );
     }
 
     public function trainings() {
@@ -62,9 +85,10 @@ class DashboardController extends Controller {
     }
 
     public function show_training( TypeTraining $type_training ) {
-        // dd( $type_training );
+        $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
         return view( 'dashboard.layouts.public.show_training', [
             'type_training' => $type_training,
+            'schedules' => $schedules
         ] );
     }
 

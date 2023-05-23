@@ -27,7 +27,7 @@ class User extends Authenticatable {
     ];
 
     public function attainments() {
-        return $this->hasMany( Attainment::class );
+        return $this->hasMany( Attainment::class, 'user_id' );
     }
 
     public function admins() {
@@ -35,7 +35,7 @@ class User extends Authenticatable {
     }
 
     public function participants() {
-        return $this->hasOne( Participant::class );
+        return $this->hasOne( Participant::class, 'user_id' );
     }
 
     public function mentors() {

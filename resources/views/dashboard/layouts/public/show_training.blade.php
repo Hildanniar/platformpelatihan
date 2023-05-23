@@ -31,10 +31,16 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-10">
+
                 <br>
                 <center>
                     <h1>{{ $type_training->name }}</h1>
                 </center>
+                <p> </p>
+                <p>Tersedia Kelas<span class="badge rounded-pill bg-warning text-dark"
+                        style="text-align: right;">{{ $type_training->class }}</span>dengan kuota orang :<span
+                        class="badge rounded-pill bg-warning text-dark"
+                        style="text-align: right;">{{ $type_training->quota }}</span></p>
                 @if ($type_training->image)
                     <div style="max-height:500px; overflow:hidden;">
                         <img src="{{ asset('storage/' . $type_training->image) }}" alt="{{ $type_training->image }}"
@@ -47,6 +53,17 @@
                 <article class="my-3 fs-6">
                     {!! $type_training->desc !!}
                 </article>
+                @foreach ($type_training->schedules as $s)
+                    <p>Jadwal Pelatihan : <span class="badge rounded-pill bg-warning text-dark"
+                            style="text-align: right;">{{ $s->start_date }} </span> s.d. <span
+                            class="badge rounded-pill bg-warning text-dark"
+                            style="text-align: right;">{{ $s->end_date }}</span></p>
+                    <p>Waktu Pelatihan : <span class="badge rounded-pill bg-warning text-dark"
+                            style="text-align: right;">{{ $s->start_time }} </span> s.d. <span
+                            class="badge rounded-pill bg-warning text-dark"
+                            style="text-align: right;">{{ $s->end_time }}</span></p>
+                @endforeach
+                <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
             </div>
         </div>
     </div>

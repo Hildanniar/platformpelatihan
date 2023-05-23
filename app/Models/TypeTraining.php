@@ -22,7 +22,7 @@ class TypeTraining extends Model {
     }
 
     public function schedules() {
-        return $this->hasMany( Schedule::class );
+        return $this->hasMany( Schedule::class, 'type_training_id' );
     }
 
     public function attainment() {

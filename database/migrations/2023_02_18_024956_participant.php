@@ -15,17 +15,17 @@ class Participant extends Migration {
     public function up() {
         Schema::create( 'participants', function ( Blueprint $table ) {
             $table->id();
-            $table->foreignIdFor(TypeTraining::class);
+            $table->foreignIdFor(TypeTraining::class)->nullable();
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->text('address');
-            $table->string('age', 3);
-            $table->string('no_hp', 13);
-            $table->enum('gender', ['Laki-laki', 'Perempuan']);
+            $table->string('age', 3)->nullable();
+            $table->string('no_hp', 13)->nullable();
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('profession');
             $table->string('no_member');
             $table->string('image')->nullable();
-            $table->enum('class', ['Offline', 'Online']);
+            $table->enum('class', ['Offline', 'Online'])->nullable();
             $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });

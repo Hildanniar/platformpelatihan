@@ -26,6 +26,6 @@ class Attainment extends Model {
     }
 
     public function materi_tasks() {
-        return $this->belongsTo( MateriTask::class );
+        return $this->belongsTo( MateriTask::class, 'materi_task_id' );
     }
 }

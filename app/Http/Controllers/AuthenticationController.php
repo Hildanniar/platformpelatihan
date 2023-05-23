@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Participant;
 use Exception;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
@@ -35,7 +36,22 @@ class AuthenticationController extends Controller {
                 'email'=> $validatedData[ 'email' ],
                 'password'=> bcrypt( $validatedData[ 'password' ] ),
             ];
-            User::create( $data_user );
+            $user = User::create( $data_user );
+            $user_last_id = $user->id;
+            $data_participant = [
+                'type_training_id'=> null,
+                'user_id' => $user_last_id,
+                'name'=> 'Peserta Baru',
+                'address'=> 'Silahkan Mengisi Alamat',
+                'age'=> null,
+                'no_hp'=> null,
+                'gender'=> null,
+                'profession'=> 'Silahkan Mengisi Pekerjaan',
+                'no_member'=> 'Silahkan Mengisi No Member',
+                'image'=> null,
+                'class'=> null,
+            ];
+            Participant::create( $data_participant );
             Session::flash( 'message', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.' );
             return redirect( '/register' );
         } catch( Exception $error ) {

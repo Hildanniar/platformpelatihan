@@ -19,7 +19,7 @@ class MateriTask extends Model {
     }
 
     public function attainments() {
-        return $this->hasMany( Attainment::class );
+        return $this->hasMany( Attainment::class, 'materi_task_id' );
     }
 
 }
