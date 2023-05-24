@@ -35,6 +35,7 @@ class AuthenticationController extends Controller {
                 'username'=> $validatedData[ 'username' ],
                 'email'=> $validatedData[ 'email' ],
                 'password'=> bcrypt( $validatedData[ 'password' ] ),
+                'is_active' => '1',
             ];
             $user = User::create( $data_user );
             $user_last_id = $user->id;
@@ -52,10 +53,10 @@ class AuthenticationController extends Controller {
                 'class'=> null,
             ];
             Participant::create( $data_participant );
-            Session::flash( 'message', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.' );
+            Session::flash( 'register_success', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.' );
             return redirect( '/register' );
         } catch( Exception $error ) {
-            dd( $error );
+            return back()->with( 'register_error', 'Register Gagal, Email atau Username Sudah Digunakan!!!' );
         }
     }
 

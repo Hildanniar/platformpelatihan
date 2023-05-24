@@ -42,9 +42,14 @@
                         Dinas Perpustakaan dan Kearsipan
                         Kabupaten Madiun</h2>
                     <br>
-                    @if (session('message'))
+                    @if (session('register_success'))
                         <div class="alert alert-success">
-                            {{ session('message') }}
+                            {{ session('register_success') }}
+                        </div>
+                    @endif
+                    @if (session()->has('register_error'))
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            {{ session('register_error') }}
                         </div>
                     @endif
                     <form action="{{ route('actionregister') }}" method="post">

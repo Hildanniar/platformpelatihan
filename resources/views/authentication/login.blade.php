@@ -45,8 +45,6 @@
                     @if (session()->has('login_error'))
                         <div class="alert alert-danger alert-dismissible show fade">
                             {{ session('login_error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
                         </div>
                     @endif
                     <form action="/login" method="POST">
