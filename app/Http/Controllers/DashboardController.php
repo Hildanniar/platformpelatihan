@@ -24,7 +24,7 @@ class DashboardController extends Controller {
     }
 
     public function dashboardPublic() {
-        $attainment = Attainment::orderBy( 'created_at', 'desc' )->limit( 6 )->latest()->get();
+        $attainment = Attainment::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
         $typeTrainings = TypeTraining::limit( 5 )->get();
         //dashboard tanpa login
         $users = User::where( 'level_id', '3' )->count();
@@ -53,13 +53,14 @@ class DashboardController extends Controller {
     }
 
     public function attainment() {
-        // $typeTrainings = TypeTraining::latest()->paginate( 6 );
         // $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
-        // dd( $typeTrainings );
         $attainments = Attainment::where( 'status', 'Publikasi' )->latest()->paginate( 6 );
+        // $materi_tasks = MateriTask::all();
+        // dd( $attainments->image );
         return view( 'dashboard.layouts.public.attainment', [
             'attainments' => $attainments,
             // 'schedules' => $schedules,
+            // 'materi_tasks '=>$materi_tasks
         ] );
     }
 
@@ -67,13 +68,6 @@ class DashboardController extends Controller {
         // dd( $attainment->users );
         return view( 'dashboard.layouts.public.show_attainment', [
             'attainment' => $attainment,
-            // 'materi_tasks' =>$materi_tasks,
-        ] );
-    }
-
-    public function page_attainment( TypeTraining $type_trainings ) {
-        return view( 'dashboard.layouts.public.page_attainment', [
-            'type_trainings' => $type_trainings,
         ] );
     }
 

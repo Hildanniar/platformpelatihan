@@ -22,7 +22,7 @@
                     <h1 class="display-4 text-white animated zoomIn">{{ $attainment->materi_tasks->name_materi }}</h1>
                     <a href="/" class="h5 text-white">Home</a>
                     <i class="far fa-circle text-white px-2"></i>
-                    <a href="/training" class="h5 text-white">Pelatihan</a>
+                    <a href="/attainment" class="h5 text-white">Karya</a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,6 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-10">
-
                 <br>
                 <center>
                     <h1>{{ $attainment->materi_tasks->name_materi }}</h1>
@@ -42,7 +41,15 @@
                 <article class="my-3 fs-6">
                     {!! $attainment->desc !!}
                 </article>
-                <p>link hasil karya : </p>
+                <p>URL hasil karya
+                    :
+                    <span class="badge rounded-pill bg-warning text-white" style="text-align: right;"><a
+                            href="{{ $attainment->link }}" target="_blank" style="color:black"> klik disini</a>
+                    </span>
+
+
+                </p>
+
             </div>
         </div>
     </div>

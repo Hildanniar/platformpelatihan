@@ -29,7 +29,7 @@
     </div>
     <!-- Navbar End -->
 
-    <!-- Blog Start -->
+    <!-- Attainment Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
@@ -59,7 +59,7 @@
                                     <small class="me-3"><i class="far fa-user text-primary me-2"></i>John Doe</small>
                                     <small><i class="far fa-calendar-alt text-primary me-2"></i></small>
                                 </div>
-                                {{-- <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4> --}}
+                                <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4>
                                 <p>{{ $t->excerpt }}</p>
                                 <a class="text-uppercase" href="/attainment/{{ $t->id }}">Read More <i
                                         class="bi bi-arrow-right"></i></a>
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <!-- Blog Start -->
+    <!-- Attainment Start -->
 
     {{-- pagination --}}
     <div class="d-flex justify-content-center">{{ $attainments->links() }}</div>
