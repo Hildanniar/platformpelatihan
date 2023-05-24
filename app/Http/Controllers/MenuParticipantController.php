@@ -7,6 +7,7 @@ use App\Models\Participant;
 use App\Models\TypeTraining;
 use App\Models\MateriTask;
 use App\Models\Attainment;
+use App\Models\Certificate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -25,11 +26,20 @@ class MenuParticipantController extends Controller {
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/participant/schedule/'. $row->id .'" class="edit btn btn-primary btn-sm text-white"><i class="far fa-clock""></i> Jadwal</a>
-                    <a href="/participant/materi_task/'. $row->id .'" class="btn btn-danger btn-sm"><i class="far fa-file"></i> Materi</a>';
+                    <a href="/participant/schedule/'. $row->id .'" class="edit btn btn-primary btn-sm text-white"><i class="far fa-clock""></i> Jadwal</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('materi', function($row){
+                    $materiBtn = '
+                    <a href="/participant/materi_task/'. $row->id .'" class="btn btn-danger btn-sm"><i class="far fa-file"></i> Materi</a>';
+                    return $materiBtn;
+                })
+                ->addColumn('certificate', function($row){
+                    $certificateBtn = '
+                    <a href="/participant/certificate/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-file"></i> Sertifikat</a>';
+                    return $certificateBtn;
+                })
+                ->rawColumns(['action', 'materi', 'certificate'])
                 ->make(true);
         }
     }
@@ -66,6 +76,13 @@ class MenuParticipantController extends Controller {
     public function schedule(TypeTraining $schedule){
         return view('participants.schedule.index', [
             'schedule' => $schedule,
+        ]);
+    }
+
+    public function certificate(Certificate $certificate){
+        dd($certificate);
+        return view('participants.certificate.index', [
+            'certificate' => $certificate,
         ]);
     }
 

@@ -36,7 +36,9 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Jenis Pelatihan</th>
-                                                    <th width="100px">Action</th>
+                                                    <th width="100px">Materi</th>
+                                                    <th width="100px">Jadwal</th>
+                                                    <th width="100px">Sertifikat</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -69,8 +71,16 @@
                         name: 'jenis pelatihan'
                     },
                     {
+                        data: 'materi',
+                        name: 'materi'
+                    },
+                    {
                         data: 'action',
-                        name: 'action',
+                        name: 'action'
+                    },
+                    {
+                        data: 'certificate',
+                        name: 'certificate',
                         orderable: true,
                         searchable: true
                     },

@@ -113,6 +113,8 @@ Route::get('/participant/materi_task/{type_training}', [MenuParticipantControlle
 Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 'show_materi']);
 Route::get('/download', [MenuParticipantController::class, 'download_materi']);
 
+//sertifikat
+Route::get('/participant/certificate/{certificate}', [MenuParticipantController::class, 'certificate']);
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
