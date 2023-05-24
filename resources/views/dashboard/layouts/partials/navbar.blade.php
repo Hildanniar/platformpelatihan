@@ -20,9 +20,9 @@
                     <a href="/dashboard/participant"
                         class="nav-item nav-link {{ Request::is('dashboard/participant') ? 'active' : '' }}">Home</a>
                     <a href="/dashboard/participant/attainment"
-                        class="nav-item nav-link {{ Request::is('dashboard/participant/attainment*') ? 'active' : '' }}">Karya</a>
-                    <a href="/dashboard/participant/type_training"
-                        class="nav-item nav-link {{ Request::is('dashboard/participant/type_training*') ? 'active' : '' }}">Pelatihan</a>
+                        class="nav-item nav-link {{ Request::is('dashboard/participant/attainment') ? 'active' : '' }}">Karya</a>
+                    <a href="/dashboard/participant/training"
+                        class="nav-item nav-link {{ Request::is('dashboard/participant/training') ? 'active' : '' }}">Pelatihan</a>
                     <a href="/dashboard/participant/start"
                         class="nav-item nav-link {{ Request::is('dashboard/participant/start*') ? 'active' : '' }}">Dashboard</a>
                 @else

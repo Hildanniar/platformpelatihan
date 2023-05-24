@@ -61,8 +61,14 @@
                                 </div>
                                 <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4>
                                 <p>{{ $t->excerpt }}</p>
-                                <a class="text-uppercase" href="/attainment/{{ $t->id }}">Read More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                @if (auth()->user() == null)
+                                    <a class="text-uppercase" href="/attainment/{{ $t->id }}">Read More <i
+                                            class="bi bi-arrow-right"></i></a>
+                                @elseif (auth()->user()->levels->name == 'Peserta')
+                                    <a class="text-uppercase"
+                                        href="/dashboard/participant/attainment/{{ $t->id }}">Read More <i
+                                            class="bi bi-arrow-right"></i></a>
+                                @endif
                             </div>
                         </div>
                     </div>

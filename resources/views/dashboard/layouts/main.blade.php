@@ -258,7 +258,7 @@
                             </div>
                             <h4 class="mb-3">{{ $t->name }}</h4>
                             <p class="m-0">{{ $t->excerpt }}</p>
-                            <a class="btn btn-lg btn-primary rounded" href="">
+                            <a class="btn btn-lg btn-primary rounded" href="/training/{{ $t->id }}">
                                 <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>

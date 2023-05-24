@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Attainment;
 use App\Models\User;
 use App\Models\TypeTraining;
-use App\Models\Survey;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardParticipantController extends Controller {
     public function index() {
+        $attainment = Attainment::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
+        $typeTrainings = TypeTraining::limit( 5 )->get();
         $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
-        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments' ) );
+        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings' ) );
     }
 
     public function start() {
@@ -27,11 +29,37 @@ class DashboardParticipantController extends Controller {
     }
 
     public function attainment() {
-        return view( 'dashboard.layouts.public.attainment' );
+        // $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
+        $attainments = Attainment::where( 'status', 'Publikasi' )->latest()->paginate( 6 );
+        // $materi_tasks = MateriTask::all();
+        // dd( $attainments->image );
+        return view( 'dashboard.layouts.public.attainment', [
+            'attainments' => $attainments,
+            // 'schedules' => $schedules,
+            // 'materi_tasks '=>$materi_tasks
+        ] );
+    }
+
+    public function show_attainment( Attainment $attainment ) {
+        // dd( $attainment->users );
+        return view( 'dashboard.layouts.public.show_attainment', [
+            'attainment' => $attainment,
+        ] );
     }
 
     public function type_training() {
-        return view( 'dashboard.layouts.public.training' );
+        $typeTrainings = TypeTraining::latest()->paginate( 6 );
+        return view( 'dashboard.layouts.public.training', [
+            'typeTrainings' => $typeTrainings,
+        ] );
+    }
+
+    public function show_training( TypeTraining $type_training ) {
+        $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
+        return view( 'dashboard.layouts.public.show_training', [
+            'type_training' => $type_training,
+            'schedules' => $schedules
+        ] );
     }
 
     public function ProfileUpdate() {

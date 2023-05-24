@@ -93,7 +93,9 @@ Route::middleware('can:is_participant')->group(function(){
 Route::get('/dashboard/participant', [DashboardParticipantController::class, 'index']);
 Route::get('/dashboard/participant/start', [DashboardParticipantController::class, 'start']);
 Route::get('/dashboard/participant/attainment', [DashboardParticipantController::class, 'attainment']);
-Route::get('/dashboard/participant/type_training', [DashboardParticipantController::class, 'type_training']);
+Route::get('/dashboard/participant/attainment/{attainment}', [DashboardParticipantController::class, 'show_attainment']);
+Route::get('/dashboard/participant/training', [DashboardParticipantController::class, 'type_training']);
+Route::get('/dashboard/participant/training/{type_training}', [DashboardParticipantController::class, 'show_training']);
 
 // update profile peserta
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');

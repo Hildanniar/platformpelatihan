@@ -46,9 +46,16 @@
                             </div>
                             <h4 class="mb-3">{{ $t->name }}</h4>
                             <p class="m-0">{{ $t->excerpt }}</p>
-                            <a class="btn btn-lg btn-primary rounded" href="/training/{{ $t->id }}">
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
+                            @if (auth()->user() == null)
+                                <a class="btn btn-lg btn-primary rounded" href="/training/{{ $t->id }}">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            @elseif (auth()->user()->levels->name == 'Peserta')
+                                <a class="btn btn-lg btn-primary rounded"
+                                    href="/dashboard/participant/training/{{ $t->id }}">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @endforeach
