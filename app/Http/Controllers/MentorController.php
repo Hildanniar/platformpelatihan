@@ -46,6 +46,7 @@ class MentorController extends Controller {
             'username'=> $validatedData['username'],
             'email'=> $validatedData['email'],
             'password'=> bcrypt($validatedData['password']),
+            'is_active' => '1',
         ];
         $user = User::create( $data_user );
         $user_last_id = $user->id;
