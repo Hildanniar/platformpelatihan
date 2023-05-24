@@ -51,8 +51,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="dropdown" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle text-white" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         @if (auth()->user()->levels->name == 'Peserta')
                             {{ auth()->user()->participants->name }}
                         @elseif (auth()->user()->levels->name == 'Mentor')

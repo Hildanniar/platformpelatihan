@@ -34,4 +34,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/assets/participant/css/demo.css">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/dashboard/css/bootstrap.min.css" rel="stylesheet">
 </head>
