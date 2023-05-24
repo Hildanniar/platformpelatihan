@@ -46,7 +46,8 @@
                                             <a href="/dashboard/participant/type_training"
                                                 class="btn btn-secondary btn-round">Daftar Sekarang</a>
                                         @else
-                                            <a href="/participant/training" class="btn btn-secondary btn-round">Mulai
+                                            <a href="/participant/training"
+                                                class="btn btn-secondary btn-round text-white">Mulai
                                                 Sekarang</a>
                                         @endif
                                     </div>

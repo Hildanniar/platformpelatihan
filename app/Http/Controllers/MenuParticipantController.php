@@ -8,6 +8,10 @@ use App\Models\TypeTraining;
 use App\Models\MateriTask;
 use App\Models\Attainment;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
+
 class MenuParticipantController extends Controller {
 
     public function getTraining(Request $request) {
@@ -21,9 +25,8 @@ class MenuParticipantController extends Controller {
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/participant/schedule/'. $row->id .'" class="edit btn btn-primary btn-sm"><i class="far fa-clock""></i> Jadwal</a>
+                    <a href="/participant/schedule/'. $row->id .'" class="edit btn btn-primary btn-sm text-white"><i class="far fa-clock""></i> Jadwal</a>
                     <a href="/participant/materi_task/'. $row->id .'" class="btn btn-danger btn-sm"><i class="far fa-file"></i> Materi</a>';
-                    
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -47,26 +50,39 @@ class MenuParticipantController extends Controller {
 
     public function show_materi(MateriTask $materi){
         $attainments = Attainment::where('user_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
-        // dd($attainments);
         return view('participants.materi_task.post', [
             'materiTask' => $materi,
             'attainments' => $attainments
         ]);
     }
     
+    public function download_materi(){
+        try {
+        return Storage::disk('local')->download('public/file_materi/COIOrbxq6cGp8ucuwG2Mo7zsqi9YCdf7RIK4e8AS.pdf');
+        } catch (\Exception $error) {
+            return $error->getMessage();
+        }
+    }
     public function schedule(TypeTraining $schedule){
         return view('participants.schedule.index', [
             'schedule' => $schedule,
         ]);
     }
 
-    public function attainment(TypeTraining $attainments) {
+    public function attainment(){
+        $attainment = Attainment::where('user_id', auth()->user()->id)->latest()->paginate(6);
         return view( 'participants.attainment.index', [
+            'attainment' => $attainment,
+        ]);
+    }
+
+    public function UploadAttainment(TypeTraining $attainments) {
+        return view( 'participants.attainment.uploadAttainment', [
             'attainments' => $attainments,
         ] );
     }
 
-    public function CreateAttainments(Request $request){
+    public function CreateAttainment(Request $request){
         $validatedData = $request->validate( [
             'link' => 'required',
             'image'=> 'required|image|file|max:3072',
@@ -77,6 +93,10 @@ class MenuParticipantController extends Controller {
             $validatedData['image'] = $request->file('image')->store('hasil-karya');
         }
         $participant = Participant::where('user_id', auth()->user()->id)->first();
+        $type_training = TypeTraining::first();
+        $materi = MateriTask::where('type_training_id', $type_training->id)->first(); //masih salah idnya
+        $attainments = Attainment::where('user_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
+        // dd($materi->id);
         $data_attainment = [
             'link'=> $validatedData['link'],
             'image'=> $validatedData['image'],
@@ -84,9 +104,19 @@ class MenuParticipantController extends Controller {
             'excerpt'=> $validatedData['excerpt'],
             'type_training_id' => $participant->type_training_id,
             'user_id'=> $participant->user_id,
-            'is_active' => 1,
+            'materi_task_id'=> $attainments->materi_task_id,
+            'is_active' => '1',
+            'comment'=> null 
         ];
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
+
+    public function show_attainment( Attainment $attainment ) {
+        // dd( $attainment->users );
+        return view( 'participants.attainment.show_attainment', [
+            'attainment' => $attainment,
+        ] );
+    }
+    
 }

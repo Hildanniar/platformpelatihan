@@ -10,12 +10,12 @@
                             <h2 class="text-white pb-2 fw-bold">{{ $materiTask->type_trainings->name }}</h2>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            {{-- <a href="/posts" class="btn btn-white btn-border btn-round mr-2" role="button">Upload Hasil
-                                    Karya</a> --}}
-                            <a href="/posts" class="btn btn-white btn-border btn-round mr-2" role="button">Lihat
+                            <a href="/download/{{ $materiTask->file_materi }}" class="btn btn-white btn-border btn-round mr-2"
+                                role="button">Download
                                 Materi</a>
-                            <a href="/participant/training" class="btn btn-white btn-border btn-round mr-2"><i
-                                    class="far fa-arrow-alt-circle-left"></i> Kembali</a>
+                            <a href="/participant/materi_task/{{ $materiTask->type_trainings->id }}"
+                                class="btn btn-white btn-border btn-round mr-2"><i class="far fa-arrow-alt-circle-left"></i>
+                                Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,6 @@
                         <center>
                             <h1>{{ $materiTask->name_task }}</h1>
                         </center>
-
                         <article class="my-3 fs-6">
                             {!! $materiTask->desc_task !!}
                             <b>
@@ -61,10 +60,10 @@
                                     {{ $materiTask->start_date }} s.d. {{ $materiTask->end_date }}</span>
                             </b>
                             @if ($attainments->is_active == '1')
-                                <button type="button" class="btn btn-success float-right">Sudah Mengupload Hasil
+                                <button type="button" class="btn btn-success float-right text-dark">Sudah Mengupload Hasil
                                     Karya</button>
                             @else
-                                <a class="btn btn-primary float-right"
+                                <a class="btn btn-primary float-right text-white"
                                     href="/participant/attainment/{{ $materiTask->type_trainings->id }}"
                                     role="button">Upload
                                     Hasil Karya</a>

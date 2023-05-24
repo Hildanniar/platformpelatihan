@@ -11,99 +11,49 @@
                     </div>
                 </div>
             </div>
-            <form method="post" action="{{ route('create.attainments') }}" class="mb-5" enctype="multipart/form-data">
-                @csrf
-                <div class="container">
-                    <div class="row gutters">
-                        <div class=" col-lg-6  ">
-                            <div class="card h-100 w-100">
-                                <div class="card-body">
-                                    <div class="account-settings">
-                                        <div class="form-group form-floating-label">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h6 class="mb-2 text-primary">Foto Hasil Karya</h6>
+            <!-- Attainment Start -->
+            <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        @foreach ($attainment as $t)
+                            <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                                <div class="blog-item bg-light rounded overflow-hidden">
+                                    <div class="blog-img position-relative overflow-hidden">
+                                        @if ($t->image)
+                                            <div style="max-height:500px; overflow:hidden;">
+                                                <img src="{{ asset('storage/' . $t->image) }}" alt="{{ $t->image }}"
+                                                    class="img-fluid">
                                             </div>
-                                            <img class="img-preview img-fluid mb-3 col-sm-5"
-                                                style="max-height:700px; max-width:700px; overflow:hidden;">
-                                            <input class="form-control input-solid @error('image') is-invalid @enderror "
-                                                type="file" id="image" name="image" onchange="previewImage()">
-                                            @error('image')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            <small style="color:red">*max.3MB</small> <br>
-                                            <small style="color:red">*format PNG, JPG, dan JPEG</small>
+                                        @else
+                                            <img src="https://source.unsplash.com/500x400?{{ $t->name }}"
+                                                alt="{{ $t->name }}" class="img-fluid">
+                                        @endif
+                                        <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4"
+                                            href="">{{ $t->type_trainings->name }}</a>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="d-flex mb-3">
+                                            <small class="me-3"><i
+                                                    class="far fa-user text-primary me-2"></i>{{ auth()->user()->participants->name }}</small>
+                                            {{-- <small><i class="far fa-calendar-alt text-primary me-2"></i></small> --}}
                                         </div>
+                                        <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4>
+                                        <p>{{ $t->excerpt }}</p>
+                                        <a class="text-uppercase"
+                                            href="/participant/attainment/show/{{ $t->id }}">Read
+                                            More <i class="bi bi-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class=" col-lg-6  ">
-                            <div class="card h-100 w-100">
-                                <div class="card-body">
-                                    @if (session()->has('success'))
-                                        <div class="alert alert-success col-lg-8" role="alert">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <h6 class="mb-2 text-primary">Form Hasil Karya</h6>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="link">URL Hasil Karya</label>
-                                        <input type="link"
-                                            class="form-control input-solid  @error('link') is-invalid @enderror"
-                                            name="link" placeholder="URL Hasil Karya" value="">
-                                        @error('link')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                        <small style="color:red">*URL dapat berupa Google Drive, Github dan lainnya</small>
-                                        <br>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="desc">Deskripsi Hasil Karya</label>
-                                        <textarea type="text" class="form-control input-solid  @error('desc') is-invalid @enderror" name="desc"
-                                            placeholder="Deskripsi Hasil Karya" value="">
-                                        </textarea>
-                                        @error('desc')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    {{-- <div class="form-group">
-                                            <label for="name">Komentar</label>
-                                            <textarea type="text" class="form-control input-solid" name="name" placeholder="Deskripsi Project" value=""></textarea>
-                                        </div> --}}
-
-                                    <button type="submit" class="btn btn-primary float-right">Kirim</button>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </form>
+            </div>
+            <!-- Attainment Start -->
+
+            {{-- pagination --}}
+            <div class="d-flex justify-content-center">{{ $attainment->links() }}</div>
         </div>
         @include('participants.layouts.partials.footer')
     </div>
-
-    <script>
-        function previewImage() {
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
-
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-    </script>
 @endsection
