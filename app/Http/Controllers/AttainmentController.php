@@ -23,14 +23,15 @@ class AttainmentController extends Controller {
     public function create() {
         return view( 'admin.attainment.create', [ 
             'type_trainings' => TypeTraining::all(),
-            'users' => User::all()
+            'users' => User::all(),
+            'participants' => Participant::all(),
         ]);
     }
 
     public function store( Request $request ) {
         $validatedData = $request->validate( [
             'type_training_id' => 'required',
-            'user_id' => 'required',
+            'participant_id' => 'required',
             'comment' => 'required',
             'desc' => 'required',
             'image' => 'image|file|max:3000'
@@ -90,7 +91,7 @@ class AttainmentController extends Controller {
                     return $data->type_trainings->name ?? 'none';
                 })
                 ->editColumn('name_user', function($data){
-                    return $data->users->participants->name ?? 'none';
+                    return $data->participants->name ?? 'none';
                 })
                 ->editColumn('value', function($data){
                     return $data->value ?? 'Belum dinilai';

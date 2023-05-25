@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\TypeTraining;
-use App\Models\User;
+use App\Models\Participant;
 use App\Models\MateriTask;
 
 class Attainment extends Migration
@@ -14,7 +14,7 @@ class Attainment extends Migration
         Schema::create('attainments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(TypeTraining::class);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Participant::class);
             $table->foreignIdFor(MateriTask::class);
             $table->string('link');
             $table->string('image')->nullable();

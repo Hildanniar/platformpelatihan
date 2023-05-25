@@ -17,12 +17,12 @@ class Attainment extends Model {
         return $this->belongsTo( TypeTraining::class, 'type_training_id' );
     }
 
-    public function users() {
-        return $this->belongsTo( User::class, 'user_id' );
-    }
+    // public function users() {
+    //     return $this->belongsTo( User::class, 'user_id' );
+    // }
 
     public function participants() {
-        return $this->belongsTo( Participant::class, 'user_id' );
+        return $this->belongsTo( Participant::class, 'participant_id' );
     }
 
     public function materi_tasks() {
