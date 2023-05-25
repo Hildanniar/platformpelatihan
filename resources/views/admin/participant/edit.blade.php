@@ -170,23 +170,6 @@
                                     </select>
                                 </div>
                                 <div class="form-group form-floating-label">
-                                    <label for="class" class="form-label">Kelas</label>
-                                    <select class="form-control input-solid @error('class') is-invalid @enderror"
-                                        id="class" required name="class">
-                                        <option selected disabled value="">Silahkan dipilih...</option>
-                                        <option value="Offline" @if (old('class', $participant->class) == 'Offline') selected @endif>Offline
-                                        </option>
-                                        </option>
-                                        <option value="Online" @if (old('class', $participant->class) == 'Online') selected @endif>Online
-                                        </option>
-                                    </select>
-                                    @error('class')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group form-floating-label">
                                     <label for="image" class="form-label">Foto Profile Peserta</label>
                                     <input type="hidden" name="oldImage" value="{{ $participant->image }}">
                                     @if ($participant->image)

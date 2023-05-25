@@ -47,7 +47,7 @@ class ParticipantController extends Controller {
             'profession' => 'required|max:255',
             'no_member' => 'required|max:255',
             'image' => 'image|file|max:2048',
-            'class' => 'required|in:Offline,Online'
+            
         ] );
 
         if ($request->file('image')) {
@@ -74,7 +74,6 @@ class ParticipantController extends Controller {
             'profession'=> $validatedData['profession'],
             'no_member'=> $validatedData['no_member'],
             'image'=> $validatedData['image'],
-            'class'=> $validatedData['class'],
         ];
     } else {
         $data_participant = [
@@ -87,7 +86,6 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> $validatedData['no_member'],
-            'class'=> $validatedData['class'],
         ];
     }
         Participant::create( $data_participant );
@@ -126,14 +124,12 @@ class ParticipantController extends Controller {
             'profession' => 'required|max:255',
             'no_member' => 'required|max:255',
             'image' => 'image|file|max:2048',
-            'class' => 'required|in:Offline,Online'
         ] ;
         $validatedData = $request->validate( $rules );
             $data_user = [
                 'username'=> $validatedData['username'],
                 'email'=> $validatedData['email'],
                 'password'=> bcrypt($validatedData['password']),
-                
             ];
         
         if ($request->file('image')) {
@@ -153,7 +149,6 @@ class ParticipantController extends Controller {
             'profession'=> $validatedData['profession'],
             'no_member'=> $validatedData['no_member'],
             'image'=> $validatedData['image'],
-            'class'=> $validatedData['class'],
         ];
     } else{
         $data_participant = [
@@ -165,7 +160,6 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> $validatedData['no_member'],
-            'class'=> $validatedData['class'],
         ];
     }
         $participant->users()->update($data_user);
@@ -213,9 +207,9 @@ class ParticipantController extends Controller {
                 ->editColumn('no_hp', function($data){
                     return $data->participants->no_hp ?? 'none';
                 })
-                ->editColumn('class', function($data){
-                    return $data->participants->class ?? 'none';
-                })
+                // ->editColumn('class', function($data){
+                //     return $data->participants->class ?? 'none';
+                // })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <a href="/admin/participant/'. $row->participants->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>

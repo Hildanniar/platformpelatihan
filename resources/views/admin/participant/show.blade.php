@@ -53,11 +53,11 @@
                                         <th>:</th>
                                         <td> {{ $participant->no_hp }}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th>Kelas</th>
                                         <th>:</th>
                                         <td> {{ $participant->class }}</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <th>Jenis Kelamin</th>
                                         <th>:</th>

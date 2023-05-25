@@ -16,7 +16,6 @@ class ParticipantFactory extends Factory {
             'gender' => [ 'Laki-Laki', 'Perempuan' ][ mt_rand( 0, 1 ) ],
             'profession' => $this->faker->jobTitle(),
             'no_member' => $this->faker->randomNumber( 5, true ),
-            'class' => [ 'Offline', 'Online' ][ mt_rand( 0, 1 ) ],
             'is_active' =>[ '0', '1' ][ mt_rand( 0, 1 ) ],
 
         ];

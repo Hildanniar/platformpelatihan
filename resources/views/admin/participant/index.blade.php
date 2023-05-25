@@ -46,7 +46,7 @@
                                                     <th>Email</th>
                                                     <th>Alamat</th>
                                                     <th>No.Telp</th>
-                                                    <th>Kelas</th>
+                                                    {{-- <th>Kelas</th> --}}
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
@@ -91,10 +91,10 @@
                         data: 'no_hp',
                         name: 'no_hp'
                     },
-                    {
-                        data: 'class',
-                        name: 'class'
-                    },
+                    // {
+                    //     data: 'class',
+                    //     name: 'class'
+                    // },
                     {
                         data: 'action',
                         name: 'action',

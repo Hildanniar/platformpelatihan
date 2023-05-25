@@ -25,7 +25,6 @@ class Participant extends Migration {
             $table->string('profession');
             $table->string('no_member');
             $table->string('image')->nullable();
-            $table->enum('class', ['Offline', 'Online'])->nullable();
             $table->enum('is_active', ['0', '1']);
             $table->timestamps();
         });
