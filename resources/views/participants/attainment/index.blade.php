@@ -14,6 +14,11 @@
             <!-- Attainment Start -->
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="container py-5">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success col-lg-8" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="row g-5">
                         @foreach ($attainment as $at)
                             <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">

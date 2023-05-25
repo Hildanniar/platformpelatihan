@@ -113,7 +113,8 @@ Route::get('/participant/training/datatraining', [MenuParticipantController::cla
 Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::class, 'schedule']);
 
 // materi & task pelatihan peserta
-Route::get('/participant/materi_task/{type_training}', [MenuParticipantController::class, 'materi_task']);
+Route::get('/participant/materi_task/{type_training}', [MenuParticipantController::class, 'materi_task_online']);
+Route::get('/participant/information/{typeTraining}', [MenuParticipantController::class, 'materi_task_offline']);
 Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 'show_materi']);
 Route::get('/download', [MenuParticipantController::class, 'download_materi']);
 
@@ -122,7 +123,11 @@ Route::get('/participant/certificate/{typeTraining}', [MenuParticipantController
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
-Route::get('/participant/attainment/{materiTask}', [MenuParticipantController::class, 'UploadAttainment']);
-Route::post('/participant/attainment/add/{materiTask}', [MenuParticipantController::class, 'CreateAttainment'])->name('create.attainment');
 Route::get('/participant/attainment/show/{attainment}', [MenuParticipantController::class, 'show_attainment']);
+//upload hasil karya untuk kelas online
+Route::get('/participant/attainment/{materiTask}', [MenuParticipantController::class, 'UploadAttainmentOnline']);
+Route::post('/participant/attainment/add/{materiTask}', [MenuParticipantController::class, 'CreateAttainmentOnline']);
+//upload hasil karya untuk kelas offline
+Route::get('/participant/attainments/{typeTraining}', [MenuParticipantController::class, 'UploadAttainmentOffline']);
+Route::post('/participant/attainment/create/{typeTraining}', [MenuParticipantController::class, 'CreateAttainmentOffline']);
 });
