@@ -109,6 +109,14 @@ class MenuParticipantController extends Controller {
         ]);
     }
 
+    public function show_attainment( Attainment $attainment ) {
+        // dd( $attainment->users );
+        return view( 'participants.attainment.show_attainment', [
+            'attainment' => $attainment,
+        ] );
+    }
+    
+
     public function UploadAttainmentOnline(MateriTask $materiTask) {
         return view( 'participants.attainment.upload_attainment_online', [
             'materiTask' => $materiTask,
@@ -175,11 +183,4 @@ class MenuParticipantController extends Controller {
     }
     
 
-    public function show_attainment( Attainment $attainment ) {
-        // dd( $attainment->users );
-        return view( 'participants.attainment.show_attainment', [
-            'attainment' => $attainment,
-        ] );
-    }
-    
 }

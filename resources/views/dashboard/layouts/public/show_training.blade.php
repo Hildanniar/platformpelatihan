@@ -28,6 +28,8 @@
         </div>
     </div>
     <!-- Navbar End -->
+
+    {{-- Show Training Start --}}
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-10">
@@ -66,14 +68,17 @@
                 @if (auth()->user() == null)
                     <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
                 @elseif (auth()->user()->levels->name == 'Peserta')
-                    <a class="btn btn-primary float-right" href="{{ regristration.training }}" role="button">Daftar Sekarang</a>
+                    <a class="btn btn-primary float-right" href="/regristration/{{ $type_training->id }}"
+                        role="button">Daftar
+                        Sekarang</a>
                 @endif
 
             </div>
         </div>
     </div>
-    @include('dashboard.layouts.partials.footer')
+    {{-- Show Training End --}}
 
+    @include('dashboard.layouts.partials.footer')
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i

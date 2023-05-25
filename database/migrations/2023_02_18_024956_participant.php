@@ -23,7 +23,7 @@ class Participant extends Migration {
             $table->string('no_hp', 13)->nullable();
             $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('profession');
-            $table->string('no_member');
+            $table->string('no_member')->nullable();
             $table->string('image')->nullable();
             $table->enum('is_active', ['0', '1']);
             $table->timestamps();

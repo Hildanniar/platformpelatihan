@@ -131,8 +131,40 @@ class DashboardParticipantController extends Controller {
         }
     }
 
-    public function regristration() {
-        return view( 'dashboard.layouts.participants.RegristrationTraining' );
+    public function regristration( TypeTraining $type_training ) {
+        return view( 'dashboard.layouts.participants.RegristrationTraining', [
+            'type_training' => $type_training,
+        ] );
     }
 
+    public function AddRegristration( TypeTraining $type_training, Request $request ) {
+        $rules =  [
+            'name' => 'required|max:255',
+            'address' => 'required|max:255',
+            'age' => 'required|numeric|min:1',
+            'no_hp' => 'required|numeric|min:1',
+            'gender' => 'required|in:Laki-Laki,Perempuan',
+            'profession' => 'required|max:255',
+            'no_member' => 'max:255',
+        ] ;
+        $validatedData = $request->validate( $rules );
+        $user = User::find( Auth::user()->id );
+        if ( $user ) {
+            $data_participant = [
+                'user_id'=> $user->id,
+                'type_training_id'=> $type_training->id,
+                'name'=> $validatedData[ 'name' ],
+                'address'=> $validatedData[ 'address' ],
+                'age'=> $validatedData[ 'age' ],
+                'no_hp'=> $validatedData[ 'no_hp' ],
+                'gender'=> $validatedData[ 'gender' ],
+                'profession'=> $validatedData[ 'profession' ],
+                'no_member'=> $validatedData[ 'no_member' ],
+                'image'=> null,
+            ];
+            $user->participants()->update( $data_participant );
+            return Redirect()->back()->with( 'success', 'Anda Berhasil Mendaftar!!!' );
+        }
+        return Redirect()->back();
+    }
 }

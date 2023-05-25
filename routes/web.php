@@ -98,8 +98,8 @@ Route::get('/dashboard/participant/training', [DashboardParticipantController::c
 Route::get('/dashboard/participant/training/{type_training}', [DashboardParticipantController::class, 'show_training']);
 
 // pendaftaran pelatihan
-Route::get('/regristration', [DashboardParticipantController::class, 'regristration'])->name('regristration.training');
-Route::post('/regristration/add', [DashboardParticipantController::class, 'AddRegristration'])->name('add.regristration.training');
+Route::get('/regristration/{type_training}', [DashboardParticipantController::class, 'regristration'])->name('regristration.training');
+Route::post('/regristration/add/{type_training}', [DashboardParticipantController::class, 'AddRegristration']);
 
 // update profile peserta
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');

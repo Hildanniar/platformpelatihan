@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title">Tabel Jenis Pelatihan</h4>
+                                {{-- <h4 class="card-title">Tabel Jenis Pelatihan</h4> --}}
                             </div>
                             @if (session()->has('success'))
                                 <div class="alert alert-success col-lg-8" role="alert">
