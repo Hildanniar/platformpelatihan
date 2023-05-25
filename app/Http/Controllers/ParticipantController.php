@@ -45,7 +45,7 @@ class ParticipantController extends Controller {
             'no_hp' => 'required|numeric|min:1',
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
-            'no_member' => 'required|max:255',
+            'no_member' => 'max:255',
             'image' => 'image|file|max:2048',
             
         ] );
@@ -72,7 +72,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member'],
+            'no_member'=> null,
             'image'=> $validatedData['image'],
         ];
     } else {
@@ -85,7 +85,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member'],
+            'no_member'=> null,
         ];
     }
         Participant::create( $data_participant );
@@ -122,7 +122,7 @@ class ParticipantController extends Controller {
             'no_hp' => 'required|numeric|min:1',
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
-            'no_member' => 'required|max:255',
+            'no_member' => 'max:255',
             'image' => 'image|file|max:2048',
         ] ;
         $validatedData = $request->validate( $rules );
@@ -147,7 +147,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member'],
+            'no_member'=> null,
             'image'=> $validatedData['image'],
         ];
     } else{
@@ -159,7 +159,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> $validatedData['no_member'],
+            'no_member'=> null,
         ];
     }
         $participant->users()->update($data_user);

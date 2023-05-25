@@ -28,7 +28,7 @@
                 <th>Email</th>
                 <th>Alamat</th>
                 <th>No.Telp</th>
-                <th>Kelas</th>
+                {{-- <th>Kelas</th> --}}
                 <th>Usia</th>
                 <th>Jenis Kelamin</th>
                 <th>Pekerjaan</th>
@@ -43,7 +43,7 @@
                     <td>{{ $participant->users->email }}</td>
                     <td>{{ $participant->address }}</td>
                     <td>{{ $participant->no_hp }}</td>
-                    <td>{{ $participant->class }}</td>
+                    {{-- <td>{{ $participant->class }}</td> --}}
                     <td>{{ $participant->age }}</td>
                     <td>{{ $participant->gender }}</td>
                     <td>{{ $participant->profession }}</td>

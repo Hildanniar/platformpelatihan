@@ -116,7 +116,7 @@
                                     <label for="no_member" class="form-label">No.Anggota Perpustakaan</label>
                                     <input type="text"
                                         class="form-control input-solid @error('no_member') is-invalid @enderror"
-                                        id="no_member" name="no_member" required
+                                        id="no_member" name="no_member"
                                         value="{{ old('no_member', $participant->no_member) }}"
                                         placeholder="No.Anggota Perpustakaan" maxlength="13">
                                     @error('no_member')
