@@ -8,15 +8,11 @@
                         <div>
                             <h2 class="text-white pb-2 fw-bold">Hasil Karya Pelatihan</h2>
                         </div>
-                        {{-- <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/participant/materi/{{ $materiTask->id }}"
-                                class="btn btn-white btn-border btn-round mr-2"><i class="far fa-arrow-alt-circle-left"></i>
-                                Kembali</a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
-            <form method="post" action="{{ route('create.attainment') }}" class="mb-5" enctype="multipart/form-data">
+            <form method="post" action="/participant/attainment/add/{{ $materiTask->id }}" class="mb-5"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="container">
                     <div class="row gutters">

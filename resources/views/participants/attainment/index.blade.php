@@ -15,21 +15,21 @@
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="container py-5">
                     <div class="row g-5">
-                        @foreach ($attainment as $t)
+                        @foreach ($attainment as $at)
                             <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                                 <div class="blog-item bg-light rounded overflow-hidden">
                                     <div class="blog-img position-relative overflow-hidden">
-                                        @if ($t->image)
+                                        @if ($at->image)
                                             <div style="max-height:500px; overflow:hidden;">
-                                                <img src="{{ asset('storage/' . $t->image) }}" alt="{{ $t->image }}"
+                                                <img src="{{ asset('storage/' . $at->image) }}" alt="{{ $at->image }}"
                                                     class="img-fluid">
                                             </div>
                                         @else
-                                            <img src="https://source.unsplash.com/500x400?{{ $t->name }}"
-                                                alt="{{ $t->name }}" class="img-fluid">
+                                            <img src="https://source.unsplash.com/500x400?{{ $at->type_trainings->name }}"
+                                                alt="{{ $at->type_trainings->name }}" class="img-fluid">
                                         @endif
                                         <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4"
-                                            href="">{{ $t->type_trainings->name }}</a>
+                                            href="">{{ $at->type_trainings->name }}</a>
                                     </div>
                                     <div class="p-4">
                                         <div class="d-flex mb-3">
@@ -37,10 +37,9 @@
                                                     class="far fa-user text-primary me-2"></i>{{ auth()->user()->participants->name }}</small>
                                             {{-- <small><i class="far fa-calendar-alt text-primary me-2"></i></small> --}}
                                         </div>
-                                        <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4>
-                                        <p>{{ $t->excerpt }}</p>
+                                        <p>{{ $at->excerpt }}</p>
                                         <a class="text-uppercase"
-                                            href="/participant/attainment/show/{{ $t->id }}">Read
+                                            href="/participant/attainment/show/{{ $at->id }}">Read
                                             More <i class="bi bi-arrow-right"></i></a>
                                     </div>
                                 </div>

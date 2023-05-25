@@ -17,8 +17,8 @@ class TypeTraining extends Model {
         return $this->hasMany( MateriTask::class );
     }
 
-    public function certificate() {
-        return $this->belongsTo( Certificate::class );
+    public function certificates() {
+        return $this->hasOne( Certificate::class, 'type_training_id' );
     }
 
     public function schedules() {

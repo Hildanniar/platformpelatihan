@@ -43,7 +43,7 @@
                                                     <tr>
                                                         <th>Peserta</th>
                                                         <th>:</th>
-                                                        <td> {{ $attainment->users->participants->name ?? 'none' }}</td>
+                                                        <td> {{ $attainment->participants->name ?? 'none' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Ulasan</th>

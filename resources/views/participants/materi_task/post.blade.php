@@ -58,16 +58,15 @@
                             <b>
                                 <span class="badge bg-danger text-white">Waktu Penugasan Mulai
                                     {{ $materiTask->start_date }} s.d. {{ $materiTask->end_date }}</span>
-                            </b>
+                                {{-- </b>
                             @if ($attainments->is_active == '1')
                                 <button type="button" class="btn btn-success float-right text-dark">Sudah Mengupload Hasil
                                     Karya</button>
-                            @else
+                            @else --}}
                                 <a class="btn btn-primary float-right text-white"
-                                    href="/participant/attainment/{{ $materiTask->type_trainings->id }}"
-                                    role="button">Upload
+                                    href="/participant/attainment/{{ $materiTask->id }}" role="button">Upload
                                     Hasil Karya</a>
-                            @endif
+                                {{-- @endif --}}
                         </article>
                     </div>
                 </div>

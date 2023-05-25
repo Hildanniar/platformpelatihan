@@ -59,7 +59,7 @@ class MenuParticipantController extends Controller {
     }
 
     public function show_materi(MateriTask $materi){
-        $attainments = Attainment::where('user_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
+        $attainments = Attainment::where('participant_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
         return view('participants.materi_task.post', [
             'materiTask' => $materi,
             'attainments' => $attainments
@@ -73,33 +73,35 @@ class MenuParticipantController extends Controller {
             return $error->getMessage();
         }
     }
-    public function schedule(TypeTraining $schedule){
+    public function schedule(TypeTraining $typeTraining){
+        // dd($typeTraining);
         return view('participants.schedule.index', [
-            'schedule' => $schedule,
+            'typeTraining' => $typeTraining,
         ]);
     }
 
-    public function certificate(Certificate $certificate){
-        dd($certificate);
+    public function certificate(TypeTraining $typeTraining){
+        // dd($typeTraining->certificates);
         return view('participants.certificate.index', [
-            'certificate' => $certificate,
+            'typeTraining' => $typeTraining,
         ]);
     }
 
     public function attainment(){
-        $attainment = Attainment::where('user_id', auth()->user()->id)->latest()->paginate(6);
+        $participant = Participant::where('user_id', auth()->user()->id)->first();
+        $attainment = Attainment::where('participant_id', $participant->id)->latest()->paginate(6);
         return view( 'participants.attainment.index', [
             'attainment' => $attainment,
         ]);
     }
 
-    public function UploadAttainment(TypeTraining $attainments) {
+    public function UploadAttainment(MateriTask $materiTask) {
         return view( 'participants.attainment.uploadAttainment', [
-            'attainments' => $attainments,
+            'materiTask' => $materiTask,
         ] );
     }
 
-    public function CreateAttainment(Request $request){
+    public function CreateAttainment(MateriTask $materiTask, Request $request){
         $validatedData = $request->validate( [
             'link' => 'required',
             'image'=> 'required|image|file|max:3072',
@@ -110,24 +112,50 @@ class MenuParticipantController extends Controller {
             $validatedData['image'] = $request->file('image')->store('hasil-karya');
         }
         $participant = Participant::where('user_id', auth()->user()->id)->first();
-        $type_training = TypeTraining::first();
-        $materi = MateriTask::where('type_training_id', $type_training->id)->first(); //masih salah idnya
-        $attainments = Attainment::where('user_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
-        // dd($materi->id);
         $data_attainment = [
             'link'=> $validatedData['link'],
             'image'=> $validatedData['image'],
             'desc'=> $validatedData['desc'],
             'excerpt'=> $validatedData['excerpt'],
             'type_training_id' => $participant->type_training_id,
-            'user_id'=> $participant->user_id,
-            'materi_task_id'=> $attainments->materi_task_id,
+            'participant_id'=> $participant->id,
+            'materi_task_id'=> $materiTask->id,
             'is_active' => '1',
             'comment'=> null 
         ];
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
+    
+    // public function CreateAttainment(Request $request){
+    //     $validatedData = $request->validate( [
+    //         'link' => 'required',
+    //         'image'=> 'required|image|file|max:3072',
+    //         'desc' => 'required'
+    //     ]);
+    //     $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->desc ), 200 );
+    //     if ($request->file('image')) {
+    //         $validatedData['image'] = $request->file('image')->store('hasil-karya');
+    //     }
+    //     $participant = Participant::where('user_id', auth()->user()->id)->first();
+    //     $type_training = TypeTraining::whereRelation('participants', 'user_id', auth()->user()->id)->first();
+    //     $materi = MateriTask::where('type_training_id', $type_training->id)->first(); //masih salah idnya
+    //     $attainments = Attainment::where('participant_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
+    //     dd($type_training);
+    //     $data_attainment = [
+    //         'link'=> $validatedData['link'],
+    //         'image'=> $validatedData['image'],
+    //         'desc'=> $validatedData['desc'],
+    //         'excerpt'=> $validatedData['excerpt'],
+    //         'type_training_id' => $participant->type_training_id,
+    //         'participant_id'=> $participant->participant_id,
+    //         'materi_task_id'=> $attainments->materi_task_id,
+    //         'is_active' => '1',
+    //         'comment'=> null 
+    //     ];
+    //     Attainment::create( $data_attainment );
+    //     return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
+    // }
 
     public function show_attainment( Attainment $attainment ) {
         // dd( $attainment->users );

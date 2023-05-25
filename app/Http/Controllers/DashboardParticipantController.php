@@ -131,4 +131,8 @@ class DashboardParticipantController extends Controller {
         }
     }
 
+    public function regristration() {
+        return view( 'dashboard.layouts.participants.RegristrationTraining' );
+    }
+
 }

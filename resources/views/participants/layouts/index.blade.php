@@ -43,7 +43,7 @@
                                     </blockquote>
                                     <div class="col-12 col-stats">
                                         @if (auth()->user()->participants->type_training_id == null)
-                                            <a href="/dashboard/participant/type_training"
+                                            <a href="/dashboard/participant/training"
                                                 class="btn btn-secondary btn-round">Daftar Sekarang</a>
                                         @else
                                             <a href="/participant/training"

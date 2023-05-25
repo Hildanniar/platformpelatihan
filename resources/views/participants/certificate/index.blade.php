@@ -20,21 +20,20 @@
                     <div class="card border-0 bg-white-9 rounded-xl p-0 mb-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                @foreach ($certificate->certificates as $cer)
-                                    <table class="table table-sm table-hover">
-                                        <tr>
-                                            <th>URL Sertifikat</th>
-                                            <th>:</th>
-                                            <td> <a href="{{ $cer->link }}" target="_blank" style="color:black">
-                                                    {{ $cer->link }}</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Deskripsi</th>
-                                            <th>:</th>
-                                            <td> {!! $cer->desc !!}</td>
-                                        </tr>
-                                    </table>
-                                @endforeach
+
+                                <table class="table table-sm table-hover">
+                                    <tr>
+                                        <th>URL Sertifikat</th>
+                                        <th>:</th>
+                                        <td>{{ $typeTraining->certificates->link }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi</th>
+                                        <th>:</th>
+                                        <td> {!! $typeTraining->certificates->desc !!}</td>
+                                    </tr>
+                                </table>
+
                             </div>
                         </div>
                     </div>

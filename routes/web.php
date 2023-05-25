@@ -97,6 +97,10 @@ Route::get('/dashboard/participant/attainment/{attainment}', [DashboardParticipa
 Route::get('/dashboard/participant/training', [DashboardParticipantController::class, 'type_training']);
 Route::get('/dashboard/participant/training/{type_training}', [DashboardParticipantController::class, 'show_training']);
 
+// pendaftaran pelatihan
+Route::get('/regristration', [DashboardParticipantController::class, 'regristration'])->name('regristration.training');
+Route::post('/regristration/add', [DashboardParticipantController::class, 'AddRegristration'])->name('add.regristration.training');
+
 // update profile peserta
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');
 Route::post('/participant/profile/update', [DashboardParticipantController::class, 'UpdateProfileParticipant'])->name('update.profile.participant');
@@ -106,7 +110,7 @@ Route::get('/participant/training', [MenuParticipantController::class, 'training
 Route::get('/participant/training/datatraining', [MenuParticipantController::class, 'getTraining']);
 
 // jadwal pelatihan peserta
-Route::get('/participant/schedule/{schedule}', [MenuParticipantController::class, 'schedule']);
+Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::class, 'schedule']);
 
 // materi & task pelatihan peserta
 Route::get('/participant/materi_task/{type_training}', [MenuParticipantController::class, 'materi_task']);
@@ -114,11 +118,11 @@ Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 's
 Route::get('/download', [MenuParticipantController::class, 'download_materi']);
 
 //sertifikat
-Route::get('/participant/certificate/{certificate}', [MenuParticipantController::class, 'certificate']);
+Route::get('/participant/certificate/{typeTraining}', [MenuParticipantController::class, 'certificate']);
 
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
-Route::get('/participant/attainment/{attainments}', [MenuParticipantController::class, 'UploadAttainment']);
-Route::post('/participant/attainment/add', [MenuParticipantController::class, 'CreateAttainment'])->name('create.attainment');
+Route::get('/participant/attainment/{materiTask}', [MenuParticipantController::class, 'UploadAttainment']);
+Route::post('/participant/attainment/add/{materiTask}', [MenuParticipantController::class, 'CreateAttainment'])->name('create.attainment');
 Route::get('/participant/attainment/show/{attainment}', [MenuParticipantController::class, 'show_attainment']);
 });

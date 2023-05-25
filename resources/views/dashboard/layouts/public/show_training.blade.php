@@ -63,7 +63,12 @@
                             class="badge rounded-pill bg-warning text-dark"
                             style="text-align: right;">{{ $s->end_time }}</span></p>
                 @endforeach
-                <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
+                @if (auth()->user() == null)
+                    <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
+                @elseif (auth()->user()->levels->name == 'Peserta')
+                    <a class="btn btn-primary float-right" href="{{ regristration.training }}" role="button">Daftar Sekarang</a>
+                @endif
+
             </div>
         </div>
     </div>
