@@ -30,8 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="table-responsive table-hover">
                                         <table id="table" class="table table-hover table-responsive"
-                                            style="table-layout: fixed;
-                                        word-wrap: break-word;">
+                                            style="table-layout: fixed; word-wrap: break-word;">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -39,11 +38,16 @@
                                                     <th width="100px">Materi</th>
                                                     <th width="100px">Jadwal</th>
                                                     <th width="100px">Sertifikat</th>
+                                                    <th width="100px">Komentar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             </tbody>
                                         </table>
+                                        <small style="color:red">*Tombol Materi warna Merah berarti anda mengikuti
+                                            kelas online</small> <br>
+                                        <small style="color:red">*Tombol Materi warna Kuning berarti anda mengikuti
+                                            kelas offline</small>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +84,11 @@
                     },
                     {
                         data: 'certificate',
-                        name: 'certificate',
+                        name: 'certificate'
+                    },
+                    {
+                        data: 'comment',
+                        name: 'comment',
                         orderable: true,
                         searchable: true
                     },
