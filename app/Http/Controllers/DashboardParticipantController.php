@@ -6,6 +6,7 @@ use App\Models\Attainment;
 use App\Models\User;
 use App\Models\TypeTraining;
 use App\Models\Schedule;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,11 +14,12 @@ use Illuminate\Support\Facades\Storage;
 class DashboardParticipantController extends Controller {
     public function index() {
         $attainment = Attainment::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
+        $participant = Participant::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
         $typeTrainings = TypeTraining::limit( 5 )->get();
         $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
-        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings' ) );
+        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings', 'participant' ) );
     }
 
     public function start() {

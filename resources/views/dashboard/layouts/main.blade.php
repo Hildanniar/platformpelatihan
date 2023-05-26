@@ -283,24 +283,24 @@
                 <h1 class="mb-0">Apa Kata Klien Kami Tentang Platform Pelatihan Kami</h1>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
-                @foreach ($attainment as $a)
+                @foreach ($participant as $par)
                     <div class="testimonial-item bg-light my-4">
                         <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                            @if ($a->participants->image == null)
+                            @if ($par->image == null)
                                 <img src="/assets/admin/img/profiledefault.png" alt="..."
                                     class="img-fluid rounded" style="width: 60px; height: 60px;">
                             @else
-                                <img src="{{ asset('storage/' . $a->participants->image) }}" alt="..."
+                                <img src="{{ asset('storage/' . $par->image) }}" alt="..."
                                     class="img-fluid rounded" style="width: 60px; height: 60px;">
                             @endif
 
                             <div class="ps-4">
-                                <h4 class="text-primary mb-1">{{ $a->participants->name }}</h4>
-                                <small class="text-uppercase">{{ $a->participants->profession }}</small>
+                                <h4 class="text-primary mb-1">{{ $par->name }}</h4>
+                                <small class="text-uppercase">{{ $par->profession }}</small>
                             </div>
                         </div>
                         <div class="pt-4 pb-5 px-5">
-                            {!! $a->comment !!}
+                            {!! $par->comment !!}
                         </div>
                     </div>
                 @endforeach
