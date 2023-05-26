@@ -25,13 +25,12 @@ class AuthenticationController extends Controller {
         // dd( $request );
         try {
             $validatedData = $request->validate( [
-                'level_id' => 'required',
                 'username' => 'required|unique:users|max:255',
                 'email' => 'required',
                 'password' => 'required',
             ] );
             $data_user = [
-                'level_id' => $validatedData[ 'level_id' ],
+                'level_id' => '3',
                 'username'=> $validatedData[ 'username' ],
                 'email'=> $validatedData[ 'email' ],
                 'password'=> bcrypt( $validatedData[ 'password' ] ),

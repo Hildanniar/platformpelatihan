@@ -69,8 +69,10 @@
                             <input type="password" name="password" class="form-control" placeholder="Password"
                                 required="">
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label><i class="fa fa-address-book"></i> Role</label>
+                            <input type="text" name="level_id" class="form-control" placeholder="Password"
+                                value="" readonly>{{ $levels->name->peserta }}
                             <select class="form-control" name="level_id" required>
                                 <option selected disabled value="">Silahkan dipilih</option>
                                 @foreach ($levels as $level)
@@ -82,7 +84,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg">Register</button>
                     </form>
                     <div class="text-center mt-3">
