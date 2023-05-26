@@ -53,11 +53,7 @@
                                         <th>:</th>
                                         <td> {{ $participant->no_hp }}</td>
                                     </tr>
-                                    {{-- <tr>
-                                        <th>Kelas</th>
-                                        <th>:</th>
-                                        <td> {{ $participant->class }}</td>
-                                    </tr> --}}
+
                                     <tr>
                                         <th>Jenis Kelamin</th>
                                         <th>:</th>
@@ -71,7 +67,26 @@
                                     <tr>
                                         <th>No.Anggota Perpustakaan</th>
                                         <th>:</th>
-                                        <td> {{ $participant->no_member }}</td>
+                                        <td>
+                                            @if ($participant->no_member == null)
+                                                <button type="button" class="btn btn-danger btn-sm">Peserta tidak memiliki
+                                                    No.Anggota Perpustakaan</button>
+                                            @else
+                                                {{ $participant->no_member }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Komentar</th>
+                                        <th>:</th>
+                                        <td>
+                                            @if ($participant->comment == null)
+                                                <button type="button" class="btn btn-danger btn-sm">Peserta belum memberi
+                                                    komentar</button>
+                                            @else
+                                                {!! $participant->comment !!}
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Foto Profile Peserta</th>

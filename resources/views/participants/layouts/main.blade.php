@@ -35,6 +35,7 @@
 
     </div>
     @include('participants.layouts.partials.script')
+    @yield('scripts')
 </body>
 
 </html>

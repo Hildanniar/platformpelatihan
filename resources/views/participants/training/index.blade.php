@@ -1,5 +1,35 @@
 @extends('participants.layouts.main')
 @section('container')
+    {{-- Modal Start
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Komentar</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ 'create.comment' }}">
+                    @csrf
+
+                    <input type="hidden" name="type_training_id" id="type_training_id" />
+
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label for="">Komentar</label>
+                            <textarea class="form-control" id="comment" type="text" name="comment" placeholder="Berikan Komentar Anda"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary text-white">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    End Modal --}}
+
     <div class="main-panel">
         <div class="content">
             <div class="panel-header bg-primary-gradient">
@@ -97,3 +127,24 @@
         });
     </script>
 @endsection
+
+{{-- @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editbtn', function() {
+                var type_training_id = $(this).val();
+                // alert(type_training_id);
+                $('#editModal').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "/participant/comment/create/" + type_training_id,
+                    data: "data",
+                    dataType: "dataType",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
+@endsection --}}

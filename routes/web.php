@@ -132,5 +132,5 @@ Route::get('/participant/attainments/{typeTraining}', [MenuParticipantController
 Route::post('/participant/attainment/create/{typeTraining}', [MenuParticipantController::class, 'CreateAttainmentOffline']);
 //komentar mengenai pelatihan yang sudah di ikuti
 Route::get('/participant/comment/{typeTraining}', [MenuParticipantController::class, 'comment']);
-Route::post('/participant/comment/create/{typeTraining}', [MenuParticipantController::class, 'create_comment']);
+Route::post('/participant/comment/create/{typeTraining}', [MenuParticipantController::class, 'create_comment'])->name('create.comment');
 });

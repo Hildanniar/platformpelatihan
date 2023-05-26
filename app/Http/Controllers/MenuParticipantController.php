@@ -46,7 +46,17 @@ class MenuParticipantController extends Controller {
                     <a href="/participant/certificate/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-file"></i> Sertifikat</a>';
                     return $certificateBtn;
                 })
-                ->rawColumns(['action', 'materi', 'certificate'])
+                ->addColumn('comment', function($row){
+                    $commentBtn = '
+                    <a href="/participant/comment/'. $row->id .'" class="btn btn-info btn-sm text-white"><i class="far fa-file"></i> Komentar</a>';
+                    return $commentBtn;
+                })
+                // ->addColumn('comment', function($row){
+                //     $commentBtn = '
+                //     <button type="button" value='. $row->id .' class="btn btn-info editbtn btn-sm text-white"><i class="far fa-file"></i> Komentar</button>';
+                //     return $commentBtn;
+                // })
+                ->rawColumns(['action', 'materi', 'certificate', 'comment'])
                 ->make(true);
         }
     }
@@ -143,7 +153,6 @@ class MenuParticipantController extends Controller {
             'participant_id'=> $participant->id,
             'materi_task_id'=> $materiTask->id,
             'is_active' => '1',
-            'comment'=> null 
         ];
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
@@ -176,11 +185,38 @@ class MenuParticipantController extends Controller {
             'participant_id'=> $participant->id,
             'materi_task_id'=> $validatedData['materi_task_id'],
             'is_active' => '1',
-            'comment'=> null 
         ];
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
     
+    public function comment(TypeTraining $typeTraining){
+        return view('participants.comment.create', [
+        'typeTraining' => $typeTraining
+        ]);
+    }
+
+    public function create_comment( TypeTraining $typeTraining, Request $request){
+        $validatedData = $request->validate( [
+            'comment' => 'required'
+        ]);
+        $participant = Participant::where('user_id', auth()->user()->id)->first();
+        $data_participant = [
+            'type_training_id'=> $typeTraining->id,
+            'name'=> $participant->name,
+            'address'=> $participant->address,
+            'age'=> $participant->age,
+            'no_hp'=> $participant->no_hp,
+            'gender'=>$participant->gender,
+            'profession'=> $participant->profession,
+            'no_member'=>$participant->no_member,
+            'comment'=> $validatedData['comment'],
+            'image'=> $participant->image,
+            'status'=> $participant->status,
+            'is_active'=> $participant->is_active,
+        ];
+        $participant->update($data_participant);
+        return redirect( '/participant/training' )->with( 'success', 'Berhasil Memberi Komentar!' );
+    }
 
 }

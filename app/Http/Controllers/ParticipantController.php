@@ -18,8 +18,44 @@ use Illuminate\Validation\ValidationException;
 
 class ParticipantController extends Controller {
 
+    public function getParticipants(Request $request)
+    {
+        if ($request->ajax()) {
+            // $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
+            $data = Participant::all();
+            return Datatables::of($data)
+            ->addIndexColumn()
+                ->editColumn('name_user', function($data){
+                    return $data->name ?? 'none';
+                })
+                ->editColumn('address', function($data){
+                    return $data->address ?? 'none';
+                })
+                ->editColumn('no_hp', function($data){
+                    return $data->no_hp ?? 'none';
+                })
+                ->editColumn('email', function($data){
+                    return $data->users->email ?? 'none';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/participant/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/participant/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>
+                    <a href="/admin/participant/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
     public function index() {
-
+        // $data = User::whereRelation('levels', 'name', 'Peserta')->get();
+        // dd(  $data->participants);
         return view( 'admin.participant.index', [
             'participants' => Participant::all()
         ] );
@@ -46,6 +82,7 @@ class ParticipantController extends Controller {
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
             'no_member' => 'max:255',
+            'comment'=>'max:255' ,
             'image' => 'image|file|max:2048',
             
         ] );
@@ -73,6 +110,7 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
+            'comment'=> null,
             'image'=> $validatedData['image'],
         ];
     } else {
@@ -86,6 +124,7 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
+            'comment'=> null,
         ];
     }
         Participant::create( $data_participant );
@@ -123,6 +162,7 @@ class ParticipantController extends Controller {
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
             'no_member' => 'max:255',
+            'comment'=>'max:255' ,
             'image' => 'image|file|max:2048',
         ] ;
         $validatedData = $request->validate( $rules );
@@ -148,6 +188,7 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
+            'comment'=> null,
             'image'=> $validatedData['image'],
         ];
     } else{
@@ -160,6 +201,7 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
+            'comment'=> null,
         ];
     }
         $participant->users()->update($data_user);
@@ -192,39 +234,6 @@ class ParticipantController extends Controller {
         return $pdf->stream();
     }
 
-    public function getParticipants(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
-            return Datatables::of($data)
-            ->addIndexColumn()
-                ->editColumn('name_user', function($data){
-                    return $data->participants->name ?? 'none';
-                })
-                ->editColumn('address', function($data){
-                    return $data->participants->address ?? 'none';
-                })
-                ->editColumn('no_hp', function($data){
-                    return $data->participants->no_hp ?? 'none';
-                })
-                // ->editColumn('class', function($data){
-                //     return $data->participants->class ?? 'none';
-                // })
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <a href="/admin/participant/'. $row->participants->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/participant/'. $row->participants->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
-                    </form>
-                    <a href="/admin/participant/'. $row->participants->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                    
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+   
 
 }

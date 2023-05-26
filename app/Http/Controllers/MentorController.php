@@ -14,6 +14,40 @@ use Illuminate\Database\QueryException;
 
 class MentorController extends Controller {
 
+    public function getMentors(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Mentor::all(); 
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->editColumn('name', function($data){
+                    return $data->name ?? 'none';
+                })
+                ->editColumn('address', function($data){
+                    return $data->address ?? 'none';
+                })
+                ->editColumn('no_hp', function($data){
+                    return $data->no_hp ?? 'none';
+                })
+                ->editColumn('email', function($data){
+                    return $data->users->email ?? 'none';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/mentor/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/mentor/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                </form>
+                    <a href="/admin/mentor/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
     public function index() {
         return view( 'admin.mentor.index');
 
@@ -161,37 +195,7 @@ class MentorController extends Controller {
         return redirect( '/admin/mentor' )->with( 'success', 'Data berhasil dihapus!' );
     }
 
-    public function getMentors(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = User::whereRelation('levels', 'name', 'Mentor')->get(); 
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->editColumn('name', function($data){
-                    return $data->mentors->name ?? 'none';
-                })
-                ->editColumn('address', function($data){
-                    return $data->mentors->address ?? 'none';
-                })
-                ->editColumn('no_hp', function($data){
-                    return $data->mentors->no_hp ?? 'none';
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <a href="/admin/mentor/'. $row->mentors->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/mentor/'. $row->mentors->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
-                </form>
-                    <a href="/admin/mentor/'. $row->mentors->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+   
 
     public function export_excel() {
         return Excel::download( new MentorExport, 'mentor.xlsx' );

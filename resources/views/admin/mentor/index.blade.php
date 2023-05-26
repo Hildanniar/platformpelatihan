@@ -43,7 +43,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Lengkap</th>
-                                                    <th>Username</th>
+                                                    {{-- <th>Username</th> --}}
                                                     <th>Email</th>
                                                     <th>Alamat</th>
                                                     <th>No.Telp</th>
@@ -80,10 +80,10 @@
                         data: 'name',
                         name: 'nama lengkap'
                     },
-                    {
-                        data: 'username',
-                        name: 'username'
-                    },
+                    // {
+                    //     data: 'username',
+                    //     name: 'username'
+                    // },
                     {
                         data: 'email',
                         name: 'email'

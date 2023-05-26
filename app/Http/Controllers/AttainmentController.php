@@ -42,8 +42,7 @@ class AttainmentController extends Controller {
                     return $actionBtn;
                 })
             ->rawColumns(['action'])
-                
-                ->make(true);
+            ->make(true);
         }
     }
     public function index() {
@@ -113,5 +112,4 @@ class AttainmentController extends Controller {
         return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
-  
 }

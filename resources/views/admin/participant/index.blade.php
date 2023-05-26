@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive table-hover">
-                                        <table id="table" class="table table-hover table-responsive">
+                                        <table id='table' class="table table-hover table-responsive">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -76,8 +76,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'name_user',
-                        name: 'nama lengkap'
+                        data: 'name',
+                        name: 'name'
                     },
                     {
                         data: 'email',
@@ -91,10 +91,6 @@
                         data: 'no_hp',
                         name: 'no_hp'
                     },
-                    // {
-                    //     data: 'class',
-                    //     name: 'class'
-                    // },
                     {
                         data: 'action',
                         name: 'action',
