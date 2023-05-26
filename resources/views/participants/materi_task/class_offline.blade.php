@@ -7,7 +7,8 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            {{-- <h2 class="text-white pb-2 fw-bold">{{ $typeTraining->name }}</h2> --}}
+                            <h3 class="text-white pb-2 fw-bold">Anda Mengikuti Pelatihan {{ $typeTraining->name }}
+                                Kelas {{ $typeTraining->class }}</h3>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/participant/training" class="btn btn-white btn-border btn-round mr-2"><i
