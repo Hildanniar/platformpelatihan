@@ -22,7 +22,6 @@ class AttainmentFactory extends Factory
             'desc' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>',
             // 'value' => $this->faker->numerify('##'),
             'status' => ['NoPublikasi', 'Publikasi'][mt_rand(0,1)],
-            'comment' => '<p>' . implode('<p></p>', $this->faker->paragraphs(mt_rand(5,10))). '</p>',
             'is_active' => ['0', '1'][mt_rand(0,1)],
         ];
     }

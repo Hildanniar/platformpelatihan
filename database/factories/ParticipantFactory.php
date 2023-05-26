@@ -16,6 +16,7 @@ class ParticipantFactory extends Factory {
             'gender' => [ 'Laki-Laki', 'Perempuan' ][ mt_rand( 0, 1 ) ],
             'profession' => $this->faker->jobTitle(),
             'no_member' => $this->faker->randomNumber( 5, true ),
+            'comment' => '<p>' . implode( '<p></p>', $this->faker->paragraphs( mt_rand( 1, 2 ) ) ). '</p>',
             'is_active' =>[ '0', '1' ][ mt_rand( 0, 1 ) ],
 
         ];

@@ -40,7 +40,7 @@
                                                     <th>No</th>
                                                     <th>Jenis Pelatihan</th>
                                                     <th>Nama Peserta</th>
-                                                    <th>Ulasan</th>
+                                                    {{-- <th>Ulasan</th> --}}
                                                     <th>Nilai</th>
                                                     {{-- <th>Status</th> --}}
                                                     <th width="100px">Action</th>
@@ -80,10 +80,10 @@
                         data: 'name_user',
                         name: 'nama peserta'
                     },
-                    {
-                        data: 'excerpt',
-                        name: 'excerpt'
-                    },
+                    // {
+                    //     data: 'excerpt',
+                    //     name: 'excerpt'
+                    // },
                     {
                         data: 'value',
                         name: 'value'

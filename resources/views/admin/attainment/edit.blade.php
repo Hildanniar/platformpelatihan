@@ -45,11 +45,11 @@
                                                         <th>:</th>
                                                         <td> {{ $attainment->participants->name ?? 'none' }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <th>Ulasan</th>
                                                         <th>:</th>
                                                         <td> {!! $attainment->comment !!}</td>
-                                                    </tr>
+                                                    </tr> --}}
                                                     <tr>
                                                         <th>Hasil Karya Pelatihan</th>
                                                         <th>:</th>
@@ -75,52 +75,100 @@
                                                         <th>Nilai Hasil Karya</th>
                                                         <th>:</th>
                                                         <td>
-                                                            @if ($attainment->value == null)
-                                                                <div class="form-group form-floating-label">
-                                                                    <input type="text"
-                                                                        class="form-control input-solid @error('value') is-invalid @enderror"
-                                                                        id="value" name="value"
-                                                                        value="{{ old('value', $attainment->value) }}"
-                                                                        placeholder="Masukkan Nilai Hasil Karya" required>
-                                                                    <small style="color:red">*Dinilai oleh Mentor</small>
-                                                                    @error('value')
-                                                                        <div class="invalid-feedback">
-                                                                            {{ $message }}
-                                                                        </div>
-                                                                    @enderror
-                                                                </div>
-                                                            @else
-                                                                {{ $attainment->value }}
+                                                            @if (auth()->user()->levels->name == 'Mentor')
+                                                                @if ($attainment->value == null)
+                                                                    <div class="form-group form-floating-label">
+                                                                        <input type="text"
+                                                                            class="form-control input-solid @error('value') is-invalid @enderror"
+                                                                            id="value" name="value"
+                                                                            value="{{ old('value', $attainment->value) }}"
+                                                                            placeholder="Masukkan Nilai Hasil Karya"
+                                                                            required>
+                                                                        <small style="color:red">*Dinilai oleh
+                                                                            Mentor</small>
+                                                                        @error('value')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                @else
+                                                                    {{ $attainment->value }}
+                                                                @endif
+                                                            @elseif(auth()->user()->levels->name == 'Admin')
+                                                                @if ($attainment->value == null)
+                                                                    <div class="form-group form-floating-label">
+                                                                        <input type="text"
+                                                                            class="form-control input-solid @error('value') is-invalid @enderror"
+                                                                            id="value" name="value"
+                                                                            value="{{ old('value', $attainment->value) }}"
+                                                                            placeholder="Masukkan Nilai Hasil Karya"
+                                                                            readonly>
+                                                                        <small style="color:red">*Dinilai oleh
+                                                                            Mentor</small>
+                                                                        @error('value')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                @else
+                                                                    {{ $attainment->value }}
+                                                                @endif
                                                             @endif
+
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Status Publikasi</th>
                                                         <th>:</th>
                                                         <td>
-
-                                                            <div class="form-group">
-                                                                <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="nopublikasi" name="status"
-                                                                        value="NoPublikasi" class="custom-control-input"
-                                                                        required
-                                                                        {{ $attainment->status == 'NoPublikasi' ? 'checked' : '' }}>
-                                                                    <label class="custom-control-label"
-                                                                        for="nopublikasi">Tidak
-                                                                        Publikasi</label><br>
+                                                            @if (auth()->user()->levels->name == 'Admin')
+                                                                <div class="form-group">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="nopublikasi"
+                                                                            name="status" value="NoPublikasi"
+                                                                            class="custom-control-input" required
+                                                                            {{ $attainment->status == 'NoPublikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="nopublikasi">Tidak
+                                                                            Publikasi</label><br>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="publikasi" name="status"
+                                                                            value="Publikasi" class="custom-control-input"
+                                                                            required
+                                                                            {{ $attainment->status == 'Publikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="publikasi">Publikasi</label>
+                                                                    </div>
+                                                                    <small style="color:red">*Dipilih oleh
+                                                                        Admin</small>
                                                                 </div>
-                                                                <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="publikasi" name="status"
-                                                                        value="Publikasi" class="custom-control-input"
-                                                                        required
-                                                                        {{ $attainment->status == 'Publikasi' ? 'checked' : '' }}>
-                                                                    <label class="custom-control-label"
-                                                                        for="publikasi">Publikasi</label>
+                                                            @elseif(auth()->user()->levels->name == 'Mentor')
+                                                                <div class="form-group">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="nopublikasi"
+                                                                            name="status" value="NoPublikasi"
+                                                                            class="custom-control-input" disabled readonly
+                                                                            {{ $attainment->status == 'NoPublikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="nopublikasi">Tidak
+                                                                            Publikasi</label><br>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="publikasi" name="status"
+                                                                            value="Publikasi" class="custom-control-input"
+                                                                            disabled readonly
+                                                                            {{ $attainment->status == 'Publikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="publikasi">Publikasi</label>
+                                                                    </div>
+                                                                    <small style="color:red">*Dipilih oleh
+                                                                        Admin</small>
                                                                 </div>
-                                                            </div>
-
+                                                            @endif
                                                             <br>
-
                                                         </td>
                                                         <td></td>
                                                     </tr>
