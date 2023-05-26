@@ -35,7 +35,7 @@
                 <center>
                     <h1>{{ $attainment->materi_tasks->name_materi }}</h1>
                 </center>
-                <p>By.</p>
+                <p>By.{{ $attainment->participants->name }}</p>
                 <img src="https://source.unsplash.com/1200x400?{{ $attainment->materi_tasks->name_materi }}"
                     alt="{{ $attainment->materi_tasks->name_materi }}" class="card-img-top">
                 <article class="my-3 fs-6">

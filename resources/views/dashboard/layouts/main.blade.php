@@ -181,8 +181,8 @@
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
-                <h5 class="fw-bold text-primary text-uppercase">Why Choose Us</h5>
-                <h1 class="mb-0">We Are Here to Grow Your Skill</h1>
+                <h5 class="fw-bold text-primary text-uppercase">Kenapa Memilih Kami</h5>
+                <h1 class="mb-0">Kami Hadir untuk Mengembangkan Keahlian Anda</h1>
             </div>
             <div class="row g-5">
                 <div class="col-lg-4">
@@ -192,7 +192,7 @@
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-cubes text-white"></i>
                             </div>
-                            <h4>Best In Industry</h4>
+                            <h4>Terbaik Di Industri</h4>
                             <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
                             </p>
                         </div>
@@ -286,11 +286,17 @@
                 @foreach ($attainment as $a)
                     <div class="testimonial-item bg-light my-4">
                         <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                            <img class="img-fluid rounded" src="img/testimonial-2.jpg"
-                                style="width: 60px; height: 60px;">
+                            @if ($a->participants->image == null)
+                                <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                    class="img-fluid rounded" style="width: 60px; height: 60px;">
+                            @else
+                                <img src="{{ asset('storage/' . $a->participants->image) }}" alt="..."
+                                    class="img-fluid rounded" style="width: 60px; height: 60px;">
+                            @endif
+
                             <div class="ps-4">
-                                <h4 class="text-primary mb-1">Client Name</h4>
-                                <small class="text-uppercase">Profession</small>
+                                <h4 class="text-primary mb-1">{{ $a->participants->name }}</h4>
+                                <small class="text-uppercase">{{ $a->participants->profession }}</small>
                             </div>
                         </div>
                         <div class="pt-4 pb-5 px-5">
@@ -322,8 +328,8 @@
                                             class="img-fluid">
                                     </div>
                                 @else
-                                    <img src="https://source.unsplash.com/500x400?{{ $at->name }}"
-                                        alt="{{ $at->name }}" class="img-fluid">
+                                    <img src="https://source.unsplash.com/500x400?{{ $at->type_trainings->name }}"
+                                        alt="{{ $at->type_trainings->name }}" class="img-fluid">
                                 @endif
                                 {{-- <img class="img-fluid" src="/assets/dashboard/img/blog-1.jpg" alt=""> --}}
                                 <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4"
