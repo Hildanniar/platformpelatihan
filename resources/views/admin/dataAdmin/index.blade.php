@@ -6,16 +6,16 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Jadwal Pelatihan</h2>
-                            <h5 class="text-white op-7 mb-2">Data Jadwal Pelatihan</h5>
+                            <h2 class="text-white pb-2 fw-bold">Admin</h2>
+                            <h5 class="text-white op-7 mb-2">Data Admin</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/admin/schedule/create" class="btn btn-white btn-border btn-round mr-2"><i
-                                    class="fas fa-plus"></i> Tambah</a>
-                            {{-- <a href="/admin/schedule/export_excel" class="btn btn-secondary btn-round"><i
+                            <a href="/admin/admin" class="btn btn-white btn-border btn-round mr-2"><i class="fas fa-plus"></i>
+                                Tambah</a>
+                            {{-- <a href="/admin/Admin/export_excel" class="btn btn-secondary btn-round"><i
                                     class="fas fa-file-excel" target="_blank"></i> Cetak Excel</a>
-                            <a href="/admin/schedule/export_pdf" class="btn btn-secondary btn-round"><i
-                                    class="fas fa-file-pdf"></i> Cetak PDF</a> --}}
+                            <a href="/admin/Admin/export_pdf" class="btn btn-secondary btn-round"><i class="fas fa-file-pdf"
+                                    target="_blank" onclick="direct_pdf()"></i> Cetak PDF</a> --}}
                         </div>
                     </div>
                 </div>
@@ -25,10 +25,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title">Tabel Data Jadwal Pelatihan</h4>
+                                <h4 class="card-title">Tabel Data Admin</h4>
                             </div>
                             @if (session()->has('success'))
-                                <div class="alert alert-success col-lg-8" role="alert">
+                                <div class="alert alert-success" role="alert">
                                     {{ session('success') }}
                                 </div>
                             @endif
@@ -38,15 +38,15 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive table-hover">
-                                        <table id="table" class="table table-hover table-responsive">
+                                        <table id='table' class="table table-hover table-responsive">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Jenis Pelatihan</th>
-                                                    <th>Tanggal Mulai</th>
-                                                    <th>Tanggal Akhir</th>
-                                                    <th>Jam Mulai</th>
-                                                    <th>Jam Akhir</th>
+                                                    <th>Nama Lengkap</th>
+                                                    <th>Email</th>
+                                                    <th>Alamat</th>
+                                                    <th>No.Telp</th>
+                                                    {{-- <th>Kelas</th> --}}
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
@@ -70,30 +70,26 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '/admin/schedule/dataschedule',
+                ajax: "/admin/admin/dataadmin",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
                     {
                         data: 'name',
-                        name: 'jenis pelatihan'
+                        name: 'name'
                     },
                     {
-                        data: 'start_date',
-                        name: 'start_date'
+                        data: 'email',
+                        name: 'email'
                     },
                     {
-                        data: 'end_date',
-                        name: 'end_date'
+                        data: 'address',
+                        name: 'address'
                     },
                     {
-                        data: 'start_time',
-                        name: 'start_time'
-                    },
-                    {
-                        data: 'end_time',
-                        name: 'end_time'
+                        data: 'no_hp',
+                        name: 'no_hp'
                     },
                     {
                         data: 'action',

@@ -50,13 +50,13 @@
                     </span>
                     <h4 class="text-section">Menu</h4>
                 </li>
-                {{-- <li class="nav-item {{ Request::is('admin/pengguna') ? 'active' : '' }}">
-                    <a href="/admin/pengguna">
-                        <i class="fas fa-user-circle"></i>
-                        <p>Akun Pengguna</p>
-                    </a>
-                </li> --}}
                 @can('is_admin')
+                    <li class="nav-item {{ Request::is('admin/admin') ? 'active' : '' }}">
+                        <a href="/admin/admin">
+                            <i class="fas fa-user"></i>
+                            <p>Data Admin</p>
+                        </a>
+                    </li>
                     <li class="nav-item {{ Request::is('admin/participant*') ? 'active' : '' }}">
                         <a href="/admin/participant">
                             <i class="fas fa-user"></i>

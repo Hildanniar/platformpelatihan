@@ -11,12 +11,23 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class TypeTrainingController extends Controller {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
+    public function getTrainings(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = TypeTraining::all();
+            return Datatables::of($data)
+                ->addIndexColumn() 
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/type_training/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <a href="/admin/type_training/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
     public function index() {
         return view( 'admin.type_training.index', [
             'type_training' => TypeTraining::all()
@@ -86,28 +97,7 @@ class TypeTrainingController extends Controller {
         return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
-    public function getTrainings(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = TypeTraining::all();
-            return Datatables::of($data)
-                ->addIndexColumn() 
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <a href="/admin/type_training/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/type_training/'. $row->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
-                    </form>
-                    <a href="/admin/type_training/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                    
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+
 
     public function export_excel() {
         return Excel::download( new TypeTrainingExport, 'jenis_pelatihan.xlsx' );

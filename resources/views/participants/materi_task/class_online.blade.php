@@ -24,12 +24,10 @@
                 <div class="row">
                     @foreach ($materiTask as $m)
                         {{-- @if ($m->bab_materi == 'BAB I')
-                            @if ($m->attainments->is_active == '1')
-                                
-                            @else
-                            @endif
+                        
                         @else
                         @endif --}}
+                        {{-- @if ($m->attainments->is_active == '1') --}}
                         <div class="col-md-4">
                             <a href="/participant/materi/{{ $m->id }}">
                                 {{-- <a href="/materi_tasks?name_materi={{ $m->name_materi }}"> --}}
@@ -44,6 +42,9 @@
                                 </div>
                             </a>
                         </div>
+                        {{-- @else
+                            <h1>Anda Belum Menyelesaikan BAB I</h1>
+                        @endif --}}
                     @endforeach
                 </div>
             </div>

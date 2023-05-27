@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\MateriTaskController;;
@@ -44,6 +45,12 @@ Route::get('/profile', [DashboardController::class, 'PUpdate'])->name('profile.u
 Route::post('/profile/update', [DashboardController::class, 'UpdateProfile'])->name('update.user.profile');
 
 Route::middleware('can:is_admin')->group(function(){
+
+// halaman data admin
+Route::get('/admin/admin/dataadmin', [AdminController::class, 'getAdmins']);
+Route::get('/admin/Admin/export_excel', [AdminController::class, 'export_excel']);
+Route::get('/admin/Admin/export_pdf', [AdminController::class, 'export_pdf']);
+Route::resource('/admin/admin', AdminController::class);
 
 // halaman data peserta
 Route::get('/admin/participant/dataparticipant', [ParticipantController::class, 'getParticipants']);

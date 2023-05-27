@@ -23,6 +23,7 @@ class DashboardParticipantController extends Controller {
     }
 
     public function start() {
+        // dd( auth()->user() );
         return view( 'participants.layouts.index' );
     }
 

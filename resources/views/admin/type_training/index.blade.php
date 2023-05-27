@@ -12,10 +12,10 @@
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/admin/type_training/create" class="btn btn-white btn-border btn-round mr-2"><i
                                     class="fas fa-plus"></i> Tambah</a>
-                            <a href="/admin/type_training/export_excel" class="btn btn-secondary btn-round"><i
+                            {{-- <a href="/admin/type_training/export_excel" class="btn btn-secondary btn-round"><i
                                     class="fas fa-file-excel" target="_blank"></i> Cetak Excel</a>
                             <a href="/admin/type_training/export_pdf" class="btn btn-secondary btn-round"><i
-                                    class="fas fa-file-pdf"></i> Cetak PDF</a>
+                                    class="fas fa-file-pdf"></i> Cetak PDF</a> --}}
                         </div>
                     </div>
                 </div>

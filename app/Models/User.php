@@ -31,7 +31,7 @@ class User extends Authenticatable {
     // }
 
     public function admins() {
-        return $this->hasOne( Admin::class );
+        return $this->hasOne( Admin::class, 'user_id' );
     }
 
     public function participants() {

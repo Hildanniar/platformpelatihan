@@ -115,8 +115,7 @@ class CertificateController extends Controller {
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
                     <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
                 </form>
-                     <a href="/admin/certificate/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                     
+                    <a href="/admin/certificate/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
