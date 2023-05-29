@@ -27,7 +27,7 @@
                         
                         @else
                         @endif --}}
-                        {{-- @if ($m->attainments->is_active == '1') --}}
+                        @if ($m->attainments->is_active == '1')
                         <div class="col-md-4">
                             <a href="/participant/materi/{{ $m->id }}">
                                 {{-- <a href="/materi_tasks?name_materi={{ $m->name_materi }}"> --}}
@@ -42,9 +42,9 @@
                                 </div>
                             </a>
                         </div>
-                        {{-- @else
+                        @else
                             <h1>Anda Belum Menyelesaikan BAB I</h1>
-                        @endif --}}
+                        @endif
                     @endforeach
                 </div>
             </div>

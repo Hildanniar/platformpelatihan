@@ -342,7 +342,7 @@
                                         Doe</small>
                                     <small><i class="far fa-calendar-alt text-primary me-2"></i></small>
                                 </div>
-                                <h4 class="mb-3">{{ $at->materi_tasks->name }}</h4>
+                                {{-- <h4 class="mb-3">{{ $at->materi_tasks->name }}</h4> --}}
                                 <p>{{ $at->excerpt }}</p>
                                 <a class="text-uppercase"
                                     href="/dashboard/participant/attainment/{{ $at->id }}">Read More <i

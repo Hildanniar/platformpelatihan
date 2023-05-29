@@ -39,7 +39,6 @@ class MenuParticipantController extends Controller {
                         <a href="/participant/information/'. $row->id .'" class="btn btn-warning btn-sm"><i class="far fa-file"></i> Materi</a>';
                     return $materiBtn;
                     }
-                
                 })
                 ->addColumn('certificate', function($row){
                     $certificateBtn = '
@@ -51,11 +50,6 @@ class MenuParticipantController extends Controller {
                     <a href="/participant/comment/'. $row->id .'" class="btn btn-info btn-sm text-white"><i class="far fa-file"></i> Komentar</a>';
                     return $commentBtn;
                 })
-                // ->addColumn('comment', function($row){
-                //     $commentBtn = '
-                //     <button type="button" value='. $row->id .' class="btn btn-info editbtn btn-sm text-white"><i class="far fa-file"></i> Komentar</button>';
-                //     return $commentBtn;
-                // })
                 ->rawColumns(['action', 'materi', 'certificate', 'comment'])
                 ->make(true);
         }

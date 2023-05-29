@@ -10,6 +10,32 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class MateriTaskController extends Controller {
+
+    public function getMateriTasks(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = MateriTask::all();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->editColumn('name', function($data){
+                    return $data->type_trainings->name ?? 'none';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/materi_tasks/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/materi_tasks/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                </form>
+                    <a href="/admin/materi_tasks/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
     public function index() {
         return view( 'admin.materi_tasks.index', [
             'materi_tasks' => MateriTask::all()
@@ -25,6 +51,7 @@ class MateriTaskController extends Controller {
     public function store( Request $request ) {
         $validatedData = $request->validate( [
             'type_training_id' => 'required',
+            'name_materi' => 'required',
             'bab_materi' => 'required',
             'file_materi' => 'file|mimes:pdf|max:5120',
             'body_materi' => 'required',
@@ -34,14 +61,37 @@ class MateriTaskController extends Controller {
             'desc_task' => 'required',
         ] );
         $validatedData[ 'excerpt_materi' ] = Str::limit( strip_tags( $request->body_materi ), 200 );
-        
-        if($request->_materi_file != null){
-            $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
-        } else {
-            $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
+        if ($request->file('file_materi')) {
+            $validatedData['file_materi'] = $request->file('file_materi')->store('file_materi');
         }
-        
-        MateriTask::create( $validatedData );
+
+        if($request->file_materi != null){
+            $data_materi_tasks = [
+                'type_training_id'=> $validatedData['type_training_id'],
+                'name_materi'=> $validatedData['name_materi'],
+                'bab_materi'=> $validatedData['bab_materi'],
+                'file_materi'=> $validatedData['file_materi'],
+                'body_materi'=> $validatedData['body_materi'],
+                'name_task'=> $validatedData['name_task'],
+                'start_date'=> $validatedData['start_date'],
+                'end_date'=> $validatedData['end_date'],
+                'desc_task'=> $validatedData['desc_task'],
+                'excerpt_materi'=> $validatedData['excerpt_materi'],
+            ];
+        } else {
+            $data_materi_tasks = [
+                'type_training_id'=> $validatedData['type_training_id'],
+                'name_materi'=> $validatedData['name_materi'],
+                'bab_materi'=> $validatedData['bab_materi'],
+                'body_materi'=> $validatedData['body_materi'],
+                'name_task'=> $validatedData['name_task'],
+                'start_date'=> $validatedData['start_date'],
+                'end_date'=> $validatedData['end_date'],
+                'desc_task'=> $validatedData['desc_task'],
+                'excerpt_materi'=> $validatedData['excerpt_materi'],
+            ];
+        }
+        MateriTask::create( $data_materi_tasks );
         return redirect( '/admin/materi_tasks' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 
@@ -61,6 +111,7 @@ class MateriTaskController extends Controller {
     public function update( Request $request, MateriTask $materiTask ) {
         $rules = [
             'type_training_id' => 'required',
+            'name_materi' => 'required',
             'bab_materi' => 'required',
             'file_materi' => 'file|mimes:pdf|max:5120',
             'body_materi' => 'required',
@@ -91,29 +142,5 @@ class MateriTaskController extends Controller {
         return redirect( '/admin/materi_tasks' )->with( 'success', 'Data Berhasil dihapus!' );
     }
 
-    public function getMateriTasks(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = MateriTask::all();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->editColumn('name', function($data){
-                    return $data->type_trainings->name ?? 'none';
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <a href="/admin/materi_tasks/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/materi_tasks/'. $row->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
-                </form>
-                    <a href="/admin/materi_tasks/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                    
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+   
 }

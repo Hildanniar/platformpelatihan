@@ -30,6 +30,18 @@
                                 @method('put')
                                 @csrf
                                 <div class="form-group form-floating-label">
+                                    <label for="name_materi" class="form-label">Nama Materi</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('name_materi') is-invalid @enderror"
+                                        id="name_materi" name="name_materi" required
+                                        value="{{ old('name_materi', $materi_tasks->name_materi) }}" maxlength="255">
+                                    @error('name_materi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
                                     <label for="training" class="form-label">Jenis Pelatihan</label>
                                     <select class="form-control input-solid" name="type_training_id">
                                         @foreach ($type_trainings as $type_training)

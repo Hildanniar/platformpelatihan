@@ -6,7 +6,7 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Jadwal Pelatihan</h2>
+                            <h2 class="text-white pb-2 fw-bold">Sertifikat Pelatihan</h2>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
                             <a href="/participant/training" class="btn btn-white btn-border btn-round mr-2"><i
@@ -25,7 +25,9 @@
                                     <tr>
                                         <th>URL Sertifikat</th>
                                         <th>:</th>
-                                        <td>{{ $typeTraining->certificates->link }} </td>
+                                        <td><a href="{{ $typeTraining->certificates->link }}" target="_blank"
+                                                style="color:black"> {{ $typeTraining->certificates->link }}</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>

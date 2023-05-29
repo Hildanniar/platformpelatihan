@@ -41,7 +41,7 @@ class TypeTrainingController extends Controller {
     public function store( Request $request ) {
         $validatedData = $request->validate( [
             'name' => 'required|max:255',
-            'quota' => 'required|min:1',
+            'quota' => 'required|numeric|min:1',
             'desc' => 'required',
             'image' => 'image|file|max:3000',
         ] );

@@ -28,6 +28,18 @@
                             <form method="post" action="/admin/materi_tasks" class="mb-5" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group form-floating-label">
+                                    <label for="name_materi" class="form-label">Nama Materi</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('name_materi') is-invalid @enderror"
+                                        id="name_materi" name="name_materi" required autofocus placeholder="Nama Materi"
+                                        value="{{ old('name_materi') }}"">
+                                    @error('name_materi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
                                     <label for="type_training_id" class="form-label">Jenis Pelatihan</label>
                                     <select class="form-control input-solid" name="type_training_id" required>
                                         <option selected disabled value="">Silahkan dipilih</option>
@@ -122,7 +134,8 @@
                                     @error('desc_task')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                    <input id="desc_task" type="hidden" name="desc_task" value="{{ old('desc_task') }}">
+                                    <input id="desc_task" type="hidden" name="desc_task"
+                                        value="{{ old('desc_task') }}">
                                     <trix-editor input="desc_task"></trix-editor>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tambah data</button>

@@ -10,7 +10,8 @@
                             <h5 class="text-white op-7 mb-2">Data Admin</h5>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/admin/admin" class="btn btn-white btn-border btn-round mr-2"><i class="fas fa-plus"></i>
+                            <a href="/admin/admin/create" class="btn btn-white btn-border btn-round mr-2"><i
+                                    class="fas fa-plus"></i>
                                 Tambah</a>
                             {{-- <a href="/admin/Admin/export_excel" class="btn btn-secondary btn-round"><i
                                     class="fas fa-file-excel" target="_blank"></i> Cetak Excel</a>

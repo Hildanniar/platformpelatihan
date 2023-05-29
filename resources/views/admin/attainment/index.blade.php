@@ -42,8 +42,8 @@
                                                     <th>Nama Peserta</th>
                                                     {{-- <th>Ulasan</th> --}}
                                                     <th>Nilai</th>
-                                                    {{-- <th>Status</th> --}}
                                                     <th width="100px">Action</th>
+                                                    <th width="100px">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -90,7 +90,11 @@
                     },
                     {
                         data: 'action',
-                        name: 'action',
+                        name: 'action'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
                         orderable: true,
                         searchable: true
                     },

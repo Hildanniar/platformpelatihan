@@ -41,6 +41,14 @@ class AttainmentController extends Controller {
                     
                     return $actionBtn;
                 })
+                ->addColumn('status', function($row){
+                    $statusBtn = '
+                    <a href="/admin/attainment/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <input type="radio" id="nopublikasi" name="status" value="NoPublikasi" class="custom-control-input" required '.$row->status == 'NoPublikasi' ? 'checked' : ''.'><label class="custom-control-label"
+                    for="nopublikasi">Tidak Publikasi</label>';
+                    
+                    return $statusBtn;
+                })
             ->rawColumns(['action'])
             ->make(true);
         }

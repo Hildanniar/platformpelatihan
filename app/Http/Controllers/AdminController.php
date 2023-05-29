@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\StoreAdminRequest;
-use App\Http\Requests\UpdateAdminRequest;
+use Illuminate\Database\QueryException;
 
 class AdminController extends Controller {
 
@@ -53,11 +52,62 @@ class AdminController extends Controller {
     }
 
     public function create() {
-        //
+        return view( 'admin.dataAdmin.create');
     }
 
-    public function store( StoreAdminRequest $request ) {
-        //
+    public function store( Request $request ) {
+        $validatedData = $request->validate( [
+            'name' => 'required|max:255',
+            'username' => 'required|unique:users|max:255',
+            'email' => 'required',
+            'password' => 'required',
+            'address' => 'required|max:255',
+            'age' => 'required|numeric|min:1',
+            'no_hp' => 'required|numeric|min:1',
+            'gender' => 'required|in:Laki-Laki,Perempuan',
+            'profession' => 'required|max:255',
+            'no_member' => 'required|max:255',
+            'image' => 'image|file|max:2048',
+        ] );
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('profile-photos');
+        }
+        $data_user = [
+            'level_id' => 1,
+            'username'=> $validatedData['username'],
+            'email'=> $validatedData['email'],
+            'password'=> bcrypt($validatedData['password']),
+            'is_active' => '1',
+        ];
+        $user = User::create( $data_user );
+        $user_last_id = $user->id;
+        if($request->image != null){
+            $data_admin = [
+                'user_id' => $user_last_id,
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+                'image'=> $validatedData['image'],
+            ];
+        } else {
+            $data_admin = [
+                'user_id' => $user_last_id,
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+            ];
+        }
+        Admin::create( $data_admin );
+        return redirect( '/admin/admin' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 
     public function show( Admin $admin ) {
@@ -68,14 +118,79 @@ class AdminController extends Controller {
     }
 
     public function edit( Admin $admin ) {
-        //
+        return view( 'admin.dataAdmin.edit', [
+            'admin' => $admin,
+            'users' => User::all(),
+        ] );
     }
 
-    public function update( UpdateAdminRequest $request, Admin $admin ) {
-        //
+    public function update( Request $request, Admin $admin ) {
+        try{
+            $rules = [
+                'name' => 'required|max:255',
+                'username' => 'required|unique:users,username,'.$admin->users->id.'|max:255',
+                'email' => 'required',
+                'password'=>'nullable',
+                'address' => 'required|max:255',
+                'age' => 'required|numeric|min:1',
+                'no_hp' => 'required|numeric|min:1',
+                'gender' => 'required|in:Laki-Laki,Perempuan',
+                'profession' => 'required|max:255',
+                'no_member' => 'required|max:255',
+                'image' => 'image|file|max:2048',
+            ];
+            
+            $validatedData = $request->validate( $rules );
+                $data_user = [
+                    'username'=> $validatedData['username'],
+                    'email'=> $validatedData['email'],
+                    'password'=> bcrypt($validatedData['password']),
+                    
+                ];
+            if ($request->file('image')) {
+                if ($request->oldImage) {
+                    Storage::delete($request->oldImage);
+                }
+                $validatedData['image'] = $request->file('image')->store('profile-photos');
+            }
+            if($request->image != null){
+            $data_admin = [
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+                'image'=> $validatedData['image'],
+                
+            ];
+        } else{
+            $data_admin = [
+                'name'=> $validatedData['name'],
+                'address'=> $validatedData['address'],
+                'age'=> $validatedData['age'],
+                'no_hp'=> $validatedData['no_hp'],
+                'gender'=> $validatedData['gender'],
+                'profession'=> $validatedData['profession'],
+                'no_member'=> $validatedData['no_member'],
+                
+            ];
+        }
+            $admin->users()->update($data_user);
+            $admin->update($data_admin);
+            return redirect( '/admin/admin' )->with( 'success', 'Data Berhasil Diupdate!' );
+        } catch(QueryException $error){
+            dd($error);
+        }
     }
 
     public function destroy( Admin $admin ) {
-        //
+        if ($admin->users->image) {
+            Storage::delete($admin->users->image);
+        }
+        $admin->users()->delete();
+        $admin->destroy($admin->id);
+        return redirect( '/admin/admin' )->with( 'success', 'Data berhasil dihapus!' );
     }
 }

@@ -58,10 +58,8 @@
                                 <div class="d-flex mb-3">
                                     <small class="me-3"><i
                                             class="far fa-user text-primary me-2"></i>{{ $t->participants->name }}</small>
-                                    {{-- <small><i
-                                            class="far fa-calendar-alt text-primary me-2"></i>{{ $t->schedules->start_date }}</small> --}}
                                 </div>
-                                <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4>
+                                {{-- <h4 class="mb-3">{{ $t->materi_tasks->name }}</h4> --}}
                                 <p>{{ $t->excerpt }}</p>
                                 @if (auth()->user() == null)
                                     <a class="text-uppercase" href="/attainment/{{ $t->id }}">Read More <i

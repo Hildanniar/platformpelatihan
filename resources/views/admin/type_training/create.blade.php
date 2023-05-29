@@ -56,7 +56,8 @@
                                     <label for="quota" class="form-label">Kuota Pelatihan</label>
                                     <input type="text"
                                         class="form-control input-solid @error('quota') is-invalid @enderror" id="quota"
-                                        name="quota" required value="{{ old('quota') }}" placeholder="Alamat">
+                                        name="quota" required value="{{ old('quota') }}"
+                                        placeholder="Isi Kuota Pelatihan">
                                     @error('quota')
                                         <div class="invalid-feedback">
                                             {{ $message }}
