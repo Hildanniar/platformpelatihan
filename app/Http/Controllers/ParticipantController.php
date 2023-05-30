@@ -21,7 +21,6 @@ class ParticipantController extends Controller {
     public function getParticipants(Request $request)
     {
         if ($request->ajax()) {
-            // $data = User::whereRelation('levels', 'name', 'Peserta')->get(); 
             $data = Participant::all();
             return Datatables::of($data)
             ->addIndexColumn()
@@ -175,7 +174,6 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
-            'comment'=> null,
             'image'=> $validatedData['image'],
         ];
     } else{
@@ -187,7 +185,6 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
-            'comment'=> null,
         ];
     }
         $participant->users()->update($data_user);

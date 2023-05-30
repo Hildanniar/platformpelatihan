@@ -6,16 +6,8 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold">Peserta</h2>
-                            <h5 class="text-white op-7 mb-2">Data Peserta</h5>
-                        </div>
-                        <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/admin/participant/create" class="btn btn-white btn-border btn-round mr-2"><i
-                                    class="fas fa-plus"></i> Tambah</a>
-                            <a href="/admin/participant/export_excel" class="btn btn-secondary btn-round"><i
-                                    class="fas fa-file-excel" target="_blank"></i> Cetak Excel</a>
-                            <a href="/admin/participant/export_pdf" class="btn btn-secondary btn-round"><i
-                                    class="fas fa-file-pdf" target="_blank" onclick="direct_pdf()"></i> Cetak PDF</a>
+                            <h2 class="text-white pb-2 fw-bold">Peserta Pelatihan</h2>
+                            <h5 class="text-white op-7 mb-2">Data Peserta Pelatihan</h5>
                         </div>
                     </div>
                 </div>
@@ -25,10 +17,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row card-tools-still-right">
-                                <h4 class="card-title">Tabel Data Peserta</h4>
+                                <h4 class="card-title">Tabel Data Peserta Pelatihan</h4>
                             </div>
                             @if (session()->has('success'))
-                                <div class="alert alert-success col-lg-8" role="alert">
+                                <div class="alert alert-success" role="alert">
                                     {{ session('success') }}
                                 </div>
                             @endif
@@ -38,18 +30,18 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive table-hover">
-                                        <table id='table' class="table table-hover table-responsive">
+                                        <table id="table" class="table table-hover table-responsive">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama Lengkap</th>
-                                                    <th>Email</th>
-                                                    <th>Alamat</th>
-                                                    <th>No.Telp</th>
+                                                    <th>Jenis Pelatihan</th>
+                                                    <th>Nama Peserta</th>
+                                                    <th>Status Komentar</th>
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,26 +61,22 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: "/admin/participant/dataparticipant",
+                ajax: '/admin/training_participants/datatrainingparticipants',
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
                     {
                         data: 'name',
-                        name: 'name'
+                        name: 'jenis pelatihan'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
+                        data: 'name_user',
+                        name: 'nama peserta'
                     },
                     {
-                        data: 'address',
-                        name: 'address'
-                    },
-                    {
-                        data: 'no_hp',
-                        name: 'no_hp'
+                        data: 'status',
+                        name: 'status',
                     },
                     {
                         data: 'action',
@@ -100,14 +88,4 @@
             });
         });
     </script>
-
-    {{-- Direct ke Tab Baru --}}
-    {{-- <script>
-        function direct_pdf() {
-            var page = '/admin/participant/export_pdf';
-            var myWindow = window.open(page, "_blank")
-
-            myWindow.focus()
-        }
-    </script> --}}
 @endsection

@@ -106,7 +106,7 @@
                     <div class="text-center mt-3">
                         <p class="text-gray-600">Belum memiliki akun? <a href="/register" class="font-bold">Register</a>
                         </p>
-                        <p><a class="font-bold" href="auth-forgot-password.html">Lupa password?</a></p>
+                        {{-- <p><a class="font-bold" href="auth-forgot-password.html">Lupa password?</a></p> --}}
                     </div>
                 </div>
             </div>

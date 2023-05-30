@@ -60,7 +60,13 @@
                     <li class="nav-item {{ Request::is('admin/participant*') ? 'active' : '' }}">
                         <a href="/admin/participant">
                             <i class="fas fa-user"></i>
-                            <p>Data Peserta</p>
+                            <p>Data Pribadi Peserta</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('admin/training_participants*') ? 'active' : '' }}">
+                        <a href="/admin/training_participants">
+                            <i class="fas fa-user"></i>
+                            <p>Data Peserta Pelatihan</p>
                         </a>
                     </li>
                     <li class="nav-item {{ Request::is('admin/mentor*') ? 'active' : '' }}">

@@ -5,10 +5,89 @@ use App\Models\TypeTraining;
 use App\Models\Participant;
 use App\Models\TrainingParticipants;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingParticipantsController extends Controller {
+
+    public function getTrainingParticipants(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = TrainingParticipants::all();
+            return Datatables::of($data)
+                ->addIndexColumn() 
+                ->editColumn('name', function($data){
+                    return $data->type_trainings->name ?? 'none';
+                })
+                ->editColumn('name_user', function($data){
+                    return $data->participants->name ?? 'none';
+                })
+                ->editColumn('value', function($data){
+                    return $data->status;
+                })
+            
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/training_participants/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>';
+                    
+                    return $actionBtn;
+                })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+    }
+    public function index() {
+        return view( 'admin.training_participants.index', [
+            'training_participants' => TrainingParticipants::all()
+        ] );
+    }
+
+
+    public function create() {
+        //
+    }
+
+    public function store( Request $request ) {
+        //
+    }
+
+
+    public function show( $id ) {
+        //
+    }
+
+
+    public function edit(TrainingParticipants  $training_participant ) {
+        return view( 'admin.training_participants.edit', [ 
+            'training_participants' => $training_participant,
+            'type_trainings' => TypeTraining::all(),
+            'participants' => Participant::all(),
+            ] );
+    }
+
+
+    public function update( Request $request, TrainingParticipants  $training_participant ) {
+        try{
+            $rules = [
+                'status' => 'in:NoPublikasi,Publikasi',
+            
+            ];
+            $validatedData = $request->validate( $rules );
+            TrainingParticipants::where( 'id', $training_participant->id )
+            ->update( $validatedData );
+            return redirect( '/admin/training_participants' )->with( 'success', 'Komentar Berhasil di Publikasi!' );
+            } catch(QueryException $error){
+                dd($error);
+            }
+    }
+
+
+    public function destroy( $id ) {
+        //
+    }
+
     public function regristration( TypeTraining $type_training ) {
         return view( 'dashboard.layouts.participants.RegristrationTraining', [
             'type_training' => $type_training,

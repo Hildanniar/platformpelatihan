@@ -93,6 +93,10 @@ Route::resource('/admin/schedule', ScheduleController::class);
 // halaman data hasil karya pelatihan
 Route::get('/admin/attainment/dataattainment', [AttainmentController::class, 'getAttainment']);
 Route::resource('/admin/attainment', AttainmentController::class);
+
+// update komentar
+Route::get('/admin/training_participants/datatrainingparticipants', [TrainingParticipantsController::class, 'getTrainingParticipants']);
+Route::resource('/admin/training_participants', TrainingParticipantsController::class);
 });
 
 //peserta
@@ -132,13 +136,17 @@ Route::get('/participant/certificate/{typeTraining}', [MenuParticipantController
 //hasil karya pelatihan peserta
 Route::get('/participant/attainment', [MenuParticipantController::class, 'attainment']);
 Route::get('/participant/attainment/show/{attainment}', [MenuParticipantController::class, 'show_attainment']);
+
 //upload hasil karya untuk kelas online
 Route::get('/participant/attainment/{materiTask}', [MenuParticipantController::class, 'UploadAttainmentOnline']);
 Route::post('/participant/attainment/add/{materiTask}', [MenuParticipantController::class, 'CreateAttainmentOnline']);
+
 //upload hasil karya untuk kelas offline
 Route::get('/participant/attainments/{typeTraining}', [MenuParticipantController::class, 'UploadAttainmentOffline']);
 Route::post('/participant/attainment/create/{typeTraining}', [MenuParticipantController::class, 'CreateAttainmentOffline']);
+
 //komentar mengenai pelatihan yang sudah di ikuti
 Route::get('/participant/comment/{typeTraining}', [TrainingParticipantsController::class, 'comment']);
 Route::post('/participant/comment/create/{typeTraining}', [TrainingParticipantsController::class, 'create_comment'])->name('create.comment');
+
 });
