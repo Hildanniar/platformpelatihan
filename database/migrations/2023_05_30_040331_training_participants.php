@@ -14,7 +14,7 @@ class TrainingParticipants extends Migration
             $table->id();
             $table->foreignIdFor(Participant::class);
             $table->foreignIdFor(TypeTraining::class);
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->enum('status', ['NoPublikasi', 'Publikasi']);
             $table->enum('is_active', ['0', '1']);
             $table->timestamps();

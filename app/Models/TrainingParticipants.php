@@ -19,7 +19,7 @@ class TrainingParticipants extends Model {
         return $this->belongsTo( TypeTraining::class, 'type_training_id' );
     }
 
-    // public function attainments() {
-    //     return $this->hasMany( Attainment::class, 'participant_id' );
-    // }
+    public function attainments() {
+        return $this->hasMany( Attainment::class, 'type_training_id' );
+    }
 }

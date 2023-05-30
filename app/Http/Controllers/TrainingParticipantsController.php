@@ -56,4 +56,28 @@ class TrainingParticipantsController extends Controller {
         }
         return Redirect()->back();
     }
+
+    public function comment( TypeTraining $typeTraining ) {
+        return view( 'participants.comment.create', [
+            'typeTraining' => $typeTraining
+        ] );
+    }
+
+    public function create_comment( TypeTraining $typeTraining, Request $request ) {
+        $validatedData = $request->validate( [
+            'comment' => 'required'
+        ] );
+        $participant = Participant::where( 'user_id', auth()->user()->id )->first();
+        $trainingParticipants = TrainingParticipants::where( 'type_training_id', $typeTraining->id )->first();
+        $data_training_participants = [
+            'participant_id'=> $participant->id,
+            'type_training_id'=> $trainingParticipants->type_training_id,
+            'comment'=> $validatedData[ 'comment' ],
+            'status'=> 'NoPublikasi',
+            'is_active'=> '1',
+        ];
+        // dd( $trainingParticipants );
+        $trainingParticipants->update( $data_training_participants );
+        return redirect( '/participant/training' )->with( 'success', 'Berhasil Memberi Komentar!' );
+    }
 }

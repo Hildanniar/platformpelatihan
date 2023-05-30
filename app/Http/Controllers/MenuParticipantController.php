@@ -7,7 +7,8 @@ use App\Models\Participant;
 use App\Models\TypeTraining;
 use App\Models\MateriTask;
 use App\Models\Attainment;
-use App\Models\Certificate;
+use App\Models\Schedule;
+use App\Models\TrainingParticipants;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -18,36 +19,36 @@ class MenuParticipantController extends Controller {
     public function getTraining(Request $request) {
         
         if ($request->ajax()) {
-            $data = TypeTraining::whereRelation('participants', 'user_id', auth()->user()->id)->get();
+            $data = TrainingParticipants::whereRelation('participants', 'user_id', auth()->user()->id)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->editColumn('type_training_id', function($data){
-                    return $data->name ?? 'none';
+                    return $data->type_trainings->name ?? 'none';
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/participant/schedule/'. $row->id .'" class="edit btn btn-primary btn-sm text-white"><i class="far fa-clock""></i> Jadwal</a>';
+                    <a href="/participant/schedule/'. $row->type_trainings->id .'" class="edit btn btn-primary btn-sm text-white"><i class="far fa-clock""></i> Jadwal</a>';
                     return $actionBtn;
                 })
                 ->addColumn('materi', function($row){
-                    if($row->class =='Online' ){
+                    if($row->type_trainings->class =='Online' ){
                     $materiBtn = '
-                    <a href="/participant/materi_task/'. $row->id .'" class="btn btn-danger btn-sm"><i class="far fa-file"></i> Materi</a>';
+                    <a href="/participant/materi_task/'. $row->type_trainings->id .'" class="btn btn-danger btn-sm"><i class="far fa-file"></i> Materi</a>';
                     return $materiBtn;
                     }else{
                         $materiBtn = '
-                        <a href="/participant/information/'. $row->id .'" class="btn btn-warning btn-sm"><i class="far fa-file"></i> Materi</a>';
+                        <a href="/participant/information/'. $row->type_trainings->id .'" class="btn btn-warning btn-sm"><i class="far fa-file"></i> Materi</a>';
                     return $materiBtn;
                     }
                 })
                 ->addColumn('certificate', function($row){
                     $certificateBtn = '
-                    <a href="/participant/certificate/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-file"></i> Sertifikat</a>';
+                    <a href="/participant/certificate/'. $row->type_trainings->id .'" class="btn btn-success btn-sm"><i class="far fa-file"></i> Sertifikat</a>';
                     return $certificateBtn;
                 })
                 ->addColumn('comment', function($row){
                     $commentBtn = '
-                    <a href="/participant/comment/'. $row->id .'" class="btn btn-info btn-sm text-white"><i class="far fa-file"></i> Komentar</a>';
+                    <a href="/participant/comment/'. $row->type_trainings->id .'" class="btn btn-info btn-sm text-white"><i class="far fa-file"></i> Komentar</a>';
                     return $commentBtn;
                 })
                 ->rawColumns(['action', 'materi', 'certificate', 'comment'])
@@ -92,7 +93,6 @@ class MenuParticipantController extends Controller {
         }
     }
     public function schedule(TypeTraining $typeTraining){
-        // dd($typeTraining);
         return view('participants.schedule.index', [
             'typeTraining' => $typeTraining,
         ]);
@@ -143,11 +143,12 @@ class MenuParticipantController extends Controller {
             'image'=> $validatedData['image'],
             'desc'=> $validatedData['desc'],
             'excerpt'=> $validatedData['excerpt'],
-            'type_training_id' => $participant->type_training_id,
+            'type_training_id' => $materiTask->type_training_id,
             'participant_id'=> $participant->id,
             'materi_task_id'=> $materiTask->id,
             'is_active' => '1',
         ];
+        
         Attainment::create( $data_attainment );
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
@@ -170,12 +171,13 @@ class MenuParticipantController extends Controller {
             $validatedData['image'] = $request->file('image')->store('hasil-karya');
         }
         $participant = Participant::where('user_id', auth()->user()->id)->first();
+        $trainingParticipants = TrainingParticipants::where( 'type_training_id', $typeTraining->id )->first();
         $data_attainment = [
             'link'=> $validatedData['link'],
             'image'=> $validatedData['image'],
             'desc'=> $validatedData['desc'],
             'excerpt'=> $validatedData['excerpt'],
-            'type_training_id' => $typeTraining->id,
+            'type_training_id' => $trainingParticipants->type_training_id,
             'participant_id'=> $participant->id,
             'materi_task_id'=> $validatedData['materi_task_id'],
             'is_active' => '1',
@@ -184,33 +186,5 @@ class MenuParticipantController extends Controller {
         return redirect( '/participant/attainment' )->with( 'success', 'Hasil Karya berhasil di Upload!' );
     }
     
-    public function comment(TypeTraining $typeTraining){
-        return view('participants.comment.create', [
-        'typeTraining' => $typeTraining
-        ]);
-    }
-
-    public function create_comment( TypeTraining $typeTraining, Request $request){
-        $validatedData = $request->validate( [
-            'comment' => 'required'
-        ]);
-        $participant = Participant::where('user_id', auth()->user()->id)->first();
-        $data_participant = [
-            'type_training_id'=> $typeTraining->id,
-            'name'=> $participant->name,
-            'address'=> $participant->address,
-            'age'=> $participant->age,
-            'no_hp'=> $participant->no_hp,
-            'gender'=>$participant->gender,
-            'profession'=> $participant->profession,
-            'no_member'=>$participant->no_member,
-            'comment'=> $validatedData['comment'],
-            'image'=> $participant->image,
-            'status'=> $participant->status,
-            'is_active'=> $participant->is_active,
-        ];
-        $participant->update($data_participant);
-        return redirect( '/participant/training' )->with( 'success', 'Berhasil Memberi Komentar!' );
-    }
 
 }

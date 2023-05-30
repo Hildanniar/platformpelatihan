@@ -13,8 +13,8 @@ class Attainment extends Migration
     {
         Schema::create('attainments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(TypeTraining::class);
             $table->foreignIdFor(Participant::class);
+            $table->foreignIdFor(TypeTraining::class);
             $table->foreignIdFor(MateriTask::class);
             $table->string('link');
             $table->string('image')->nullable();

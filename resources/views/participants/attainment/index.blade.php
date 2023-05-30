@@ -15,7 +15,7 @@
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="container py-5">
                     @if (session()->has('success'))
-                        <div class="alert alert-success col-lg-8" role="alert">
+                        <div class="alert alert-success " role="alert">
                             {{ session('success') }}
                         </div>
                     @endif

@@ -26,7 +26,7 @@ class TypeTraining extends Model {
     }
 
     public function attainment() {
-        return $this->hasMany( Attainment::class );
+        return $this->hasMany( Attainment::class, 'type_training_id' );
     }
 
     // public function participants() {

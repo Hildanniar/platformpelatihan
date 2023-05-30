@@ -24,9 +24,9 @@ class Attainment extends Model {
         return $this->belongsTo( Participant::class, 'participant_id' );
     }
 
-    // public function training_participants() {
-    //     return $this->belongsTo( TrainingParticipants::class, 'participant_id' );
-    // }
+    public function training_participants() {
+        return $this->belongsTo( TrainingParticipants::class, 'type_training_id' );
+    }
 
     public function materi_tasks() {
         return $this->belongsTo( MateriTask::class, 'materi_task_id' );

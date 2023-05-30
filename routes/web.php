@@ -139,6 +139,6 @@ Route::post('/participant/attainment/add/{materiTask}', [MenuParticipantControll
 Route::get('/participant/attainments/{typeTraining}', [MenuParticipantController::class, 'UploadAttainmentOffline']);
 Route::post('/participant/attainment/create/{typeTraining}', [MenuParticipantController::class, 'CreateAttainmentOffline']);
 //komentar mengenai pelatihan yang sudah di ikuti
-Route::get('/participant/comment/{typeTraining}', [MenuParticipantController::class, 'comment']);
-Route::post('/participant/comment/create/{typeTraining}', [MenuParticipantController::class, 'create_comment'])->name('create.comment');
+Route::get('/participant/comment/{typeTraining}', [TrainingParticipantsController::class, 'comment']);
+Route::post('/participant/comment/create/{typeTraining}', [TrainingParticipantsController::class, 'create_comment'])->name('create.comment');
 });

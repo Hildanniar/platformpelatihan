@@ -25,14 +25,27 @@
                                     <tr>
                                         <th>URL Sertifikat</th>
                                         <th>:</th>
-                                        <td><a href="{{ $typeTraining->certificates->link }}" target="_blank"
-                                                style="color:black"> {{ $typeTraining->certificates->link }}</a>
+                                        <td>
+                                            @if ($typeTraining->certificates->link == null)
+                                                <button class="btn btn-primary float-right text-white">Link Sertifikat Belum
+                                                    di Upload</button>
+                                            @else
+                                                <a href="{{ $typeTraining->certificates->link }}" target="_blank"
+                                                    style="color:black"> {{ $typeTraining->certificates->link }}</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
                                         <th>:</th>
-                                        <td> {!! $typeTraining->certificates->desc !!}</td>
+                                        <td>
+                                            @if ($typeTraining->certificates->desc == null)
+                                                <button class="btn btn-primary float-right text-white">Tidak ada
+                                                    Deskripsi</button>
+                                            @else
+                                                {!! $typeTraining->certificates->desc !!}
+                                        </td>
+                                        @endif
                                     </tr>
                                 </table>
 

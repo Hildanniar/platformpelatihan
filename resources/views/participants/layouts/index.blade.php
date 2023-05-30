@@ -6,7 +6,7 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            @if (auth()->user()->participants->name == null)
+                            @if ($trainingParticipants->participant_id == null)
                                 <h2 class="text-white pb-2 fw-bold">Silahkan Daftar Pelatihan
                                 </h2>
                             @else
@@ -31,18 +31,18 @@
                                         </div>
                                     </div>
                                     <blockquote class="col-12">
-                                        @if (auth()->user()->participants->type_training_id == null)
+                                        @if ($trainingParticipants->participant_id == null)
                                             <h4 class="card-title">Silahkan memilih jenis pelatihan yang akan
                                                 anda ikuti
                                             </h4>
                                         @else
                                             <h4 class="card-title">Anda memiliki pelatihan
-                                                {{ auth()->user()->participants->type_trainings->name }}
+                                                {{ $trainingParticipants->type_trainings->name }}
                                             </h4>
                                         @endif
                                     </blockquote>
                                     <div class="col-12 col-stats">
-                                        @if (auth()->user()->participants->type_training_id == null)
+                                        @if ($trainingParticipants->participant_id == null)
                                             <a href="/dashboard/participant/training"
                                                 class="btn btn-secondary btn-round">Daftar Sekarang</a>
                                         @else
