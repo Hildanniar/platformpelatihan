@@ -41,14 +41,14 @@ class AttainmentController extends Controller {
                     
                     return $actionBtn;
                 })
-                ->addColumn('status', function($row){
-                    $statusBtn = '
-                    <a href="/admin/attainment/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <input type="radio" id="nopublikasi" name="status" value="NoPublikasi" class="custom-control-input" required '.$row->status == 'NoPublikasi' ? 'checked' : ''.'><label class="custom-control-label"
-                    for="nopublikasi">Tidak Publikasi</label>';
+                // ->addColumn('status', function($row){
+                //     $statusBtn = '
+                //     <a href="/admin/attainment/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                //     <input type="radio" id="nopublikasi" name="status" value="NoPublikasi" class="custom-control-input" required '.$row->status == 'NoPublikasi' ? 'checked' : ''.'><label class="custom-control-label"
+                //     for="nopublikasi">Tidak Publikasi</label>';
                     
-                    return $statusBtn;
-                })
+                //     return $statusBtn;
+                // })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -59,29 +59,29 @@ class AttainmentController extends Controller {
         ] );
     }
 
-    public function create() {
-        return view( 'admin.attainment.create', [ 
-            'type_trainings' => TypeTraining::all(),
-            'users' => User::all(),
-            'participants' => Participant::all(),
-        ]);
-    }
+    // public function create() {
+    //     return view( 'admin.attainment.create', [ 
+    //         'type_trainings' => TypeTraining::all(),
+    //         'users' => User::all(),
+    //         'participants' => Participant::all(),
+    //     ]);
+    // }
 
-    public function store( Request $request ) {
-        $validatedData = $request->validate( [
-            'type_training_id' => 'required',
-            'participant_id' => 'required',
-            'comment' => 'required',
-            'desc' => 'required',
-            'image' => 'image|file|max:3000'
-        ] );
-        if ( $request->file( 'image' ) ) {
-            $validatedData[ 'image' ] = $request->file( 'image' )->store( 'hasil-karya' );
-        }
-        $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->comment ), 200 );
-        Attainment::create( $validatedData );
-        return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Ditambahkan!' );
-    }
+    // public function store( Request $request ) {
+    //     $validatedData = $request->validate( [
+    //         'type_training_id' => 'required',
+    //         'participant_id' => 'required',
+    //         'comment' => 'required',
+    //         'desc' => 'required',
+    //         'image' => 'image|file|max:3000'
+    //     ] );
+    //     if ( $request->file( 'image' ) ) {
+    //         $validatedData[ 'image' ] = $request->file( 'image' )->store( 'hasil-karya' );
+    //     }
+    //     $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->comment ), 200 );
+    //     Attainment::create( $validatedData );
+    //     return redirect( '/admin/attainment' )->with( 'success', 'Data Berhasil Ditambahkan!' );
+    // }
 
     public function show( Attainment $attainment ) {
         return view( 'admin.attainment.show', [ 'attainment' => $attainment ] );

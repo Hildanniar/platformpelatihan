@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\User;
-use App\Models\Participant;
+// use App\Models\TrainingParticipants;
 use App\Models\TypeTraining;
 use App\Models\MateriTask;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +23,10 @@ class Attainment extends Model {
     public function participants() {
         return $this->belongsTo( Participant::class, 'participant_id' );
     }
+
+    // public function training_participants() {
+    //     return $this->belongsTo( TrainingParticipants::class, 'participant_id' );
+    // }
 
     public function materi_tasks() {
         return $this->belongsTo( MateriTask::class, 'materi_task_id' );

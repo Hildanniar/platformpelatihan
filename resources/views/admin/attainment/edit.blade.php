@@ -45,11 +45,6 @@
                                                         <th>:</th>
                                                         <td> {{ $attainment->participants->name ?? 'none' }}</td>
                                                     </tr>
-                                                    {{-- <tr>
-                                                        <th>Ulasan</th>
-                                                        <th>:</th>
-                                                        <td> {!! $attainment->comment !!}</td>
-                                                    </tr> --}}
                                                     <tr>
                                                         <th>Hasil Karya Pelatihan</th>
                                                         <th>:</th>

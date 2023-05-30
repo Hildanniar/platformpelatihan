@@ -16,7 +16,6 @@ class UserFactory extends Factory
     {
         return [
             'level_id' => mt_rand(1, 3),
-            // 'user_id' => mt_rand(1, 4),
             'email' => $this->faker->unique()->safeEmail(),
             'username' => $this->faker->unique()->username(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

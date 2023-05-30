@@ -14,7 +14,7 @@ class MentorFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => mt_rand(6, 10),
+            'user_id' => mt_rand(4, 6),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'age' => mt_rand(20, 100),

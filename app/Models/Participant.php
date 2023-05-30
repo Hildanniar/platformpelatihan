@@ -21,9 +21,9 @@ class Participant extends Model {
         return $this->hasMany( TrainingParticipants::class, 'participant_id' );
     }
 
-    public function type_trainings() {
-        return $this->belongsTo( TypeTraining::class, 'type_training_id' );
-    }
+    // public function type_trainings() {
+    //     return $this->belongsTo( TypeTraining::class, 'type_training_id' );
+    // }
 
     public function schedules() {
         return $this->hasMany( Schedule::class );

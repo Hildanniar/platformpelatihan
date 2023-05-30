@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\TypeTraining;
 use App\Models\Attainment;
+use App\Models\Participant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

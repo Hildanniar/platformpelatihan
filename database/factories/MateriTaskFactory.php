@@ -14,7 +14,7 @@ class MateriTaskFactory extends Factory
     public function definition()
     {
         return [
-            'type_training_id' => mt_rand(1, 10),
+            'type_training_id' => mt_rand(1, 5),
             'name_materi' => $this->faker->name(),
             'bab_materi' => ['BAB I', 'BAB II', 'BAB III'][mt_rand(0,1)],
             'excerpt_materi' => $this->faker->paragraph(),

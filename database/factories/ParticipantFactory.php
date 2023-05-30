@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ParticipantFactory extends Factory {
     public function definition() {
         return [
-            'type_training_id' => mt_rand( 1, 5 ),
-            'user_id' => mt_rand( 11, 15 ),
+            'user_id' => mt_rand( 7, 10 ),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'age' => mt_rand( 20, 100 ),

@@ -15,7 +15,6 @@ class Participant extends Migration {
     public function up() {
         Schema::create( 'participants', function ( Blueprint $table ) {
             $table->id();
-            $table->foreignIdFor(TypeTraining::class)->nullable();
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->text('address');
