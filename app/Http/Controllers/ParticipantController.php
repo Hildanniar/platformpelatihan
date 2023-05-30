@@ -54,8 +54,6 @@ class ParticipantController extends Controller {
         }
     }
     public function index() {
-        // $data = User::whereRelation('levels', 'name', 'Peserta')->get();
-        // dd(  $data->participants);
         return view( 'admin.participant.index', [
             'participants' => Participant::all()
         ] );
@@ -71,7 +69,6 @@ class ParticipantController extends Controller {
 
     public function store( Request $request ) {
         $validatedData = $request->validate( [
-            'type_training_id' => 'required',
             'name' => 'required|max:255',
             'username' => 'required|unique:users|max:255',
             'email' => 'required',
@@ -82,7 +79,6 @@ class ParticipantController extends Controller {
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
             'no_member' => 'max:255',
-            'comment'=>'max:255' ,
             'image' => 'image|file|max:2048',
             
         ] );
@@ -101,7 +97,6 @@ class ParticipantController extends Controller {
         $user_last_id = $user->id;
         if($request->image != null){
         $data_participant = [
-            'type_training_id'=> $validatedData['type_training_id'],
             'user_id' => $user_last_id,
             'name'=> $validatedData['name'],
             'address'=> $validatedData['address'],
@@ -110,12 +105,10 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
-            'comment'=> null,
             'image'=> $validatedData['image'],
         ];
     } else {
         $data_participant = [
-            'type_training_id'=> $validatedData['type_training_id'],
             'user_id' => $user_last_id,
             'name'=> $validatedData['name'],
             'address'=> $validatedData['address'],
@@ -124,7 +117,6 @@ class ParticipantController extends Controller {
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
             'no_member'=> null,
-            'comment'=> null,
         ];
     }
         Participant::create( $data_participant );
@@ -132,14 +124,12 @@ class ParticipantController extends Controller {
     }
 
     public function show( Participant $participant ) {
-        // dd($participant);
         return view( 'admin.participant.show', [
             'participant' => $participant,
         ] );
         }
         
     public function edit( Participant $participant ) {
-        // dd($participant->users);
         return view( 'admin.participant.edit', [
             'participant' => $participant,
             'users' => User::all(),
@@ -148,10 +138,8 @@ class ParticipantController extends Controller {
     }
 
     public function update( Request $request, Participant $participant ) {
-        // dd($request);
         try{
         $rules =  [
-            'type_training_id' => 'required',
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.$participant->users->id.'|max:255',
             'email' => 'required',
@@ -180,7 +168,6 @@ class ParticipantController extends Controller {
         }
         if($request->image != null){
         $data_participant = [
-            'type_training_id'=> $validatedData['type_training_id'],
             'name'=> $validatedData['name'],
             'address'=> $validatedData['address'],
             'age'=> $validatedData['age'],
@@ -193,7 +180,6 @@ class ParticipantController extends Controller {
         ];
     } else{
         $data_participant = [
-            'type_training_id'=> $validatedData['type_training_id'],
             'name'=> $validatedData['name'],
             'address'=> $validatedData['address'],
             'age'=> $validatedData['age'],
@@ -233,7 +219,5 @@ class ParticipantController extends Controller {
         ->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
-
-   
 
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardParticipantController;
 use App\Http\Controllers\MenuParticipantController;
+use App\Http\Controllers\TrainingParticipantsController;
 
 // halaman utama tanpa login
 Route::get('/', [DashboardController::class, 'dashboardPublic']);
@@ -105,8 +106,8 @@ Route::get('/dashboard/participant/training', [DashboardParticipantController::c
 Route::get('/dashboard/participant/training/{type_training}', [DashboardParticipantController::class, 'show_training']);
 
 // pendaftaran pelatihan
-Route::get('/regristration/{type_training}', [DashboardParticipantController::class, 'regristration'])->name('regristration.training');
-Route::post('/regristration/add/{type_training}', [DashboardParticipantController::class, 'AddRegristration']);
+Route::get('/regristration/{type_training}', [TrainingParticipantsController::class, 'regristration'])->name('regristration.training');
+Route::post('/regristration/add/{type_training}', [TrainingParticipantsController::class, 'AddRegristration']);
 
 // update profile peserta
 Route::get('/participant/profile', [DashboardParticipantController::class, 'ProfileUpdate'])->name('update.profile');

@@ -28,7 +28,6 @@
                 <th>Email</th>
                 <th>Alamat</th>
                 <th>No.Telp</th>
-                {{-- <th>Kelas</th> --}}
                 <th>Usia</th>
                 <th>Jenis Kelamin</th>
                 <th>Pekerjaan</th>

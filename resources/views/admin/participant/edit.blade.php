@@ -154,7 +154,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group form-floating-label">
+                                {{-- <div class="form-group form-floating-label">
                                     <label for="training" class="form-label">Jenis Pelatihan</label>
                                     <select class="form-control input-solid" name="type_training_id">
                                         @foreach ($type_trainings as $type_training)
@@ -168,7 +168,7 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="form-group form-floating-label">
                                     <label for="image" class="form-label">Foto Profile Peserta</label>
                                     <input type="hidden" name="oldImage" value="{{ $participant->image }}">

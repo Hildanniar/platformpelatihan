@@ -32,4 +32,8 @@ class TypeTraining extends Model {
     public function participants() {
         return $this->hasMany( Participant::class );
     }
+
+    public function training_participants() {
+        return $this->hasMany( Participant::class, 'type_training_id' );
+    }
 }

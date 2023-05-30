@@ -147,7 +147,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group form-floating-label">
+                                {{-- <div class="form-group form-floating-label">
                                     <label for="type_training_id" class="form-label">Jenis Pelatihan</label>
                                     <select class="form-control input-solid" name="type_training_id">
                                         <option selected disabled value="">Silahkan dipilih...</option>
@@ -162,7 +162,7 @@
                                             @endif
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div class="form-group form-floating-label">
                                     <label for="image" class="form-label">Foto Profile Peserta</label>
                                     <img class="img-preview img-fluid mb-3 col-sm-5"

@@ -19,14 +19,14 @@ class DatabaseSeeder extends Seeder {
 
     public function run() {
 
-        User::factory( 15 )->create();
-        Admin::factory( 5 )->create();
-        Participant::factory( 5 )->create();
-        Mentor::factory( 5 )->create();
+        User::factory( 10 )->create();
+        Admin::factory( 3 )->create();
+        Participant::factory( 4 )->create();
+        Mentor::factory( 3 )->create();
         MateriTask::factory( 5 )->create();
         TypeTraining::factory( 5 )->create();
         Schedule::factory( 5 )->create();
-        Attainment::factory( 5 )->create();
+        // Attainment::factory( 5 )->create();
         Certificate::factory( 2 )->create();
         Survey::factory( 5 )->create();
         Level::create( [

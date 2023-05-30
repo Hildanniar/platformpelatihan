@@ -6,7 +6,7 @@ use App\Models\Attainment;
 use App\Models\User;
 use App\Models\TypeTraining;
 use App\Models\Schedule;
-use App\Models\Participant;
+use App\Models\TrainingParticipants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Storage;
 class DashboardParticipantController extends Controller {
     public function index() {
         $attainment = Attainment::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
-        $participant = Participant::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
+        $trainingParticipants = TrainingParticipants::orderBy( 'created_at', 'desc' )->where( 'status', 'Publikasi' )->limit( 5 )->latest()->get();
         $typeTrainings = TypeTraining::limit( 5 )->get();
         $users = User::where( 'level_id', '3' )->count();
         $type_trainings = TypeTraining::count();
         $attainments = Attainment::count();
-        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings', 'participant' ) );
+        return view( 'dashboard.layouts.participants.main', compact( 'users', 'type_trainings', 'attainments', 'attainment', 'typeTrainings', 'trainingParticipants' ) );
     }
 
     public function start() {
@@ -134,40 +134,40 @@ class DashboardParticipantController extends Controller {
         }
     }
 
-    public function regristration( TypeTraining $type_training ) {
-        return view( 'dashboard.layouts.participants.RegristrationTraining', [
-            'type_training' => $type_training,
-        ] );
-    }
+    // public function regristration( TypeTraining $type_training ) {
+    //     return view( 'dashboard.layouts.participants.RegristrationTraining', [
+    //         'type_training' => $type_training,
+    // ] );
+    // }
 
-    public function AddRegristration( TypeTraining $type_training, Request $request ) {
-        $rules =  [
-            'name' => 'required|max:255',
-            'address' => 'required|max:255',
-            'age' => 'required|numeric|min:1',
-            'no_hp' => 'required|numeric|min:1',
-            'gender' => 'required|in:Laki-Laki,Perempuan',
-            'profession' => 'required|max:255',
-            'no_member' => 'max:255',
-        ] ;
-        $validatedData = $request->validate( $rules );
-        $user = User::find( Auth::user()->id );
-        if ( $user ) {
-            $data_participant = [
-                'user_id'=> $user->id,
-                'type_training_id'=> $type_training->id,
-                'name'=> $validatedData[ 'name' ],
-                'address'=> $validatedData[ 'address' ],
-                'age'=> $validatedData[ 'age' ],
-                'no_hp'=> $validatedData[ 'no_hp' ],
-                'gender'=> $validatedData[ 'gender' ],
-                'profession'=> $validatedData[ 'profession' ],
-                'no_member'=> $validatedData[ 'no_member' ],
-                'image'=> null,
-            ];
-            $user->participants()->update( $data_participant );
-            return Redirect()->back()->with( 'success', 'Anda Berhasil Mendaftar!!!' );
-        }
-        return Redirect()->back();
-    }
+    // public function AddRegristration( TypeTraining $type_training, Request $request ) {
+    //     $rules =  [
+    //         'name' => 'required|max:255',
+    //         'address' => 'required|max:255',
+    //         'age' => 'required|numeric|min:1',
+    //         'no_hp' => 'required|numeric|min:1',
+    //         'gender' => 'required|in:Laki-Laki,Perempuan',
+    //         'profession' => 'required|max:255',
+    //         'no_member' => 'max:255',
+    // ] ;
+    //     $validatedData = $request->validate( $rules );
+    //     $user = User::find( Auth::user()->id );
+    //     if ( $user ) {
+    //         $data_participant = [
+    //             'user_id'=> $user->id,
+    //             'type_training_id'=> $type_training->id,
+    //             'name'=> $validatedData[ 'name' ],
+    //             'address'=> $validatedData[ 'address' ],
+    //             'age'=> $validatedData[ 'age' ],
+    //             'no_hp'=> $validatedData[ 'no_hp' ],
+    //             'gender'=> $validatedData[ 'gender' ],
+    //             'profession'=> $validatedData[ 'profession' ],
+    //             'no_member'=> $validatedData[ 'no_member' ],
+    //             'image'=> null,
+    // ];
+    //         $user->participants()->update( $data_participant );
+    //         return Redirect()->back()->with( 'success', 'Anda Berhasil Mendaftar!!!' );
+    //     }
+    //     return Redirect()->back();
+    // }
 }
