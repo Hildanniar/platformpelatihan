@@ -26,7 +26,7 @@ class MateriTaskController extends Controller {
                     <form action="/admin/materi_tasks/'. $row->id .'" method="POST" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                 </form>
                     <a href="/admin/materi_tasks/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
                     

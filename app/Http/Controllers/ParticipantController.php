@@ -42,7 +42,7 @@ class ParticipantController extends Controller {
                     <form action="/admin/participant/'. $row->id .'" method="POST" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                     </form>
                     <a href="/admin/participant/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
                     
@@ -149,7 +149,6 @@ class ParticipantController extends Controller {
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
             'no_member' => 'max:255',
-            'comment'=>'max:255' ,
             'image' => 'image|file|max:2048',
         ] ;
         $validatedData = $request->validate( $rules );

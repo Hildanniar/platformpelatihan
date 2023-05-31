@@ -27,11 +27,14 @@ class TrainingParticipantsController extends Controller {
                 ->editColumn('value', function($data){
                     return $data->status;
                 })
-            
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                    <a href="/admin/training_participants/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>';
-                    
+                    <a href="/admin/training_participants/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/training_participants/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>';
                     return $actionBtn;
                 })
             ->rawColumns(['action'])
@@ -84,8 +87,9 @@ class TrainingParticipantsController extends Controller {
     }
 
 
-    public function destroy( $id ) {
-        //
+    public function destroy( TrainingParticipants  $training_participant ) {
+        TrainingParticipants::destroy( $training_participant->id );
+        return redirect( '/admin/training_participants' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
     public function regristration( TypeTraining $type_training ) {

@@ -7,11 +7,27 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class SurveyController extends Controller {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+    public function getSurveys(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Survey::all();
+            return Datatables::of($data)
+                ->addIndexColumn() 
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <form action="/admin/survey/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>
+                    <a href="/admin/survey/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
 
     public function index() {
         return view( 'admin.survey.index', [ 'surveys' => Survey::all() ] );
@@ -97,25 +113,5 @@ class SurveyController extends Controller {
         return redirect( '/admin/survey' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
-    public function getSurveys(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Survey::all();
-            return Datatables::of($data)
-                ->addIndexColumn() 
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <form action="/admin/survey/'. $row->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
-                    </form>
-                    <a href="/admin/survey/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                    
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+   
 }

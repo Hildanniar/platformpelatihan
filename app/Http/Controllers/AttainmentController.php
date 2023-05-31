@@ -29,14 +29,13 @@ class AttainmentController extends Controller {
                 ->editColumn('value', function($data){
                     return $data->value ?? 'Belum dinilai';
                 })
-            
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <a href="/admin/attainment/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
                     <form action="/admin/attainment/'. $row->id .'" method="POST" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm" onclick="return confirm("Apakah Anda Yakin Menghapus Data Ini?")"><i class="fas fa-trash"></i> Hapus</button>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                     </form>';
                     
                     return $actionBtn;
