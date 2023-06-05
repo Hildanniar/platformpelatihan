@@ -81,9 +81,11 @@ class DashboardController extends Controller {
 
     public function show_training( TypeTraining $type_training ) {
         $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
+        $trainingParticipants = TrainingParticipants::where( 'type_training_id', $type_training->id )->count();
         return view( 'dashboard.layouts.public.show_training', [
             'type_training' => $type_training,
-            'schedules' => $schedules
+            'schedules' => $schedules,
+            'trainingParticipants' => $trainingParticipants
         ] );
     }
 

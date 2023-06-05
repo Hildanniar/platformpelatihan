@@ -36,9 +36,11 @@
                                                 anda ikuti
                                             </h4>
                                         @else
+                                            {{-- @foreach ($trainingParticipants as $tp) --}}
                                             <h4 class="card-title">Anda memiliki pelatihan
                                                 {{ $trainingParticipants->type_trainings->name }}
                                             </h4>
+                                            {{-- @endforeach --}}
                                         @endif
                                     </blockquote>
                                     <div class="col-12 col-stats">

@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
-use App\Models\Participant;
-use App\Models\TypeTraining;
-use App\Models\MateriTask;
-use App\Models\Attainment;
 use App\Models\Schedule;
-use App\Models\TrainingParticipants;
+use App\Models\Attainment;
+use App\Models\MateriTask;
+use App\Models\Participant;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
+use App\Models\TypeTraining;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
+use App\Models\TrainingParticipants;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class MenuParticipantController extends Controller {
 
@@ -42,14 +44,26 @@ class MenuParticipantController extends Controller {
                     }
                 })
                 ->addColumn('certificate', function($row){
+                    if($row->type_trainings->certificates){
                     $certificateBtn = '
                     <a href="/participant/certificate/'. $row->type_trainings->id .'" class="btn btn-success btn-sm"><i class="far fa-file"></i> Sertifikat</a>';
                     return $certificateBtn;
+                }else{
+                    $certificateBtn = '
+                    <button class="btn btn-success btn-sm text-white">Sertifikat belum diupload</button>';
+                    return $certificateBtn;
+                }
                 })
                 ->addColumn('comment', function($row){
+                    if($row->comment == null){
                     $commentBtn = '
                     <a href="/participant/comment/'. $row->type_trainings->id .'" class="btn btn-info btn-sm text-white"><i class="far fa-file"></i> Komentar</a>';
                     return $commentBtn;
+                }else{
+                    $certificateBtn = '
+                    <button class="btn btn-info btn-sm text-white">Sudah memberi komentar</button>';
+                    return $certificateBtn;
+                }
                 })
                 ->rawColumns(['action', 'materi', 'certificate', 'comment'])
                 ->make(true);
@@ -64,6 +78,7 @@ class MenuParticipantController extends Controller {
 
     public function materi_task_online(TypeTraining $type_training ){
         $materi_tasks = MateriTask::where('type_training_id', $type_training->id )->orderBy('bab_materi')->with('attainments')->get();
+        $attainments = Attainment::where('participant_id', auth()->user()->participants->id)->where('materi_task_id', $materi_tasks->id)->first();
         // dd($materi_tasks);
         return view('participants.materi_task.class_online', [
             'materiTask' => $materi_tasks,
@@ -78,16 +93,19 @@ class MenuParticipantController extends Controller {
     }
 
     public function show_materi(MateriTask $materi){
-        $attainments = Attainment::where('participant_id', auth()->user()->id)->where('materi_task_id', $materi->id)->first();
+        $attainments = Attainment::where('participant_id', auth()->user()->participants->id)->where('materi_task_id', $materi->id)->first();
+        $todayDate = Carbon::now()->format('Y-m-d');
         return view('participants.materi_task.post', [
             'materiTask' => $materi,
-            'attainments' => $attainments
+            'attainments' => $attainments,
+            'today' => $todayDate
         ]);
     }
     
-    public function download_materi(){
+    public function download_materi(MateriTask $materi){
+    // dd($materi);
         try {
-        return Storage::disk('local')->download('public/file_materi/COIOrbxq6cGp8ucuwG2Mo7zsqi9YCdf7RIK4e8AS.pdf');
+        return Response::download('storage/'.$materi->file_materi, $materi->bab_materi.'-'.$materi->name_materi.'.pdf');
         } catch (\Exception $error) {
             return $error->getMessage();
         }

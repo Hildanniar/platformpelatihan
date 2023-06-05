@@ -172,7 +172,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> null,
+            'no_member'=> $validatedData['no_member'],
             'image'=> $validatedData['image'],
         ];
     } else{
@@ -183,7 +183,7 @@ class ParticipantController extends Controller {
             'no_hp'=> $validatedData['no_hp'],
             'gender'=> $validatedData['gender'],
             'profession'=> $validatedData['profession'],
-            'no_member'=> null,
+            'no_member'=> $validatedData['no_member'],
         ];
     }
         $participant->users()->update($data_user);

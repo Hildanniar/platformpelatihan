@@ -25,7 +25,7 @@ class DashboardParticipantController extends Controller {
 
     public function start() {
         $participant = Participant::where( 'user_id', auth()->user()->id )->first();
-        $trainingParticipants = TrainingParticipants::where( 'participant_id', $participant->id )->first();
+        $trainingParticipants = TrainingParticipants::where( 'participant_id', $participant->id )->latest()->first();
         // dd( $trainingParticipants );
         return view( 'participants.layouts.index', [
             'trainingParticipants'=> $trainingParticipants

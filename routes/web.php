@@ -128,7 +128,7 @@ Route::get('/participant/schedule/{typeTraining}', [MenuParticipantController::c
 Route::get('/participant/materi_task/{type_training}', [MenuParticipantController::class, 'materi_task_online']);
 Route::get('/participant/information/{typeTraining}', [MenuParticipantController::class, 'materi_task_offline']);
 Route::get('/participant/materi/{materi}', [MenuParticipantController::class, 'show_materi']);
-Route::get('/download', [MenuParticipantController::class, 'download_materi']);
+Route::get('/download/{materi}', [MenuParticipantController::class, 'download_materi']);
 
 //sertifikat
 Route::get('/participant/certificate/{typeTraining}', [MenuParticipantController::class, 'certificate']);

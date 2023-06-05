@@ -10,9 +10,13 @@
                             <h2 class="text-white pb-2 fw-bold">{{ $materiTask->type_trainings->name }}</h2>
                         </div>
                         <div class="ml-md-auto py-2 py-md-0">
-                            <a href="/download/{{ $materiTask->file_materi }}" class="btn btn-white btn-border btn-round mr-2"
-                                role="button">Download
-                                Materi</a>
+                            @if ($materiTask->file_materi)
+                                <a href="/download/{{ $materiTask->id }}" class="btn btn-white btn-border btn-round mr-2"
+                                    role="button">Download
+                                    Materi</a>
+                            @else
+                            @endif
+
                             <a href="/participant/materi_task/{{ $materiTask->type_trainings->id }}"
                                 class="btn btn-white btn-border btn-round mr-2"><i class="far fa-arrow-alt-circle-left"></i>
                                 Kembali</a>
@@ -57,16 +61,25 @@
                             {!! $materiTask->desc_task !!}
                             <b>
                                 <span class="badge bg-danger text-white">Waktu Penugasan Mulai
-                                    {{ $materiTask->start_date }} s.d. {{ $materiTask->end_date }}</span>
-                                {{-- </b>
-                            @if ($attainments->is_active == '1')
-                                <button type="button" class="btn btn-success float-right text-dark">Sudah Mengupload Hasil
+                                    {{ date('d-m-Y', strtotime($materiTask->start_date)) }} s.d.
+                                    {{ date('d-m-Y', strtotime($materiTask->end_date)) }}</span>
+                            </b>
+                            @if ($attainments)
+                                <button type="button" class="btn btn-success float-right text-white">Sudah
+                                    Mengupload
+                                    Hasil
                                     Karya</button>
-                            @else --}}
-                                <a class="btn btn-primary float-right text-white"
-                                    href="/participant/attainment/{{ $materiTask->id }}" role="button">Upload
-                                    Hasil Karya</a>
-                                {{-- @endif --}}
+                            @else
+                                @if ($today > $materiTask->end_date)
+                                    <button type="button" class="btn btn-danger float-right text-white">Sudah Melewati
+                                        Batas Waktu</button>
+                                @else
+                                    <a class="btn btn-primary float-right text-white"
+                                        href="/participant/attainment/{{ $materiTask->id }}" role="button">Upload
+                                        Hasil Karya</a>
+                                @endif
+                            @endif
+
                         </article>
                     </div>
                 </div>

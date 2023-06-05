@@ -65,14 +65,17 @@
                             class="badge rounded-pill bg-warning text-dark"
                             style="text-align: right;">{{ $s->end_time }}</span></p>
                 @endforeach
-                @if (auth()->user() == null)
-                    <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
-                @elseif (auth()->user()->levels->name == 'Peserta')
-                    <a class="btn btn-primary float-right" href="/regristration/{{ $type_training->id }}"
-                        role="button">Daftar
-                        Sekarang</a>
+                @if ($trainingParticipants < $type_training->quota)
+                    @if (auth()->user() == null)
+                        <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
+                    @elseif (auth()->user()->levels->name == 'Peserta')
+                        <a class="btn btn-primary float-right" href="/regristration/{{ $type_training->id }}"
+                            role="button">Daftar
+                            Sekarang</a>
+                    @endif
+                @else
+                    <button class="btn btn-danger float-right">Kuota Sudah Penuh</button>
                 @endif
-
             </div>
         </div>
     </div>
