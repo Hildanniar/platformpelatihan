@@ -141,7 +141,7 @@
                         secara gratis. Adanya platform pelatihan ini sebagai bentuk dukungan ke perpustakaan yang
                         menjadi tempat belajar mencari ilmu.</p>
                     <div class="row g-0 mb-3">
-                        <div class="col-sm-9 wow zoomIn" data-wow-delay="0.2s">
+                        {{-- <div class="col-sm-9 wow zoomIn" data-wow-delay="0.2s">
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Pendaftaran gratis</h5>
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Mendapatkan Sertifikat
                             </h5>
@@ -150,7 +150,7 @@
                                 skill baru</h5>
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Diajarkan oleh Mentor yang
                                 berpengalaman dibidangnya</h5>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
                         <div class="bg-primary d-flex align-items-center justify-content-center rounded"
@@ -162,8 +162,6 @@
                             <h4 class="text-primary mb-0">0351-383473</h4>
                         </div>
                     </div>
-                    {{-- <a href="quote.html" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn" data-wow-delay="0.9s">Request
-                        A Quote</a> --}}
                 </div>
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
@@ -192,18 +190,18 @@
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-cubes text-white"></i>
                             </div>
-                            <h4>Terbaik Di Industri</h4>
-                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
-                            </p>
+                            <h4>Pendaftaran gratis</h4>
+                            {{-- <p class="mb-0">Pelatihan dilakukan secara gratis
+                            </p> --}}
                         </div>
                         <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
                             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3"
                                 style="width: 60px; height: 60px;">
                                 <i class="fa fa-award text-white"></i>
                             </div>
-                            <h4>Award Winning</h4>
-                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
-                            </p>
+                            <h4>Mendapatkan Sertifikat</h4>
+                            {{-- <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
+                            </p> --}}
                         </div>
                     </div>
                 </div>
@@ -218,20 +216,23 @@
                         <div class="col-12 wow zoomIn" data-wow-delay="0.4s">
                             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3"
                                 style="width: 60px; height: 60px;">
-                                <i class="fa fa-users-cog text-white"></i>
+                                <i class="fa fa-check text-white"></i>
                             </div>
-                            <h4>quotaal Staff</h4>
-                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
-                            </p>
+                            <h4>Mendapatkan pengetahuan
+                                dan
+                                skill baru</h4>
+                            {{-- <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
+                            </p> --}}
                         </div>
                         <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
                             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3"
                                 style="width: 60px; height: 60px;">
-                                <i class="fa fa-phone-alt text-white"></i>
+                                <i class="fa fa-users-cog text-white"></i>
                             </div>
-                            <h4>24/7 Support</h4>
-                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
-                            </p>
+                            <h4>Mentor yang
+                                berpengalaman dibidangnya</h4>
+                            {{-- <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor
+                            </p> --}}
                         </div>
                     </div>
                 </div>

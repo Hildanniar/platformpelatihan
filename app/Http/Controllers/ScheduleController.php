@@ -11,11 +11,31 @@ use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ScheduleController extends Controller {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+    public function getSchedules(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Schedule::all();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->editColumn('name', function($data){
+                    return $data->type_trainings->name ?? 'none';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                    <a href="/admin/schedule/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
+                    <form action="/admin/schedule/'. $row->id .'" method="POST" class="d-inline">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value=' . csrf_token() . '>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                    </form>
+                    <a href="/admin/schedule/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
+                    
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
 
     public function index() {
         return view( 'admin.schedule.index', [
@@ -114,40 +134,16 @@ class ScheduleController extends Controller {
         return redirect( '/admin/schedule' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
-    public function getSchedules(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Schedule::all();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->editColumn('name', function($data){
-                    return $data->type_trainings->name ?? 'none';
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '
-                    <a href="/admin/schedule/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
-                    <form action="/admin/schedule/'. $row->id .'" method="POST" class="d-inline">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value=' . csrf_token() . '>
-                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
-                    </form>
-                    <a href="/admin/schedule/'. $row->id .'" class="btn btn-success btn-sm"><i class="far fa-eye"></i> Detail</a>';
-                    
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+   
 
-    public function export_excel() {
-        return Excel::download( new ScheduleExport, 'jadwal_pelatihan.xlsx' );
-    }
+    // public function export_excel() {
+    //     return Excel::download( new ScheduleExport, 'jadwal_pelatihan.xlsx' );
+    // }
 
-    public function export_pdf() {
-        $schedule = Schedule::get();
-        $pdf = PDF::loadView( 'admin.pdf.schedule', ['schedules' => $schedule] )
-        ->setPaper('a4', 'potrait');
-        return $pdf->stream();
-    }
+    // public function export_pdf() {
+    //     $schedule = Schedule::get();
+    //     $pdf = PDF::loadView( 'admin.pdf.schedule', ['schedules' => $schedule] )
+    //     ->setPaper('a4', 'potrait');
+    //     return $pdf->stream();
+    // }
 }

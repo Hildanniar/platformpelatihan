@@ -37,8 +37,10 @@
                             @endif
                         @endif
                         @if (auth()->user()->levels->name == 'Admin')
-
-                            @if (auth()->user()->admins->image == null)
+                            @if (auth()->user()->levels->name == 'Admin')
+                                <img src="/assets/admin/img/profiledefault.png" alt="..."
+                                    class="avatar-img rounded-circle">
+                            @elseif (auth()->user()->admins->image == null)
                                 <img src="/assets/admin/img/profiledefault.png" alt="..."
                                     class="avatar-img rounded-circle">
                             @else

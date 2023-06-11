@@ -39,32 +39,26 @@ class SurveyController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function create() {
-        return view( 'dashboard.layouts.main', [
-            'surveys' => Survey::all()
-        ] );
-    }
+    // public function create() {
+    //     return view( 'dashboard.layouts.main', [
+    //         'surveys' => Survey::all()
+    //     ] );
+    // }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
 
-    public function store( Request $request ) {
-        $validatedData = $request->validate( [
-            'name' => 'required',
-            'age' => 'required',
-            'city' => 'required',
-            'profession' => 'required',
-            'type_training' => 'required',
-            'month' => 'required',
-            'excuse' => 'required'
-        ] );
-        Survey::create( $validatedData );
-        return redirect( '/' )->with( 'success', 'Berhasil Dikirim!' );
-    }
+    // public function store( Request $request ) {
+    //     $validatedData = $request->validate( [
+    //         'name' => 'required',
+    //         'age' => 'required',
+    //         'city' => 'required',
+    //         'profession' => 'required',
+    //         'type_training' => 'required',
+    //         'month' => 'required',
+    //         'excuse' => 'required'
+    //     ] );
+    //     Survey::create( $validatedData );
+    //     return redirect( '/' )->with( 'success', 'Berhasil Dikirim!' );
+    // }
 
     /**
     * Display the specified resource.
@@ -79,39 +73,19 @@ class SurveyController extends Controller {
         ] );
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Survey  $survey
-    * @return \Illuminate\Http\Response
-    */
+    // public function edit( Survey $survey ) {
+    
+    // }
 
-    public function edit( Survey $survey ) {
-       
-    }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\Survey  $survey
-    * @return \Illuminate\Http\Response
-    */
+    // public function update( Request $request, Survey $survey ) {
+    // }
 
-    public function update( Request $request, Survey $survey ) {
-    }
-
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Survey  $survey
-    * @return \Illuminate\Http\Response
-    */
 
     public function destroy( Survey $survey ) {
         Survey::destroy( $survey->id );
         return redirect( '/admin/survey' )->with( 'success', 'Data Berhasil Dihapus!' );
     }
 
-   
+
 }

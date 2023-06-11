@@ -142,5 +142,4 @@ class MateriTaskController extends Controller {
         return redirect( '/admin/materi_tasks' )->with( 'success', 'Data Berhasil dihapus!' );
     }
 
-   
 }

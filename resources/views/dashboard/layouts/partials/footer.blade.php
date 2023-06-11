@@ -54,9 +54,9 @@
                                     class="bi bi-arrow-right text-primary me-2"></i>Home</a>
                             <a class="text-light mb-2" href="/about"><i
                                     class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                            <a class="text-light mb-2" href="#"><i
+                            <a class="text-light mb-2" href="/attainment"><i
                                     class="bi bi-arrow-right text-primary me-2"></i>Karya</a>
-                            <a class="text-light mb-2" href="#"><i
+                            <a class="text-light mb-2" href="/training"><i
                                     class="bi bi-arrow-right text-primary me-2"></i>Pelatihan</a>
                         </div>
                     </div>
@@ -70,7 +70,11 @@
         <div class="row justify-content-end">
             <div class="col-lg-8 col-md-6">
                 <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
-                    <p class="mb-0">&copy; <a class="text-white">Kampus PSDKU Madiun Universitas Sebelas Maret</a>.
+                    <p class="mb-0">&copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> <a class="text-white">Kampus PSDKU Madiun Universitas Sebelas
+                            Maret</a>.
                         Dikelola oleh
                         Dinas Perpustakaan dan Kearsipan Kabupaten Madiun.
                     </p>

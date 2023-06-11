@@ -92,9 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    @include('admin.layouts.partials.footer')
+        @include('admin.layouts.partials.footer')
     </div>
 @endsection

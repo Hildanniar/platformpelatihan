@@ -78,7 +78,7 @@ class MenuParticipantController extends Controller {
 
     public function materi_task_online(TypeTraining $type_training ){
         $materi_tasks = MateriTask::where('type_training_id', $type_training->id )->orderBy('bab_materi')->with('attainments')->get();
-        $attainments = Attainment::where('participant_id', auth()->user()->participants->id)->where('materi_task_id', $materi_tasks->id)->first();
+        // $attainments = Attainment::where('participant_id', auth()->user()->participants->id)->where('materi_task_id', $materi_tasks->id)->first();
         // dd($materi_tasks);
         return view('participants.materi_task.class_online', [
             'materiTask' => $materi_tasks,

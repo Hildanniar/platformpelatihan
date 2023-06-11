@@ -99,14 +99,14 @@ class TypeTrainingController extends Controller {
 
 
 
-    public function export_excel() {
-        return Excel::download( new TypeTrainingExport, 'jenis_pelatihan.xlsx' );
-    }
+    // public function export_excel() {
+    //     return Excel::download( new TypeTrainingExport, 'jenis_pelatihan.xlsx' );
+    // }
 
-    public function export_pdf() {
-        $type_trainings = TypeTraining::get();
-        $pdf = PDF::loadView( 'admin.pdf.type_training', ['type_trainings' => $type_trainings] )
-        ->setPaper('a4', 'potrait');
-        return $pdf->stream();
-    }
+    // public function export_pdf() {
+    //     $type_trainings = TypeTraining::get();
+    //     $pdf = PDF::loadView( 'admin.pdf.type_training', ['type_trainings' => $type_trainings] )
+    //     ->setPaper('a4', 'potrait');
+    //     return $pdf->stream();
+    // }
 }
