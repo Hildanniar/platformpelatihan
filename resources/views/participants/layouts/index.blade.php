@@ -6,7 +6,10 @@
                 <div class="page-inner py-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            @if ($trainingParticipants->participant_id == null)
+                            @if (auth()->user()->levels->name == 'Peserta')
+                                <h2 class="text-white pb-2 fw-bold">Silahkan Daftar Pelatihan
+                                </h2>
+                            @elseif ($trainingParticipants->participant_id == null)
                                 <h2 class="text-white pb-2 fw-bold">Silahkan Daftar Pelatihan
                                 </h2>
                             @else
@@ -31,22 +34,27 @@
                                         </div>
                                     </div>
                                     <blockquote class="col-12">
-                                        @if ($trainingParticipants->participant_id == null)
+                                        @if (auth()->user()->levels->name == 'Peserta')
+                                            <h4 class="card-title">Silahkan memilih jenis pelatihan yang akan
+                                                anda ikuti
+                                            </h4>
+                                        @elseif ($trainingParticipants->participant_id == null)
                                             <h4 class="card-title">Silahkan memilih jenis pelatihan yang akan
                                                 anda ikuti
                                             </h4>
                                         @else
-                                            {{-- @foreach ($trainingParticipants as $tp) --}}
                                             <h4 class="card-title">Anda memiliki pelatihan
                                                 {{ $trainingParticipants->type_trainings->name }}
                                             </h4>
-                                            {{-- @endforeach --}}
                                         @endif
                                     </blockquote>
                                     <div class="col-12 col-stats">
-                                        @if ($trainingParticipants->participant_id == null)
+                                        @if (auth()->user()->levels->name == 'Peserta')
                                             <a href="/dashboard/participant/training"
-                                                class="btn btn-secondary btn-round">Daftar Sekarang</a>
+                                                class="btn btn-secondary btn-round text-white">Daftar Sekarang</a>
+                                        @elseif ($trainingParticipants->participant_id == null)
+                                            <a href="/dashboard/participant/training"
+                                                class="btn btn-secondary btn-round text-white">Daftar Sekarang</a>
                                         @else
                                             <a href="/participant/training"
                                                 class="btn btn-secondary btn-round text-white">Mulai
