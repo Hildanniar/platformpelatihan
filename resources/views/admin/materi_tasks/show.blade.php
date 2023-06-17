@@ -69,14 +69,19 @@
                                         <td> {{ $materi_tasks->name_task }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Kriteria Upload Tugas</th>
+                                        <th>:</th>
+                                        <td> {{ $materi_tasks->criteria_task }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Tanggal Mulai</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->start_date }}</td>
+                                        <td> {{ date('d/m/Y', strtotime($materi_tasks->start_date)) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Akhir</th>
                                         <th>:</th>
-                                        <td> {{ $materi_tasks->end_date }}</td>
+                                        <td> {{ date('d/m/Y', strtotime($materi_tasks->end_date)) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi Tugas</th>

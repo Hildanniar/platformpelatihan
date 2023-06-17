@@ -23,6 +23,18 @@ class ScheduleController extends Controller {
                 ->editColumn('class', function($data){
                     return $data->type_trainings->class ?? 'none';
                 })
+                ->editColumn('start_date', function($data){
+                    return date('d/m/Y', strtotime($data->start_date))?? 'none';
+                })
+                ->editColumn('end_date', function($data){
+                    return date('d/m/Y', strtotime($data->end_date))?? 'none';
+                })
+                ->editColumn('start_time', function($data){
+                    return date('H:i', strtotime($data->start_time))?? 'none';
+                })
+                ->editColumn('end_time', function($data){
+                    return date('H:i', strtotime($data->end_time))?? 'none';
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <a href="/admin/schedule/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>

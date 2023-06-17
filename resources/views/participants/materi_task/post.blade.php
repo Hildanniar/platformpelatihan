@@ -61,8 +61,8 @@
                             {!! $materiTask->desc_task !!}
                             <b>
                                 <span class="badge bg-danger text-white">Waktu Penugasan Mulai
-                                    {{ date('d-m-Y', strtotime($materiTask->start_date)) }} s.d.
-                                    {{ date('d-m-Y', strtotime($materiTask->end_date)) }}</span>
+                                    {{ date('d/m/Y', strtotime($materiTask->start_date)) }} s.d.
+                                    {{ date('d/m/Y', strtotime($materiTask->end_date)) }}</span>
                             </b>
                             @if ($attainments)
                                 <button type="button" class="btn btn-success float-right text-white">Sudah

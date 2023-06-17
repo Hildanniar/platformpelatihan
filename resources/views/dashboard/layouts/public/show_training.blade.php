@@ -57,13 +57,13 @@
                 </article>
                 @foreach ($type_training->schedules as $s)
                     <p>Jadwal Pelatihan : <span class="badge rounded-pill bg-warning text-dark"
-                            style="text-align: right;">{{ $s->start_date }} </span> s.d. <span
+                            style="text-align: right;">{{ date('d/m/Y', strtotime($s->start_date)) }}</span> s.d. <span
                             class="badge rounded-pill bg-warning text-dark"
-                            style="text-align: right;">{{ $s->end_date }}</span></p>
+                            style="text-align: right;">{{ date('d/m/Y', strtotime($s->end_date)) }}</span></p>
                     <p>Waktu Pelatihan : <span class="badge rounded-pill bg-warning text-dark"
-                            style="text-align: right;">{{ $s->start_time }} </span> s.d. <span
+                            style="text-align: right;">{{ date('H:i', strtotime($s->start_time)) }} </span> s.d. <span
                             class="badge rounded-pill bg-warning text-dark"
-                            style="text-align: right;">{{ $s->end_time }}</span></p>
+                            style="text-align: right;">{{ date('H:i', strtotime($s->end_time)) }}</span></p>
                 @endforeach
                 @if (auth()->user() == null)
                     <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>

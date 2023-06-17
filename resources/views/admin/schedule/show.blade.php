@@ -36,22 +36,22 @@
                                     <tr>
                                         <th>Tanggal Mulai</th>
                                         <th>:</th>
-                                        <td> {{ $schedule->start_date }}</td>
+                                        <td> {{ date('d/m/Y', strtotime($schedule->start_date)) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Akhir</th>
                                         <th>:</th>
-                                        <td> {{ $schedule->end_date }}</td>
+                                        <td> {{ date('d/m/Y', strtotime($schedule->end_date)) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Jam Mulai</th>
                                         <th>:</th>
-                                        <td> {{ $schedule->start_time }}</td>
+                                        <td> {{ date('H:i', strtotime($schedule->start_time)) }}</td>
                                     </tr>
                                     <tr>
                                         <th>Jam Akhir</th>
                                         <th>:</th>
-                                        <td> {{ $schedule->end_time }}</td>
+                                        <td> {{ date('H:i', strtotime($schedule->end_time)) }}</td>
                                     </tr>
                                 </table>
                             </div>
