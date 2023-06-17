@@ -19,6 +19,7 @@ class MateriTask extends Migration
             $table->text('body_materi');
             $table->string('file_materi')->nullable();
             $table->string('name_task');
+            $table->string('criteria_task');
             $table->date('start_date');
             $table->date('end_date');
             $table->text('desc_task');
