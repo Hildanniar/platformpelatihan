@@ -36,8 +36,16 @@
                     <h1>{{ $attainment->materi_tasks->name_materi }}</h1>
                 </center>
                 <p>By.{{ $attainment->participants->name }}</p>
-                <img src="https://source.unsplash.com/1200x400?{{ $attainment->materi_tasks->name_materi }}"
-                    alt="{{ $attainment->materi_tasks->name_materi }}" class="card-img-top">
+
+                @if ($attainment->image != null)
+                    <div style="max-height:500px; overflow:hidden;">
+                        <img src="{{ asset('storage/' . $attainment->image) }}" alt="{{ $attainment->image }}"
+                            class="card-img-top">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/1200x400?{{ $attainment->materi_tasks->name_materi }}"
+                        alt="{{ $attainment->materi_tasks->name_materi }}" class="card-img-top">
+                @endif
                 <article class="my-3 fs-6">
                     {!! $attainment->desc !!}
                 </article>

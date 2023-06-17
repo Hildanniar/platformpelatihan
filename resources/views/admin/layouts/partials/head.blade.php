@@ -19,7 +19,6 @@
             display: none;
         }
     </style>
-
     <script>
         WebFont.load({
             google: {
@@ -43,4 +42,9 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/assets/admin/css/demo.css">
+
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>

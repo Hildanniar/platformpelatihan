@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Platform Pelatihan- Dinas Perpustakaan dan Kearsipan Kabupaten Madiun</title>
+    <link rel="shortcut icon" href="{{ asset('assets/admin/img/logodinas.png') }}" type="image/x-icon" />
     {{-- Bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -114,3 +116,20 @@
     </div>
 </section>
 <!-- Section: Design Block -->
+
+<script src="assets/login/js/bootstrap.js"></script>
+<script src="assets/login/js/app.js"></script>
+<script src="/assets/login/extensions/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#reload').click(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/login/reload-captcha',
+            success: function(data) {
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
+
+</html>

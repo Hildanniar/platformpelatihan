@@ -47,7 +47,6 @@
                                                     <th>Email</th>
                                                     <th>Alamat</th>
                                                     <th>No.Telp</th>
-                                                    {{-- <th>Kelas</th> --}}
                                                     <th width="100px">Action</th>
                                                 </tr>
                                             </thead>

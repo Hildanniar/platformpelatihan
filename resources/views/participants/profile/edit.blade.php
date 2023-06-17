@@ -39,6 +39,7 @@
                                             <h6 class="user-email">{{ auth()->user()->email }}</h6>
                                             <br>
                                             <div class="media-body ml-4">
+                                                <input type="hidden" name="oldImage" value="">
                                                 <label class="btn btn-outline-warning">
                                                     Upload new photo
                                                     <input type="file" class="account-settings-fileinput" name="image"
@@ -59,7 +60,7 @@
 
                                     <div class="row gutters">
                                         @if (session()->has('success'))
-                                            <div class="alert alert-success col-lg-8" role="alert">
+                                            <div class="alert alert-success col-lg-12" role="alert">
                                                 {{ session('success') }}
                                             </div>
                                         @endif

@@ -76,10 +76,10 @@
                                     <label for="file" class="form-label">File Materi</label>
                                     <input type="hidden" name="oldFile" value="{{ $materi_tasks->file_materi }}">
                                     @if ($materi_tasks->file_materi)
-                                        <img src="{{ asset('storage/' . $materi_tasks->file_materi) }}"
-                                            class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                        <iframe src="{{ asset('storage/' . $materi_tasks->file_materi) }}" type="pdf"
+                                            width="600" height="400"></iframe>
                                     @else
-                                        <img class="img-preview img-fluid mb-3 col-sm-5">
+                                        {{-- <img class="img-preview img-fluid mb-3 col-sm-5"> --}}
                                     @endif
                                     <input class="form-control @error('file_materi') is-invalid @enderror " type="file"
                                         id="file_materi" name="file_materi" onchange="previewFile()">

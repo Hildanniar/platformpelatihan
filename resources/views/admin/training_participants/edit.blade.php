@@ -56,27 +56,52 @@
                                                         <th>Status Komentar Peserta</th>
                                                         <th>:</th>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="nopublikasi" name="status"
-                                                                        value="NoPublikasi" class="custom-control-input"
-                                                                        required
-                                                                        {{ $training_participants->status == 'NoPublikasi' ? 'checked' : '' }}>
-                                                                    <label class="custom-control-label"
-                                                                        for="nopublikasi">Tidak
-                                                                        Publikasi</label><br>
+                                                            @if ($training_participants->comment === null)
+                                                                <div class="form-group">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="nopublikasi"
+                                                                            name="status" value="NoPublikasi"
+                                                                            class="custom-control-input" disabled readonly
+                                                                            {{ $training_participants->status == 'NoPublikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="nopublikasi">Tidak
+                                                                            Publikasi</label><br>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="publikasi" name="status"
+                                                                            value="Publikasi" class="custom-control-input"
+                                                                            disabled readonly
+                                                                            {{ $training_participants->status == 'Publikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="publikasi">Publikasi</label>
+                                                                    </div>
+                                                                    <small style="color:red">*Silahkan dipilih salah
+                                                                        satu</small>
                                                                 </div>
-                                                                <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="publikasi" name="status"
-                                                                        value="Publikasi" class="custom-control-input"
-                                                                        required
-                                                                        {{ $training_participants->status == 'Publikasi' ? 'checked' : '' }}>
-                                                                    <label class="custom-control-label"
-                                                                        for="publikasi">Publikasi</label>
+                                                            @else
+                                                                <div class="form-group">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="nopublikasi"
+                                                                            name="status" value="NoPublikasi"
+                                                                            class="custom-control-input" required
+                                                                            {{ $training_participants->status == 'NoPublikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="nopublikasi">Tidak
+                                                                            Publikasi</label><br>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" id="publikasi" name="status"
+                                                                            value="Publikasi" class="custom-control-input"
+                                                                            required
+                                                                            {{ $training_participants->status == 'Publikasi' ? 'checked' : '' }}>
+                                                                        <label class="custom-control-label"
+                                                                            for="publikasi">Publikasi</label>
+                                                                    </div>
+                                                                    <small style="color:red">*Silahkan dipilih salah
+                                                                        satu</small>
                                                                 </div>
-                                                                <small style="color:red">*Silahkan dipilih salah
-                                                                    satu</small>
-                                                            </div>
+                                                            @endif
+
                                                         </td>
                                                     </tr>
                                                 </table>

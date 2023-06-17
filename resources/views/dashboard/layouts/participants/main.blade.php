@@ -339,9 +339,9 @@
                             </div>
                             <div class="p-4">
                                 <div class="d-flex mb-3">
-                                    <small class="me-3"><i class="far fa-user text-primary me-2"></i>John
-                                        Doe</small>
-                                    <small><i class="far fa-calendar-alt text-primary me-2"></i></small>
+                                    <small class="me-3"><i
+                                            class="far fa-user text-primary me-2"></i>{{ $at->participants->name }}</small>
+                                    {{-- <small><i class="far fa-calendar-alt text-primary me-2"></i></small> --}}
                                 </div>
                                 {{-- <h4 class="mb-3">{{ $at->materi_tasks->name }}</h4> --}}
                                 <p>{{ $at->excerpt }}</p>

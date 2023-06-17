@@ -31,7 +31,8 @@
                                     <tr>
                                         <th>Link Sertifikat</th>
                                         <th>:</th>
-                                        <td> {!! $certificate->link !!}
+                                        <td> <a href="{{ $certificate->link }}" target="_blank" style="color:black">
+                                                {{ $certificate->link }}</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -45,6 +46,7 @@
                     </div>
                 </div>
             </div>
-            @include('admin.layouts.partials.footer')
         </div>
-    @endsection
+        @include('admin.layouts.partials.footer')
+    </div>
+@endsection
