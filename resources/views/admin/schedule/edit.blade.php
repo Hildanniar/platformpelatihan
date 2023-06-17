@@ -35,9 +35,11 @@
                                         @foreach ($type_trainings as $type_training)
                                             @if (old('type_training_id', $schedule->type_training_id) == $type_training->id)
                                                 <option value="{{ $type_training->id }}" selected>{{ $type_training->name }}
+                                                    - Kelas {{ $type_training->class }}
                                                 </option>
                                             @else
-                                                <option value="{{ $type_training->id }}">{{ $type_training->name }}</option>
+                                                <option value="{{ $type_training->id }}">{{ $type_training->name }} -
+                                                    Kelas {{ $type_training->class }} </option>
                                             @endif
                                         @endforeach
                                     </select>

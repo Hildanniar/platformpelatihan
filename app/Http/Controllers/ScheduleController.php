@@ -20,6 +20,9 @@ class ScheduleController extends Controller {
                 ->editColumn('name', function($data){
                     return $data->type_trainings->name ?? 'none';
                 })
+                ->editColumn('class', function($data){
+                    return $data->type_trainings->class ?? 'none';
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <a href="/admin/schedule/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
@@ -43,24 +46,12 @@ class ScheduleController extends Controller {
         ] );
     }
 
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
     public function create() {
         return view( 'admin.schedule.create', [
             'type_trainings' => TypeTraining::all()
         ] );
     }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
 
     public function store( Request $request ) {
         $validatedData = $request->validate( [
@@ -74,25 +65,12 @@ class ScheduleController extends Controller {
         return redirect( '/admin/schedule' )->with( 'success', 'Data Berhasil Ditambahkan!' );
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Schedule  $schedule
-    * @return \Illuminate\Http\Response
-    */
-
     public function show( Schedule $schedule ) {
         return view( 'admin.schedule.show', [
             'schedule' =>  $schedule
         ] );
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Schedule  $schedule
-    * @return \Illuminate\Http\Response
-    */
 
     public function edit( Schedule $schedule ) {
         return view( 'admin.schedule.edit', [
@@ -101,13 +79,6 @@ class ScheduleController extends Controller {
         ] );
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\Schedule  $schedule
-    * @return \Illuminate\Http\Response
-    */
 
     public function update( Request $request, Schedule $schedule ) {
         $rules = [
@@ -122,12 +93,6 @@ class ScheduleController extends Controller {
         return redirect( '/admin/schedule' )->with( 'success', 'Data Berhasil Diupdate!' );
     }
 
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Schedule  $schedule
-    * @return \Illuminate\Http\Response
-    */
 
     public function destroy( Schedule $schedule ) {
         Schedule::destroy( $schedule->id );

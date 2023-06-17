@@ -43,6 +43,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Jenis Pelatihan</th>
+                                                    <th>Kelas Pelatihan</th>
                                                     <th>Tanggal Mulai</th>
                                                     <th>Tanggal Akhir</th>
                                                     <th>Jam Mulai</th>
@@ -78,6 +79,10 @@
                     {
                         data: 'name',
                         name: 'jenis pelatihan'
+                    },
+                    {
+                        data: 'class',
+                        name: 'class'
                     },
                     {
                         data: 'start_date',

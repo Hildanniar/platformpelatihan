@@ -29,6 +29,11 @@
                                         <td> {{ $schedule->type_trainings->name ?? 'none' }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Kelas Pelatihan</th>
+                                        <th>:</th>
+                                        <td> {{ $schedule->type_trainings->class ?? 'none' }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Tanggal Mulai</th>
                                         <th>:</th>
                                         <td> {{ $schedule->start_date }}</td>
