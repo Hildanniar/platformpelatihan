@@ -78,6 +78,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
+                                    <small style="color:red">*Ukuran file materi max.5 MB.</small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="body_materi" class="form-label ">Teks Materi</label>
@@ -99,13 +100,28 @@
                                     <label for="name_task" class="form-label">Nama Tugas</label>
                                     <input type="text"
                                         class="form-control input-solid @error('name_task') is-invalid @enderror"
-                                        id="name_task" name="name_task" required autofocus placeholder="Nama"
+                                        id="name_task" name="name_task" required autofocus placeholder="Nama Tugas"
                                         value="{{ old('name_task') }}"">
                                     @error('name_task')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <label for="criteria_task" class="form-label">Kriteria Upload Tugas</label>
+                                    <input type="text"
+                                        class="form-control input-solid @error('criteria_task') is-invalid @enderror"
+                                        id="criteria_task" name="criteria_task" required autofocus
+                                        placeholder="Kriteria Upload Tugas" value="{{ old('criteria_task') }}"">
+                                    @error('criteria_task')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    <small style="color:red">*Disesuaikan dengan jenis tugas dan pelatihannya. Contoh :
+                                        Dikumpulkan
+                                        dalam bentuk Video MP4/Gambar PNG/PDF dsb.</small>
                                 </div>
                                 <div class="form-group form-floating-label">
                                     <label for="start_date" class="form-label">Tanggal Mulai</label>

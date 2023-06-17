@@ -65,6 +65,8 @@
                                         @enderror
                                         <small style="color:red">*URL dapat berupa Google Drive, Github dan lainnya</small>
                                         <br>
+                                        <small style="color:red">*{{ $materiTask->criteria_task }}</small>
+                                        <br>
                                     </div>
                                     <div class="form-group">
                                         <label for="desc">Deskripsi Hasil Karya</label>

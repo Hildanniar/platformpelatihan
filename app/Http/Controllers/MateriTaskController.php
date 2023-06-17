@@ -20,6 +20,12 @@ class MateriTaskController extends Controller {
                 ->editColumn('name', function($data){
                     return $data->type_trainings->name ?? 'none';
                 })
+                ->editColumn('start_date', function($data){
+                    return date('d/m/Y', strtotime($data->start_date)) ?? 'none';
+                })
+                ->editColumn('end_date', function($data){
+                    return date('d/m/Y', strtotime($data->end_date)) ?? 'none';
+                })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                     <a href="/admin/materi_tasks/'. $row->id .'/edit" class="edit btn btn-warning btn-sm"><i class="far fa-edit""></i> Edit</a>
@@ -53,9 +59,10 @@ class MateriTaskController extends Controller {
             'type_training_id' => 'required',
             'name_materi' => 'required',
             'bab_materi' => 'required',
-            'file_materi' => 'file|mimes:pdf|max:5120',
+            'file_materi' => 'file|mimes:pdf|max:5000',
             'body_materi' => 'required',
             'name_task' => 'required',
+            'criteria_task' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'desc_task' => 'required',
@@ -73,6 +80,7 @@ class MateriTaskController extends Controller {
                 'file_materi'=> $validatedData['file_materi'],
                 'body_materi'=> $validatedData['body_materi'],
                 'name_task'=> $validatedData['name_task'],
+                'criteria_task'=> $validatedData['criteria_task'],
                 'start_date'=> $validatedData['start_date'],
                 'end_date'=> $validatedData['end_date'],
                 'desc_task'=> $validatedData['desc_task'],
@@ -85,6 +93,7 @@ class MateriTaskController extends Controller {
                 'bab_materi'=> $validatedData['bab_materi'],
                 'body_materi'=> $validatedData['body_materi'],
                 'name_task'=> $validatedData['name_task'],
+                'criteria_task'=> $validatedData['criteria_task'],
                 'start_date'=> $validatedData['start_date'],
                 'end_date'=> $validatedData['end_date'],
                 'desc_task'=> $validatedData['desc_task'],
@@ -116,6 +125,7 @@ class MateriTaskController extends Controller {
             'file_materi' => 'file|mimes:pdf|max:5120',
             'body_materi' => 'required',
             'name_task' => 'required',
+            'criteria_task' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
             'desc_task' => 'required',
@@ -123,7 +133,7 @@ class MateriTaskController extends Controller {
         $validatedData = $request->validate( $rules );
 
         if ( $request->file( 'file_materi' ) ) {
-            if ( $request->oldfile_materi ) {
+            if ( $request->oldFile ) {
                 Storage::delete( $request->oldFile );
             }
             $validatedData[ 'file_materi' ] = $request->file( 'file_materi' )->store( 'file_materi' );
