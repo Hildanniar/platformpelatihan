@@ -16,13 +16,21 @@
     <!-- Navbar Start -->
     <div class="container-fluid position-relative p-0">
         @include('dashboard.layouts.partials.navbar')
-        <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
-            <div class="row py-5">
-                <div class="col-12 pt-lg-5 mt-lg-5 text-center">
-                    <h1 class="display-4 text-white animated zoomIn">Pelatihan</h1>
-                    <a href="/" class="h5 text-white">Home</a>
-                    <i class="far fa-circle text-white px-2"></i>
-                    <a href="/training" class="h5 text-white">Pelatihan</a>
+        {{-- <div class="container-fluid bg-primary py-5" style="margin-bottom: 90px;"> --}}
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="/assets/content-photo/pelatihan6.jpeg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="row py-5">
+                            <div class="col-12 pt-lg-5 mt-lg-5 text-center">
+                                <h1 class="display-4 text-white animated zoomIn">Pelatihan</h1>
+                                <a href="/" class="h5 text-white">Home</a>
+                                <i class="far fa-circle text-white px-2"></i>
+                                <a href="/training" class="h5 text-white">Pelatihan</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

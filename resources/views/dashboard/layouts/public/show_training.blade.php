@@ -72,7 +72,9 @@
                         role="button">Daftar
                         Sekarang</a>
                 @endif
-                {{-- @if ($trainingParticipants < $type_training->quota)
+                {{-- @if ($training_participants < $type_training->quota) --}}
+                {{-- @if ($type_training->quota)
+                    {{-- {{ dd($training_participants) }} --}}
                     @if (auth()->user() == null)
                         <a class="btn btn-primary float-right" href="/login" role="button">Daftar Sekarang</a>
                     @elseif (auth()->user()->levels->name == 'Peserta')

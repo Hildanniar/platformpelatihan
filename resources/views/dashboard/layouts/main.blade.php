@@ -19,7 +19,7 @@
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="/assets/dashboard/img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="/assets/content-photo/pelatihan2.jpeg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Dinas Perpustakaan dan
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/assets/dashboard/img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="/assets/content-photo/pelatihan3.jpeg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Dinas Perpustakaan dan
@@ -166,7 +166,7 @@
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="/assets/dashboard/img/about.jpg" style="object-fit: cover;">
+                            src="/assets/content-photo/pelatihan9.jpeg" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                 <div class="col-lg-4  wow zoomIn" data-wow-delay="0.9s" style="min-height: 350px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.1s"
-                            src="/assets/dashboard/img/feature.jpg" style="object-fit: cover;">
+                            src="/assets/content-photo/pelatihan2.jpeg" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-4">
