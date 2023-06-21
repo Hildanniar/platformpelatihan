@@ -26,7 +26,7 @@ class DashboardParticipantController extends Controller {
     public function start() {
         $participant = Participant::where( 'user_id', auth()->user()->id )->first();
         $trainingParticipants = TrainingParticipants::where( 'participant_id', $participant->id )->latest()->first();
-        // dd( $trainingParticipants );
+        // dd( $trainingParticipants->participant_id );
         return view( 'participants.layouts.index', [
             'trainingParticipants'=> $trainingParticipants
         ] );
@@ -64,6 +64,7 @@ class DashboardParticipantController extends Controller {
 
     public function show_training( TypeTraining $type_training ) {
         $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
+        $training_participants = TrainingParticipants::where( 'type_training_id', $type_training->id )->count();
         return view( 'dashboard.layouts.public.show_training', [
             'type_training' => $type_training,
             'schedules' => $schedules
@@ -85,7 +86,6 @@ class DashboardParticipantController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.auth()->user()->id.'|max:255',
             'email' => 'required',
-            'password'=>'nullable',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',
@@ -94,21 +94,35 @@ class DashboardParticipantController extends Controller {
             'no_member' => 'required|max:255',
             'image' => 'image|file|max:2048',
         ] ;
+        if ( $request->password != null ) {
+            $rules[ 'password' ] = 'max:20';
+        }
         $validatedData = $request->validate( $rules );
         $user = User::find( Auth::user()->id );
         if ( $user ) {
             if ( auth()->user()->levels->name == 'Peserta' ) {
-                $data_user = [
-                    'username'=> $validatedData[ 'username' ],
-                    'email'=> $validatedData[ 'email' ],
-                    'password'=> bcrypt( $validatedData[ 'password' ] ),
-                ];
 
+                if ( $request->password != null ) {
+                    $data_user = [
+                        'level_id' => 3,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+                    ];
+                } else {
+                    $data_user = [
+                        'level_id' => 3,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                    ];
+                }
                 if ( $request->file( 'image' ) ) {
                     if ( $request->oldImage ) {
                         Storage::delete( $request->oldImage );
                     }
                     $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                }
+                if ( $request->image != null ) {
                     $data_participant = [
                         'name'=> $validatedData[ 'name' ],
                         'address'=> $validatedData[ 'address' ],

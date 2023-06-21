@@ -107,7 +107,7 @@ Route::get('/dashboard/participant/start', [DashboardParticipantController::clas
 Route::get('/dashboard/participant/attainment', [DashboardParticipantController::class, 'attainment']);
 Route::get('/dashboard/participant/attainment/{attainment}', [DashboardParticipantController::class, 'show_attainment']);
 Route::get('/dashboard/participant/training', [DashboardParticipantController::class, 'type_training']);
-Route::get('/dashboard/participant/training/{type_training}', [DashboardParticipantController::class, 'show_training']);
+Route::get('/dashboard/participant/training/{type_training}', [DashboardController::class, 'show_training']);
 
 // pendaftaran pelatihan
 Route::get('/regristration/{type_training}', [TrainingParticipantsController::class, 'regristration'])->name('regristration.training');

@@ -140,13 +140,25 @@ class AdminController extends Controller {
                 'image' => 'image|file|max:2048',
             ];
             
+            if($request->password != null){
+                $rules['password'] = 'max:20';
+            }
             $validatedData = $request->validate( $rules );
+            if($request->password != null){
                 $data_user = [
+                    'level_id' => 1,
                     'username'=> $validatedData['username'],
                     'email'=> $validatedData['email'],
                     'password'=> bcrypt($validatedData['password']),
                     
                 ];
+            } else {
+                $data_user = [
+                    'level_id' => 1,
+                    'username'=> $validatedData['username'],
+                    'email'=> $validatedData['email'],
+                ];
+            }
             if ($request->file('image')) {
                 if ($request->oldImage) {
                     Storage::delete($request->oldImage);
@@ -192,5 +204,6 @@ class AdminController extends Controller {
         $admin->users()->delete();
         $admin->destroy($admin->id);
         return redirect( '/admin/admin' )->with( 'success', 'Data berhasil dihapus!' );
+        
     }
 }

@@ -34,6 +34,6 @@ class TypeTraining extends Model {
     // }
 
     public function training_participants() {
-        return $this->hasMany( Participant::class, 'type_training_id' );
+        return $this->hasMany( TrainingParticipants::class, 'type_training_id' );
     }
 }

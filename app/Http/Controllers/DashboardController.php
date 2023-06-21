@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
 
 class DashboardController extends Controller {
     public function dashboardAdmin() {
@@ -80,13 +81,19 @@ class DashboardController extends Controller {
     }
 
     public function show_training( TypeTraining $type_training ) {
+        // try {
         $schedules = Schedule::where( 'type_training_id', $type_training->id )->get();
-        $trainingParticipants = TrainingParticipants::where( 'type_training_id', $type_training->id )->count();
+        $training_participants = TrainingParticipants::where( 'type_training_id', $type_training->id )->count();
+        // dd( $training_participants );
+        // return view( 'dashboard.layouts.public.show_training', compact( [ 'type_training', 'schedules', 'training_participants' ] ) );
         return view( 'dashboard.layouts.public.show_training', [
             'type_training' => $type_training,
             'schedules' => $schedules,
-            'trainingParticipants' => $trainingParticipants
+            'training_participants' => $training_participants
         ] );
+        // } catch( QueryException $error ) {
+        //     dd( $error );
+        // }
     }
 
     public function PUpdate() {
@@ -104,7 +111,6 @@ class DashboardController extends Controller {
             'name' => 'required|max:255',
             'username' => 'required|unique:users,username,'.auth()->user()->id.'|max:255',
             'email' => 'required',
-            'password'=>'nullable',
             'address' => 'required|max:255',
             'age' => 'required|numeric|min:1',
             'no_hp' => 'required|numeric|min:1',
@@ -114,20 +120,35 @@ class DashboardController extends Controller {
             'image' => 'image|file|max:2048',
 
         ] ;
+        if ( $request->password != null ) {
+            $rules[ 'password' ] = 'max:20';
+        }
         $validatedData = $request->validate( $rules );
         $user = User::find( Auth::user()->id );
         if ( $user ) {
             if ( auth()->user()->levels->name == 'Admin' ) {
-                $data_user = [
-                    'username'=> $validatedData[ 'username' ],
-                    'email'=> $validatedData[ 'email' ],
-                    'password'=> bcrypt( $validatedData[ 'password' ] ),
-                ];
+                if ( $request->password != null ) {
+                    $data_user = [
+                        'level_id' => 1,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+
+                    ];
+                } else {
+                    $data_user = [
+                        'level_id' => 1,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                    ];
+                }
                 if ( $request->file( 'image' ) ) {
                     if ( $request->oldImage ) {
                         Storage::delete( $request->oldImage );
                     }
                     $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                }
+                if ( $request->image != null ) {
                     $data_admin = [
                         'name'=> $validatedData[ 'name' ],
                         'address'=> $validatedData[ 'address' ],
@@ -152,16 +173,28 @@ class DashboardController extends Controller {
                 $user->admins()->update( $data_admin );
                 $user->update( $data_user );
             } elseif ( auth()->user()->levels->name == 'Mentor' ) {
-                $data_user = [
-                    'username'=> $validatedData[ 'username' ],
-                    'email'=> $validatedData[ 'email' ],
-                    'password'=> bcrypt( $validatedData[ 'password' ] ),
-                ];
+                if ( $request->password != null ) {
+                    $data_user = [
+                        'level_id' => 2,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                        'password'=> bcrypt( $validatedData[ 'password' ] ),
+
+                    ];
+                } else {
+                    $data_user = [
+                        'level_id' => 2,
+                        'username'=> $validatedData[ 'username' ],
+                        'email'=> $validatedData[ 'email' ],
+                    ];
+                }
                 if ( $request->file( 'image' ) ) {
                     if ( $request->oldImage ) {
                         Storage::delete( $request->oldImage );
                     }
                     $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+                }
+                if ( $request->image != null ) {
                     $data_mentor = [
                         'name'=> $validatedData[ 'name' ],
                         'address'=> $validatedData[ 'address' ],

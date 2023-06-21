@@ -9,7 +9,7 @@ use Illuminate\Database\QueryException;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 class TrainingParticipantsController extends Controller {
 
     public function getTrainingParticipants(Request $request)
@@ -106,13 +106,20 @@ class TrainingParticipantsController extends Controller {
             'no_hp' => 'required|numeric|min:1',
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'profession' => 'required|max:255',
-            'no_member' => 'max:255',
-
+            'no_member' => 'required|max:255',
+            'image' => 'image|file|max:2048',
         ] ;
         $participant = Participant::where( 'user_id', auth()->user()->id )->first();
         $validatedData = $request->validate( $rules );
         $user = User::find( Auth::user()->id );
         if ( $user ) {
+            if ( $request->file( 'image' ) ) {
+                if ( $request->oldImage ) {
+                    Storage::delete( $request->oldImage );
+                }
+                $validatedData[ 'image' ] = $request->file( 'image' )->store( 'profile-photos' );
+            }
+            if($request->image != null){
             $data_participant = [
                 'user_id'=> $user->id,
                 'name'=> $validatedData[ 'name' ],
@@ -122,10 +129,22 @@ class TrainingParticipantsController extends Controller {
                 'gender'=> $validatedData[ 'gender' ],
                 'profession'=> $validatedData[ 'profession' ],
                 'no_member'=> $validatedData[ 'no_member' ],
-                'image'=> null,
+                'image'=> $validatedData[ 'image' ],
                 'is_active' => '1'
             ];
-
+        } else{
+            $data_participant = [
+                'user_id'=> $user->id,
+                'name'=> $validatedData[ 'name' ],
+                'address'=> $validatedData[ 'address' ],
+                'age'=> $validatedData[ 'age' ],
+                'no_hp'=> $validatedData[ 'no_hp' ],
+                'gender'=> $validatedData[ 'gender' ],
+                'profession'=> $validatedData[ 'profession' ],
+                'no_member'=> $validatedData[ 'no_member' ],
+                'is_active' => '1'
+            ];
+        }
             $data_training_participants = [
                 'participant_id'=> $participant->id,
                 'type_training_id' => $typeTraining->id,

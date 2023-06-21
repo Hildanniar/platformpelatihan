@@ -43,6 +43,7 @@ class TypeTrainingController extends Controller {
             'name' => 'required|max:255',
             'quota' => 'required|numeric|min:1',
             'desc' => 'required',
+            'class' => 'required|in:Offline,Online',
             'image' => 'image|file|max:3000',
         ] );
         if ( $request->file( 'image' ) ) {
@@ -72,6 +73,7 @@ class TypeTrainingController extends Controller {
             'name' => 'required|max:255',
             'quota' => 'required|min:1',
             'desc' => 'required',
+            'class' => 'required|in:Offline,Online',
             'image' => 'image|file|max:3000',
         ];
         $validatedData = $request->validate( $rules );
@@ -82,10 +84,25 @@ class TypeTrainingController extends Controller {
             }
             $validatedData[ 'image' ] = $request->file( 'image' )->store( 'post-images' );
             $validatedData[ 'excerpt' ] = Str::limit( strip_tags( $request->desc ), 200 );
-
+        }
+        if($request->image != null){
+            $data_type_training = [
+                'name'=> $validatedData['name'],
+                'quota'=> $validatedData['quota'],
+                'desc'=> $validatedData['desc'],
+                'class'=> $validatedData['class'],
+                'image'=> $validatedData['image'],
+            ];
+        } else{
+            $data_type_training = [
+                'name'=> $validatedData['name'],
+                'quota'=> $validatedData['quota'],
+                'desc'=> $validatedData['desc'],
+                'class'=> $validatedData['class'],
+            ];
         }
         TypeTraining::where( 'id', $typeTraining->id )
-        ->update( $validatedData );
+        ->update( $data_type_training );
         return redirect( '/admin/type_training' )->with( 'success', 'Data Berhasil Diedit!' );
     }
 
